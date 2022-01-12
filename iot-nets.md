@@ -1,7 +1,7 @@
 ---
 title: A summary of security-enabling technologies for IoT devices
 abbrev: IoT networking security guidelines
-docname: draft-moran-iot-nets-00
+docname: draft-moran-iot-nets-01
 category: info
 
 ipr: trust200902
@@ -92,7 +92,6 @@ IoT adoption is hampered by a lack of core technologies surrounding the developm
 
 To reduce this barrier to entry, the IETF has been investing in these core technologies.
 
-
 # Foundations of Trustworthy IoT
 
 IoT devices can bring a lot of value to businesses and individuals, but they are also difficult to manage because of their diversity, difficulty in auditing, maintenance, onboarding practices, and lack of visibility about device security posture and device software.
@@ -127,6 +126,102 @@ For broadcast media, such as radio protocols, intra-LAN policies cannot be preem
 ## Remedying Vulnerabilities
 
 Remedying vulnerabilities requires a remote update system. Where there are secure components that are independently updatable, additional considerations are required. In both cases, the new software must be signed, but that alone is insufficient: it must be authenticated against a known, authorized party. It must also come with a statement of provenance—a software bill of materials or SBoM. This statement must describe all the components of the software along with defining the authorship of the software, which may be separate from the authority to install that software on a given device.
+
+# Threats and Risks to IoT Deployments
+
+1. To deploy new keys into a device and connect it to a network, devices SHOULD support a secure onboarding protocol such as FIDO Device Onboarding {{FDO}} or LwM2M Bootstrap ({{LwM2M}}).
+
+Requirement: Connect devices to network
+Threat: network keys are intercepted or extracted
+
+Threat: trust anchor of device is compromised
+Requirement: need to deploy keys to device
+
+Technologies: BRSKI, FDO, LwM2M Bootstrap
+
+2. To enable devices to report their current software version and related data securely, devices SHOULD support a support a mechanism of performing attestation measurements in a trustworthy way and a Remote Attestation protocol, such as {{I-D.ietf-rats-eat}}.
+
+Threat: old firmware present on device allows compromise of data sent to device, poisoning of data sent to service
+Threat: rogue/simulated device emulates real device, allows compromise of data sent to device, poisoning of data sent to service
+
+Requirement: devices must prove their hardware/software to service
+
+Technologies: RATS, PSA
+
+3. To enable devices to be updated securely in the field, they SHOULD support a remote update protocol such as {{I-D.ietf-suit-manifest}}.
+
+Threat: Old firmware with known vulnerability cannot be altered. This allows exploit of known vulnerability.
+Requirement: Software on unattended devices must be remotely-updatable.
+
+Threat: Compromise of the update system allows remote code execution
+Requirement: Software update mechanism must be secured (see RFC9124)
+
+Technologies: SUIT, TEEP
+
+4. To prove the provenance of a firmware update, update manifests SHOULD include (directly, or by secure reference) a Software Identifier or Software Bill of Materials, such as {{I-D.ietf-sacm-coswid}}.
+
+Risk: Software of unknown origin may be used in a device
+Threat: If software origin is not verified, a threat actor may deliberately seed the software supply chain with vulnerable code, enabling further compromise.
+
+Technologies: CoSWID
+
+5. To enable a Relying Party of the Remote Attestation to correctly evaluate the Attestation Report, the SBoM (such as {{I-D.ietf-sacm-coswid}}) SHOULD contain expected values for the Attestation Report.
+
+Risk: Correct values for attestation results may not be known by Relying Parties, causing them to log values, but not limit them.
+Threat: A threat actor deploys compromised software to devices; this is detected by monitoring systems, but not identified as an attack.
+
+Requirement: Monitoring systems must know the expected values in Attestation results.
+
+Technologies: CoSWID, CoMID, CoRIM
+
+NOTE: Remote attestation terminology is fluid on this topic. A "Verifier" can be any system that appraises Evidence in remote attestation. It is expected that "appraisal" will be spread across at least two systems to maintain confidentiality and separation of responsibility: 1) a Verifier that ensures that the attestation Evidence is produced by genuine hardware, not tampered with, and not signed by revoked keys and 2) a monitoring system taking on the role of Verifier and Relying Party that appraises whether a device has the correct software versions and initiates remediation if not.
+
+6. To ensure that network infrastructure is configured discern the difference between authentic traffic and anomalous traffic, network infrastructure SHOULD contain a {{RFC8520}} Manufacturer Usage Description (MUD) Controller which accepts MUD files in order to automatically program rules into the network infrastructure.
+
+Threat: Devices may contain intentional or accidental capabilities to make networks vulnerable or launch attacks on other networks. These capabilities are extremely costly to discover by inspection or audit.
+Requirement: Devices (or their supply chains) must advertise their network access requirements and networks must enforce that devices adhere to their stated network access requirements.
+
+Technologies: MUD (RFC8520)
+
+Threat: if a service hosting network access requirements documents is compromised, it can be used to enable malicious devices to mount attacks.
+
+Requirement: network access requirements documents should be signed using offline keys.
+
+Technologies: MUD (RFC8520) with signatures
+
+Threat: A device can mis-advertise its network access requirements, pretending to be a different, but recognised and more privileged device (potentially cloning MAC addresses, keys, etc.)
+
+Requirement: Network Access Requirements documents must be secured against tampering and misreporting
+
+Technologies: MUD + 802.1X, RATS+MUD, SUIT+MUD, RATS+SUIT+MUD
+
+Risk: Network Access Requirements documents embedded in or referenced from device certificates conflate two capabilities for network operators: network access requirement authorship (potentially delegated) and network access requirement audit. While network operators should audit network access requirements, authoring those requirements should be done by the authors of the device behavior.
+
+Requirement: If Network Access Requirements are embedded in or referenced by device certificates, the responsibility for network access requirement authorship should be delegated to the device application authors. Alternatively, this can be done explicitly by tying device application authorship to device network access requirements authorship.
+
+Technologies: iotopia, SUIT+MUD
+
+7. In order for network infrastructure to be configured in advance of any changes to devices, MUD files SHOULD be transported (directly or by secure reference) within update manifests.
+
+Risk: recently updated devices may incur latency penalties when a new network access requirements reference must be resolved and verified.
+Threat: a threat actor may block access to a distributor of network access requirements documents, thus disabling all devices referencing the network access requirements documents it hosts.
+
+Requirement: Network access requirements documents should be distributed in advance of use by any device.
+Technologies: SUIT+MUD
+
+8. To enable rapid response to evolving threats, the MUD controller SHOULD also support dynamic update of MUD files.
+
+Threat: A network access requirements document grants permissions to a device that are too broad.
+Requirement: it must be possible to distribute reduced permissions to network access controllers
+
+Technologies: SUIT+MUD? Others?
+
+9. Network infrastructure SHOULD apply risk management policy to devices that attest non-compliant configuration. For example, a device with out-of-date firmware may only be permitted to access the update system.
+
+Threat: Old firmware with known vulnerability allows exploit until it is updated.
+Requirement: Network infrastructure SHOULD apply risk management policy to devices that attest non-compliant configuration. For example, a device with out-of-date firmware may only be permitted to access the update system.
+
+Technologies: SUIT, RATS
 
 # Baseline Requirements for Secure Networks
 
