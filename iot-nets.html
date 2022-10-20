@@ -1,0 +1,2050 @@
+<!DOCTYPE html>
+<html lang="en" class="Internet-Draft">
+<head>
+<meta charset="utf-8">
+<meta content="Common,Latin" name="scripts">
+<meta content="initial-scale=1.0" name="viewport">
+<title>A summary of security-enabling technologies for IoT devices</title>
+<meta content="Brendan Moran" name="author">
+<meta content="
+       The IETF has developed security technologies that help to secure the Internet of Things even over constrained networks and when targetting constrained nodes. These technologies can be used independenly or can be composed into larger systems to mitigate a variety of threats. This documents illustrates an overview over these technologies and highlights their relationships. Ultimately, a threat model is presented as a basis to derive requirements that interconnect existing and emerging solution technologies. 
+    " name="description">
+<meta content="xml2rfc 3.13.0" name="generator">
+<meta content="Internet-Draft" name="keyword">
+<meta content="draft-moran-iot-nets-01" name="ietf.draft">
+<!-- Generator version information:
+  xml2rfc 3.13.0
+    Python 3.8.9
+    appdirs 1.4.4
+    ConfigArgParse 1.5.3
+    google-i18n-address 2.5.0
+    html5lib 1.1
+    intervaltree 3.1.0
+    Jinja2 3.1.2
+    kitchen 1.2.6
+    lxml 4.9.1
+    MarkupSafe 2.1.1
+    pycountry 22.3.5
+    pyflakes 2.4.0
+    PyYAML 6.0
+    requests 2.26.0
+    setuptools 49.2.1
+    six 1.15.0
+-->
+<link href="./iot-nets.xml" rel="alternate" type="application/rfc+xml">
+<link href="#copyright" rel="license">
+<style type="text/css">/*
+
+  NOTE: Changes at the bottom of this file overrides some earlier settings.
+
+  Once the style has stabilized and has been adopted as an official RFC style,
+  this can be consolidated so that style settings occur only in one place, but
+  for now the contents of this file consists first of the initial CSS work as
+  provided to the RFC Formatter (xml2rfc) work, followed by itemized and
+  commented changes found necssary during the development of the v3
+  formatters.
+
+*/
+
+/* fonts */
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans'); /* Sans-serif */
+@import url('https://fonts.googleapis.com/css?family=Noto+Serif'); /* Serif (print) */
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono'); /* Monospace */
+
+@viewport {
+  zoom: 1.0;
+  width: extend-to-zoom;
+}
+@-ms-viewport {
+  width: extend-to-zoom;
+  zoom: 1.0;
+}
+/* general and mobile first */
+html {
+}
+body {
+  max-width: 90%;
+  margin: 1.5em auto;
+  color: #222;
+  background-color: #fff;
+  font-size: 14px;
+  font-family: 'Noto Sans', Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+  scroll-behavior: smooth;
+}
+.ears {
+  display: none;
+}
+
+/* headings */
+#title, h1, h2, h3, h4, h5, h6 {
+  margin: 1em 0 0.5em;
+  font-weight: bold;
+  line-height: 1.3;
+}
+#title {
+  clear: both;
+  border-bottom: 1px solid #ddd;
+  margin: 0 0 0.5em 0;
+  padding: 1em 0 0.5em;
+}
+.author {
+  padding-bottom: 4px;
+}
+h1 {
+  font-size: 26px;
+  margin: 1em 0;
+}
+h2 {
+  font-size: 22px;
+  margin-top: -20px;  /* provide offset for in-page anchors */
+  padding-top: 33px;
+}
+h3 {
+  font-size: 18px;
+  margin-top: -36px;  /* provide offset for in-page anchors */
+  padding-top: 42px;
+}
+h4 {
+  font-size: 16px;
+  margin-top: -36px;  /* provide offset for in-page anchors */
+  padding-top: 42px;
+}
+h5, h6 {
+  font-size: 14px;
+}
+#n-copyright-notice {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 1em;
+  margin-bottom: 1em;
+}
+/* general structure */
+p {
+  padding: 0;
+  margin: 0 0 1em 0;
+  text-align: left;
+}
+div, span {
+  position: relative;
+}
+div {
+  margin: 0;
+}
+.alignRight.art-text {
+  background-color: #f9f9f9;
+  border: 1px solid #eee;
+  border-radius: 3px;
+  padding: 1em 1em 0;
+  margin-bottom: 1.5em;
+}
+.alignRight.art-text pre {
+  padding: 0;
+}
+.alignRight {
+  margin: 1em 0;
+}
+.alignRight > *:first-child {
+  border: none;
+  margin: 0;
+  float: right;
+  clear: both;
+}
+.alignRight > *:nth-child(2) {
+  clear: both;
+  display: block;
+  border: none;
+}
+svg {
+  display: block;
+}
+.alignCenter.art-text {
+  background-color: #f9f9f9;
+  border: 1px solid #eee;
+  border-radius: 3px;
+  padding: 1em 1em 0;
+  margin-bottom: 1.5em;
+}
+.alignCenter.art-text pre {
+  padding: 0;
+}
+.alignCenter {
+  margin: 1em 0;
+}
+.alignCenter > *:first-child {
+  border: none;
+  margin: 0 auto;
+}
+
+/* lists */
+ol, ul {
+  padding: 0;
+  margin: 0 0 1em 2em;
+}
+ol ol, ul ul, ol ul, ul ol {
+  margin-left: 1em;
+}
+li {
+  margin: 0 0 0.25em 0;
+}
+.ulCompact li {
+  margin: 0;
+}
+ul.empty, .ulEmpty {
+  list-style-type: none;
+}
+ul.empty li, .ulEmpty li {
+  margin-top: 0.5em;
+}
+ul.ulBare, li.ulBare {
+  margin-left: 0em !important;
+}
+ul.compact, .ulCompact,
+ol.compact, .olCompact {
+  line-height: 100%;
+  margin: 0 0 0 2em;
+}
+
+/* definition lists */
+dl {
+}
+dl > dt {
+  float: left;
+  margin-right: 1em;
+}
+/* 
+dl.nohang > dt {
+  float: none;
+}
+*/
+dl > dd {
+  margin-bottom: .8em;
+  min-height: 1.3em;
+}
+dl.compact > dd, .dlCompact > dd {
+  margin-bottom: 0em;
+}
+dl > dd > dl {
+  margin-top: 0.5em;
+  margin-bottom: 0em;
+}
+
+/* links */
+a {
+  text-decoration: none;
+}
+a[href] {
+  color: #22e; /* Arlen: WCAG 2019 */
+}
+a[href]:hover {
+  background-color: #f2f2f2;
+}
+figcaption a[href],
+a[href].selfRef {
+  color: #222;
+}
+/* XXX probably not this:
+a.selfRef:hover {
+  background-color: transparent;
+  cursor: default;
+} */
+
+/* Figures */
+tt, code, pre, code {
+  background-color: #f9f9f9;
+  font-family: 'Roboto Mono', monospace;
+}
+pre {
+  border: 1px solid #eee;
+  margin: 0;
+  padding: 1em;
+}
+img {
+  max-width: 100%;
+}
+figure {
+  margin: 0;
+}
+figure blockquote {
+  margin: 0.8em 0.4em 0.4em;
+}
+figcaption {
+  font-style: italic;
+  margin: 0 0 1em 0;
+}
+@media screen {
+  pre {
+    overflow-x: auto;
+    max-width: 100%;
+    max-width: calc(100% - 22px);
+  }
+}
+
+/* aside, blockquote */
+aside, blockquote {
+  margin-left: 0;
+  padding: 1.2em 2em;
+}
+blockquote {
+  background-color: #f9f9f9;
+  color: #111; /* Arlen: WCAG 2019 */
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  margin: 1em 0;
+}
+cite {
+  display: block;
+  text-align: right;
+  font-style: italic;
+}
+
+/* tables */
+table {
+  width: 100%;
+  margin: 0 0 1em;
+  border-collapse: collapse;
+  border: 1px solid #eee;
+}
+th, td {
+  text-align: left;
+  vertical-align: top;
+  padding: 0.5em 0.75em;
+}
+th {
+  text-align: left;
+  background-color: #e9e9e9;
+}
+tr:nth-child(2n+1) > td {
+  background-color: #f5f5f5;
+}
+table caption {
+  font-style: italic;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+table p {
+  /* XXX to avoid bottom margin on table row signifiers. If paragraphs should
+     be allowed within tables more generally, it would be far better to select on a class. */
+  margin: 0;
+}
+
+/* pilcrow */
+a.pilcrow {
+  color: #666; /* Arlen: AHDJ 2019 */
+  text-decoration: none;
+  visibility: hidden;
+  user-select: none;
+  -ms-user-select: none;
+  -o-user-select:none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+@media screen {
+  aside:hover > a.pilcrow,
+  p:hover > a.pilcrow,
+  blockquote:hover > a.pilcrow,
+  div:hover > a.pilcrow,
+  li:hover > a.pilcrow,
+  pre:hover > a.pilcrow {
+    visibility: visible;
+  }
+  a.pilcrow:hover {
+    background-color: transparent;
+  }
+}
+
+/* misc */
+hr {
+  border: 0;
+  border-top: 1px solid #eee;
+}
+.bcp14 {
+  font-variant: small-caps;
+}
+
+.role {
+  font-variant: all-small-caps;
+}
+
+/* info block */
+#identifiers {
+  margin: 0;
+  font-size: 0.9em;
+}
+#identifiers dt {
+  width: 3em;
+  clear: left;
+}
+#identifiers dd {
+  float: left;
+  margin-bottom: 0;
+}
+/* Fix PDF info block run off issue */
+@media print {
+  #identifiers dd {
+    float: none;
+  }
+}
+#identifiers .authors .author {
+  display: inline-block;
+  margin-right: 1.5em;
+}
+#identifiers .authors .org {
+  font-style: italic;
+}
+
+/* The prepared/rendered info at the very bottom of the page */
+.docInfo {
+  color: #666; /* Arlen: WCAG 2019 */
+  font-size: 0.9em;
+  font-style: italic;
+  margin-top: 2em;
+}
+.docInfo .prepared {
+  float: left;
+}
+.docInfo .prepared {
+  float: right;
+}
+
+/* table of contents */
+#toc  {
+  padding: 0.75em 0 2em 0;
+  margin-bottom: 1em;
+}
+nav.toc ul {
+  margin: 0 0.5em 0 0;
+  padding: 0;
+  list-style: none;
+}
+nav.toc li {
+  line-height: 1.3em;
+  margin: 0.75em 0;
+  padding-left: 1.2em;
+  text-indent: -1.2em;
+}
+/* references */
+.references dt {
+  text-align: right;
+  font-weight: bold;
+  min-width: 7em;
+}
+.references dd {
+  margin-left: 8em;
+  overflow: auto;
+}
+
+.refInstance {
+  margin-bottom: 1.25em;
+}
+
+.references .ascii {
+  margin-bottom: 0.25em;
+}
+
+/* index */
+.index ul {
+  margin: 0 0 0 1em;
+  padding: 0;
+  list-style: none;
+}
+.index ul ul {
+  margin: 0;
+}
+.index li {
+  margin: 0;
+  text-indent: -2em;
+  padding-left: 2em;
+  padding-bottom: 5px;
+}
+.indexIndex {
+  margin: 0.5em 0 1em;
+}
+.index a {
+  font-weight: 700;
+}
+/* make the index two-column on all but the smallest screens */
+@media (min-width: 600px) {
+  .index ul {
+    -moz-column-count: 2;
+    -moz-column-gap: 20px;
+  }
+  .index ul ul {
+    -moz-column-count: 1;
+    -moz-column-gap: 0;
+  }
+}
+
+/* authors */
+address.vcard {
+  font-style: normal;
+  margin: 1em 0;
+}
+
+address.vcard .nameRole {
+  font-weight: 700;
+  margin-left: 0;
+}
+address.vcard .label {
+  font-family: "Noto Sans",Arial,Helvetica,sans-serif;
+  margin: 0.5em 0;
+}
+address.vcard .type {
+  display: none;
+}
+.alternative-contact {
+  margin: 1.5em 0 1em;
+}
+hr.addr {
+  border-top: 1px dashed;
+  margin: 0;
+  color: #ddd;
+  max-width: calc(100% - 16px);
+}
+
+/* temporary notes */
+.rfcEditorRemove::before {
+  position: absolute;
+  top: 0.2em;
+  right: 0.2em;
+  padding: 0.2em;
+  content: "The RFC Editor will remove this note";
+  color: #9e2a00; /* Arlen: WCAG 2019 */
+  background-color: #ffd; /* Arlen: WCAG 2019 */
+}
+.rfcEditorRemove {
+  position: relative;
+  padding-top: 1.8em;
+  background-color: #ffd; /* Arlen: WCAG 2019 */
+  border-radius: 3px;
+}
+.cref {
+  background-color: #ffd; /* Arlen: WCAG 2019 */
+  padding: 2px 4px;
+}
+.crefSource {
+  font-style: italic;
+}
+/* alternative layout for smaller screens */
+@media screen and (max-width: 1023px) {
+  body {
+    padding-top: 2em;
+  }
+  #title {
+    padding: 1em 0;
+  }
+  h1 {
+    font-size: 24px;
+  }
+  h2 {
+    font-size: 20px;
+    margin-top: -18px;  /* provide offset for in-page anchors */
+    padding-top: 38px;
+  }
+  #identifiers dd {
+    max-width: 60%;
+  }
+  #toc {
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    padding: 0;
+    margin: 0;
+    background-color: inherit;
+    border-bottom: 1px solid #ccc;
+  }
+  #toc h2 {
+    margin: -1px 0 0 0;
+    padding: 4px 0 4px 6px;
+    padding-right: 1em;
+    min-width: 190px;
+    font-size: 1.1em;
+    text-align: right;
+    background-color: #444;
+    color: white;
+    cursor: pointer;
+  }
+  #toc h2::before { /* css hamburger */
+    float: right;
+    position: relative;
+    width: 1em;
+    height: 1px;
+    left: -164px;
+    margin: 6px 0 0 0;
+    background: white none repeat scroll 0 0;
+    box-shadow: 0 4px 0 0 white, 0 8px 0 0 white;
+    content: "";
+  }
+  #toc nav {
+    display: none;
+    padding: 0.5em 1em 1em;
+    overflow: auto;
+    height: calc(100vh - 48px);
+    border-left: 1px solid #ddd;
+  }
+}
+
+/* alternative layout for wide screens */
+@media screen and (min-width: 1024px) {
+  body {
+    max-width: 724px;
+    margin: 42px auto;
+    padding-left: 1.5em;
+    padding-right: 29em;
+  }
+  #toc {
+    position: fixed;
+    top: 42px;
+    right: 42px;
+    width: 25%;
+    margin: 0;
+    padding: 0 1em;
+    z-index: 1;
+  }
+  #toc h2 {
+    border-top: none;
+    border-bottom: 1px solid #ddd;
+    font-size: 1em;
+    font-weight: normal;
+    margin: 0;
+    padding: 0.25em 1em 1em 0;
+  }
+  #toc nav {
+    display: block;
+    height: calc(90vh - 84px);
+    bottom: 0;
+    padding: 0.5em 0 0;
+    overflow: auto;
+  }
+  img { /* future proofing */
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* pagination */
+@media print {
+  body {
+
+    width: 100%;
+  }
+  p {
+    orphans: 3;
+    widows: 3;
+  }
+  #n-copyright-notice {
+    border-bottom: none;
+  }
+  #toc, #n-introduction {
+    page-break-before: always;
+  }
+  #toc {
+    border-top: none;
+    padding-top: 0;
+  }
+  figure, pre {
+    page-break-inside: avoid;
+  }
+  figure {
+    overflow: scroll;
+  }
+  pre.breakable {
+    break-inside: auto;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+  }
+  h2+*, h3+*, h4+*, h5+*, h6+* {
+    page-break-before: avoid;
+  }
+  pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-size: 10pt;
+  }
+  table {
+    border: 1px solid #ddd;
+  }
+  td {
+    border-top: 1px solid #ddd;
+  }
+}
+
+/* This is commented out here, as the string-set: doesn't
+   pass W3C validation currently */
+/*
+.ears thead .left {
+  string-set: ears-top-left content();
+}
+
+.ears thead .center {
+  string-set: ears-top-center content();
+}
+
+.ears thead .right {
+  string-set: ears-top-right content();
+}
+
+.ears tfoot .left {
+  string-set: ears-bottom-left content();
+}
+
+.ears tfoot .center {
+  string-set: ears-bottom-center content();
+}
+
+.ears tfoot .right {
+  string-set: ears-bottom-right content();
+}
+*/
+
+@page :first {
+  padding-top: 0;
+  @top-left {
+    content: normal;
+    border: none;
+  }
+  @top-center {
+    content: normal;
+    border: none;
+  }
+  @top-right {
+    content: normal;
+    border: none;
+  }
+}
+
+@page {
+  size: A4;
+  margin-bottom: 45mm;
+  padding-top: 20px;
+  /* The follwing is commented out here, but set appropriately by in code, as
+     the content depends on the document */
+  /*
+  @top-left {
+    content: 'Internet-Draft';
+    vertical-align: bottom;
+    border-bottom: solid 1px #ccc;
+  }
+  @top-left {
+    content: string(ears-top-left);
+    vertical-align: bottom;
+    border-bottom: solid 1px #ccc;
+  }
+  @top-center {
+    content: string(ears-top-center);
+    vertical-align: bottom;
+    border-bottom: solid 1px #ccc;
+  }
+  @top-right {
+    content: string(ears-top-right);
+    vertical-align: bottom;
+    border-bottom: solid 1px #ccc;
+  }
+  @bottom-left {
+    content: string(ears-bottom-left);
+    vertical-align: top;
+    border-top: solid 1px #ccc;
+  }
+  @bottom-center {
+    content: string(ears-bottom-center);
+    vertical-align: top;
+    border-top: solid 1px #ccc;
+  }
+  @bottom-right {
+      content: '[Page ' counter(page) ']';
+      vertical-align: top;
+      border-top: solid 1px #ccc;
+  }
+  */
+
+}
+
+/* Changes introduced to fix issues found during implementation */
+/* Make sure links are clickable even if overlapped by following H* */
+a {
+  z-index: 2;
+}
+/* Separate body from document info even without intervening H1 */
+section {
+  clear: both;
+}
+
+
+/* Top align author divs, to avoid names without organization dropping level with org names */
+.author {
+  vertical-align: top;
+}
+
+/* Leave room in document info to show Internet-Draft on one line */
+#identifiers dt {
+  width: 8em;
+}
+
+/* Don't waste quite as much whitespace between label and value in doc info */
+#identifiers dd {
+  margin-left: 1em;
+}
+
+/* Give floating toc a background color (needed when it's a div inside section */
+#toc {
+  background-color: white;
+}
+
+/* Make the collapsed ToC header render white on gray also when it's a link */
+@media screen and (max-width: 1023px) {
+  #toc h2 a,
+  #toc h2 a:link,
+  #toc h2 a:focus,
+  #toc h2 a:hover,
+  #toc a.toplink,
+  #toc a.toplink:hover {
+    color: white;
+    background-color: #444;
+    text-decoration: none;
+  }
+}
+
+/* Give the bottom of the ToC some whitespace */
+@media screen and (min-width: 1024px) {
+  #toc {
+    padding: 0 0 1em 1em;
+  }
+}
+
+/* Style section numbers with more space between number and title */
+.section-number {
+  padding-right: 0.5em;
+}
+
+/* prevent monospace from becoming overly large */
+tt, code, pre, code {
+  font-size: 95%;
+}
+
+/* Fix the height/width aspect for ascii art*/
+pre.sourcecode,
+.art-text pre {
+  line-height: 1.12;
+}
+
+
+/* Add styling for a link in the ToC that points to the top of the document */
+a.toplink {
+  float: right;
+  margin-right: 0.5em;
+}
+
+/* Fix the dl styling to match the RFC 7992 attributes */
+dl > dt,
+dl.dlParallel > dt {
+  float: left;
+  margin-right: 1em;
+}
+dl.dlNewline > dt {
+  float: none;
+}
+
+/* Provide styling for table cell text alignment */
+table td.text-left,
+table th.text-left {
+  text-align: left;
+}
+table td.text-center,
+table th.text-center {
+  text-align: center;
+}
+table td.text-right,
+table th.text-right {
+  text-align: right;
+}
+
+/* Make the alternative author contact informatio look less like just another
+   author, and group it closer with the primary author contact information */
+.alternative-contact {
+  margin: 0.5em 0 0.25em 0;
+}
+address .non-ascii {
+  margin: 0 0 0 2em;
+}
+
+/* With it being possible to set tables with alignment
+  left, center, and right, { width: 100%; } does not make sense */
+table {
+  width: auto;
+}
+
+/* Avoid reference text that sits in a block with very wide left margin,
+   because of a long floating dt label.*/
+.references dd {
+  overflow: visible;
+}
+
+/* Control caption placement */
+caption {
+  caption-side: bottom;
+}
+
+/* Limit the width of the author address vcard, so names in right-to-left
+   script don't end up on the other side of the page. */
+
+address.vcard {
+  max-width: 30em;
+  margin-right: auto;
+}
+
+/* For address alignment dependent on LTR or RTL scripts */
+address div.left {
+  text-align: left;
+}
+address div.right {
+  text-align: right;
+}
+
+/* Provide table alignment support.  We can't use the alignX classes above
+   since they do unwanted things with caption and other styling. */
+table.right {
+ margin-left: auto;
+ margin-right: 0;
+}
+table.center {
+ margin-left: auto;
+ margin-right: auto;
+}
+table.left {
+ margin-left: 0;
+ margin-right: auto;
+}
+
+/* Give the table caption label the same styling as the figcaption */
+caption a[href] {
+  color: #222;
+}
+
+@media print {
+  .toplink {
+    display: none;
+  }
+
+  /* avoid overwriting the top border line with the ToC header */
+  #toc {
+    padding-top: 1px;
+  }
+
+  /* Avoid page breaks inside dl and author address entries */
+  .vcard {
+    page-break-inside: avoid;
+  }
+
+}
+/* Tweak the bcp14 keyword presentation */
+.bcp14 {
+  font-variant: small-caps;
+  font-weight: bold;
+  font-size: 0.9em;
+}
+/* Tweak the invisible space above H* in order not to overlay links in text above */
+ h2 {
+  margin-top: -18px;  /* provide offset for in-page anchors */
+  padding-top: 31px;
+ }
+ h3 {
+  margin-top: -18px;  /* provide offset for in-page anchors */
+  padding-top: 24px;
+ }
+ h4 {
+  margin-top: -18px;  /* provide offset for in-page anchors */
+  padding-top: 24px;
+ }
+/* Float artwork pilcrow to the right */
+@media screen {
+  .artwork a.pilcrow {
+    display: block;
+    line-height: 0.7;
+    margin-top: 0.15em;
+  }
+}
+/* Make pilcrows on dd visible */
+@media screen {
+  dd:hover > a.pilcrow {
+    visibility: visible;
+  }
+}
+/* Make the placement of figcaption match that of a table's caption
+   by removing the figure's added bottom margin */
+.alignLeft.art-text,
+.alignCenter.art-text,
+.alignRight.art-text {
+   margin-bottom: 0;
+}
+.alignLeft,
+.alignCenter,
+.alignRight {
+  margin: 1em 0 0 0;
+}
+/* In print, the pilcrow won't show on hover, so prevent it from taking up space,
+   possibly even requiring a new line */
+@media print {
+  a.pilcrow {
+    display: none;
+  }
+}
+/* Styling for the external metadata */
+div#external-metadata {
+  background-color: #eee;
+  padding: 0.5em;
+  margin-bottom: 0.5em;
+  display: none;
+}
+div#internal-metadata {
+  padding: 0.5em;                       /* to match the external-metadata padding */
+}
+/* Styling for title RFC Number */
+h1#rfcnum {
+  clear: both;
+  margin: 0 0 -1em;
+  padding: 1em 0 0 0;
+}
+/* Make .olPercent look the same as <ol><li> */
+dl.olPercent > dd {
+  margin-bottom: 0.25em;
+  min-height: initial;
+}
+/* Give aside some styling to set it apart */
+aside {
+  border-left: 1px solid #ddd;
+  margin: 1em 0 1em 2em;
+  padding: 0.2em 2em;
+}
+aside > dl,
+aside > ol,
+aside > ul,
+aside > table,
+aside > p {
+  margin-bottom: 0.5em;
+}
+/* Additional page break settings */
+@media print {
+  figcaption, table caption {
+    page-break-before: avoid;
+  }
+}
+/* Font size adjustments for print */
+@media print {
+  body  { font-size: 10pt;      line-height: normal; max-width: 96%; }
+  h1    { font-size: 1.72em;    padding-top: 1.5em; } /* 1*1.2*1.2*1.2 */
+  h2    { font-size: 1.44em;    padding-top: 1.5em; } /* 1*1.2*1.2 */
+  h3    { font-size: 1.2em;     padding-top: 1.5em; } /* 1*1.2 */
+  h4    { font-size: 1em;       padding-top: 1.5em; }
+  h5, h6 { font-size: 1em;      margin: initial; padding: 0.5em 0 0.3em; }
+}
+/* Sourcecode margin in print, when there's no pilcrow */
+@media print {
+  .artwork,
+  .sourcecode {
+    margin-bottom: 1em;
+  }
+}
+/* Avoid narrow tables forcing too narrow table captions, which may render badly */
+table {
+  min-width: 20em;
+}
+/* ol type a */
+ol.type-a { list-style-type: lower-alpha; }
+ol.type-A { list-style-type: upper-alpha; }
+ol.type-i { list-style-type: lower-roman; }
+ol.type-I { list-style-type: lower-roman; }
+/* Apply the print table and row borders in general, on request from the RPC,
+and increase the contrast between border and odd row background sligthtly */
+table {
+  border: 1px solid #ddd;
+}
+td {
+  border-top: 1px solid #ddd;
+}
+tr:nth-child(2n+1) > td {
+  background-color: #f8f8f8;
+}
+/* Use style rules to govern display of the TOC. */
+@media screen and (max-width: 1023px) {
+  #toc nav { display: none; }
+  #toc.active nav { display: block; }
+}
+/* Add support for keepWithNext */
+.keepWithNext {
+  break-after: avoid-page;
+  break-after: avoid-page;
+}
+/* Add support for keepWithPrevious */
+.keepWithPrevious {
+  break-before: avoid-page;
+}
+/* Change the approach to avoiding breaks inside artwork etc. */
+figure, pre, table, .artwork, .sourcecode  {
+  break-before: auto;
+  break-after: auto;
+}
+/* Avoid breaks between <dt> and <dd> */
+dl {
+  break-before: auto;
+  break-inside: auto;
+}
+dt {
+  break-before: auto;
+  break-after: avoid-page;
+}
+dd {
+  break-before: avoid-page;
+  break-after: auto;
+  orphans: 3;
+  widows: 3
+}
+span.break, dd.break {
+  margin-bottom: 0;
+  min-height: 0;
+  break-before: auto;
+  break-inside: auto;
+  break-after: auto;
+}
+/* Undo break-before ToC */
+@media print {
+  #toc {
+    break-before: auto;
+  }
+}
+/* Text in compact lists should not get extra bottim margin space,
+   since that would makes the list not compact */
+ul.compact p, .ulCompact p,
+ol.compact p, .olCompact p {
+ margin: 0;
+}
+/* But the list as a whole needs the extra space at the end */
+section ul.compact,
+section .ulCompact,
+section ol.compact,
+section .olCompact {
+  margin-bottom: 1em;                    /* same as p not within ul.compact etc. */
+}
+/* The tt and code background above interferes with for instance table cell
+   backgrounds.  Changed to something a bit more selective. */
+tt, code {
+  background-color: transparent;
+}
+p tt, p code, li tt, li code {
+  background-color: #f8f8f8;
+}
+/* Tweak the pre margin -- 0px doesn't come out well */
+pre {
+   margin-top: 0.5px;
+}
+/* Tweak the comact list text */
+ul.compact, .ulCompact,
+ol.compact, .olCompact,
+dl.compact, .dlCompact {
+  line-height: normal;
+}
+/* Don't add top margin for nested lists */
+li > ul, li > ol, li > dl,
+dd > ul, dd > ol, dd > dl,
+dl > dd > dl {
+  margin-top: initial;
+}
+/* Elements that should not be rendered on the same line as a <dt> */
+/* This should match the element list in writer.text.TextWriter.render_dl() */
+dd > div.artwork:first-child,
+dd > aside:first-child,
+dd > figure:first-child,
+dd > ol:first-child,
+dd > div:first-child > pre.sourcecode,
+dd > table:first-child,
+dd > ul:first-child {
+  clear: left;
+}
+/* fix for weird browser behaviour when <dd/> is empty */
+dt+dd:empty::before{
+  content: "\00a0";
+}
+/* Make paragraph spacing inside <li> smaller than in body text, to fit better within the list */
+li > p {
+  margin-bottom: 0.5em
+}
+/* Don't let p margin spill out from inside list items */
+li > p:last-of-type {
+  margin-bottom: 0;
+}
+</style>
+<link href="rfc-local.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<script src="metadata.min.js"></script>
+<table class="ears">
+<thead><tr>
+<td class="left">Internet-Draft</td>
+<td class="center">IoT networking security guidelines</td>
+<td class="right">July 2022</td>
+</tr></thead>
+<tfoot><tr>
+<td class="left">Moran</td>
+<td class="center">Expires 13 January 2023</td>
+<td class="right">[Page]</td>
+</tr></tfoot>
+</table>
+<div id="external-metadata" class="document-information"></div>
+<div id="internal-metadata" class="document-information">
+<dl id="identifiers">
+<dt class="label-workgroup">Workgroup:</dt>
+<dd class="workgroup">IOTOPS</dd>
+<dt class="label-internet-draft">Internet-Draft:</dt>
+<dd class="internet-draft">draft-moran-iot-nets-01</dd>
+<dt class="label-published">Published:</dt>
+<dd class="published">
+<time datetime="2022-07-12" class="published">12 July 2022</time>
+    </dd>
+<dt class="label-intended-status">Intended Status:</dt>
+<dd class="intended-status">Informational</dd>
+<dt class="label-expires">Expires:</dt>
+<dd class="expires"><time datetime="2023-01-13">13 January 2023</time></dd>
+<dt class="label-authors">Author:</dt>
+<dd class="authors">
+<div class="author">
+      <div class="author-name">B. Moran</div>
+<div class="org">Arm Limited</div>
+</div>
+</dd>
+</dl>
+</div>
+<h1 id="title">A summary of security-enabling technologies for IoT devices</h1>
+<section id="section-abstract">
+      <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
+<p id="section-abstract-1">The IETF has developed security technologies that help to secure the Internet of Things even over constrained networks and when targetting constrained nodes. These technologies can be used independenly or can be composed into larger systems to mitigate a variety of threats. This documents illustrates an overview over these technologies and highlights their relationships. Ultimately, a threat model is presented as a basis to derive requirements that interconnect existing and emerging solution technologies.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+</section>
+<div id="status-of-memo">
+<section id="section-boilerplate.1">
+        <h2 id="name-status-of-this-memo">
+<a href="#name-status-of-this-memo" class="section-name selfRef">Status of This Memo</a>
+        </h2>
+<p id="section-boilerplate.1-1">
+        This Internet-Draft is submitted in full conformance with the
+        provisions of BCP 78 and BCP 79.<a href="#section-boilerplate.1-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-2">
+        Internet-Drafts are working documents of the Internet Engineering Task
+        Force (IETF). Note that other groups may also distribute working
+        documents as Internet-Drafts. The list of current Internet-Drafts is
+        at <span><a href="https://datatracker.ietf.org/drafts/current/">https://datatracker.ietf.org/drafts/current/</a></span>.<a href="#section-boilerplate.1-2" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-3">
+        Internet-Drafts are draft documents valid for a maximum of six months
+        and may be updated, replaced, or obsoleted by other documents at any
+        time. It is inappropriate to use Internet-Drafts as reference
+        material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-4">
+        This Internet-Draft will expire on 13 January 2023.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="copyright">
+<section id="section-boilerplate.2">
+        <h2 id="name-copyright-notice">
+<a href="#name-copyright-notice" class="section-name selfRef">Copyright Notice</a>
+        </h2>
+<p id="section-boilerplate.2-1">
+            Copyright (c) 2022 IETF Trust and the persons identified as the
+            document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.2-2">
+            This document is subject to BCP 78 and the IETF Trust's Legal
+            Provisions Relating to IETF Documents
+            (<span><a href="https://trustee.ietf.org/license-info">https://trustee.ietf.org/license-info</a></span>) in effect on the date of
+            publication of this document. Please review these documents
+            carefully, as they describe your rights and restrictions with
+            respect to this document. Code Components extracted from this
+            document must include Revised BSD License text as described in
+            Section 4.e of the Trust Legal Provisions and are provided without
+            warranty as described in the Revised BSD License.<a href="#section-boilerplate.2-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="toc">
+<section id="section-toc.1">
+        <a href="#" onclick="scroll(0,0)" class="toplink">▲</a><h2 id="name-table-of-contents">
+<a href="#name-table-of-contents" class="section-name selfRef">Table of Contents</a>
+        </h2>
+<nav class="toc"><ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1">
+            <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="xref">1</a>.  <a href="#name-introduction" class="xref">Introduction</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2">
+            <p id="section-toc.1-1.2.1"><a href="#section-2" class="xref">2</a>.  <a href="#name-threats-and-risks-to-iot-de" class="xref">Threats and Risks to IoT Deployments</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.1">
+                <p id="section-toc.1-1.2.2.1.1"><a href="#section-2.1" class="xref">2.1</a>.  <a href="#name-threat-iot-network-credenti" class="xref">Threat: IoT Network Credential Exposure</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.1.2.1">
+                    <p id="section-toc.1-1.2.2.1.2.1.1" class="keepWithNext"><a href="#section-2.1.1" class="xref">2.1.1</a>.  <a href="#name-requsenetcredentials" class="xref">REQ.USE.NET.CREDENTIALS</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.1.2.2">
+                    <p id="section-toc.1-1.2.2.1.2.2.1" class="keepWithNext"><a href="#section-2.1.2" class="xref">2.1.2</a>.  <a href="#name-threatiotnetcredentials" class="xref">THREAT.IOT.NET.CREDENTIALS</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.1.2.3">
+                    <p id="section-toc.1-1.2.2.1.2.3.1"><a href="#section-2.1.3" class="xref">2.1.3</a>.  <a href="#name-reqsecnetcredentials" class="xref">REQ.SEC.NET.CREDENTIALS</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.1.2.4">
+                    <p id="section-toc.1-1.2.2.1.2.4.1"><a href="#section-2.1.4" class="xref">2.1.4</a>.  <a href="#name-technologies-to-mitigate-th" class="xref">Technologies to Mitigate THREAT.IOT.NET.CREDENTIALS</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.2">
+                <p id="section-toc.1-1.2.2.2.1"><a href="#section-2.2" class="xref">2.2</a>.  <a href="#name-threat-trust-anchor-private" class="xref">Threat: Trust Anchor Private Key Disclosure</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.2.2.1">
+                    <p id="section-toc.1-1.2.2.2.2.1.1"><a href="#section-2.2.1" class="xref">2.2.1</a>.  <a href="#name-threatiottadisclosure" class="xref">THREAT.IOT.TA.DISCLOSURE</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.2.2.2">
+                    <p id="section-toc.1-1.2.2.2.2.2.1"><a href="#section-2.2.2" class="xref">2.2.2</a>.  <a href="#name-reqsectarotation" class="xref">REQ.SEC.TA.ROTATION</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.2.2.3">
+                    <p id="section-toc.1-1.2.2.2.2.3.1"><a href="#section-2.2.3" class="xref">2.2.3</a>.  <a href="#name-technologies-to-mitigate-thr" class="xref">Technologies to mitigate THREAT.IOT.TA.DISCLOSURE</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.3">
+                <p id="section-toc.1-1.2.2.3.1"><a href="#section-2.3" class="xref">2.3</a>.  <a href="#name-threat-incorrect-firmware-v" class="xref">Threat: Incorrect Firmware/Version</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.3.2.1">
+                    <p id="section-toc.1-1.2.2.3.2.1.1"><a href="#section-2.3.1" class="xref">2.3.1</a>.  <a href="#name-threatfwold" class="xref">THREAT.FW.OLD</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.3.2.2">
+                    <p id="section-toc.1-1.2.2.3.2.2.1"><a href="#section-2.3.2" class="xref">2.3.2</a>.  <a href="#name-threatdevrogue" class="xref">THREAT.DEV.ROGUE</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.3.2.3">
+                    <p id="section-toc.1-1.2.2.3.2.3.1"><a href="#section-2.3.3" class="xref">2.3.3</a>.  <a href="#name-reqsecfwmeasure" class="xref">REQ.SEC.FW.MEASURE</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.3.2.4">
+                    <p id="section-toc.1-1.2.2.3.2.4.1"><a href="#section-2.3.4" class="xref">2.3.4</a>.  <a href="#name-technologies-to-implement-r" class="xref">Technologies to implement REQ.SEC.FW.MEASURE</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.4">
+                <p id="section-toc.1-1.2.2.4.1"><a href="#section-2.4" class="xref">2.4</a>.  <a href="#name-threat-vulnerable-firmware" class="xref">Threat: Vulnerable Firmware</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.4.2.1">
+                    <p id="section-toc.1-1.2.2.4.2.1.1"><a href="#section-2.4.1" class="xref">2.4.1</a>.  <a href="#name-threatfwknownvulnerability" class="xref">THREAT.FW.KNOWN.VULNERABILITY</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.4.2.2">
+                    <p id="section-toc.1-1.2.2.4.2.2.1"><a href="#section-2.4.2" class="xref">2.4.2</a>.  <a href="#name-reqsecfwremoteupdate" class="xref">REQ.SEC.FW.REMOTE.UPDATE</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.4.2.3">
+                    <p id="section-toc.1-1.2.2.4.2.3.1"><a href="#section-2.4.3" class="xref">2.4.3</a>.  <a href="#name-threatupdatecompromise" class="xref">THREAT.UPDATE.COMPROMISE</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.4.2.4">
+                    <p id="section-toc.1-1.2.2.4.2.4.1"><a href="#section-2.4.4" class="xref">2.4.4</a>.  <a href="#name-reqsecupdatesecurity" class="xref">REQ.SEC.UPDATE.SECURITY</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.4.2.5">
+                    <p id="section-toc.1-1.2.2.4.2.5.1"><a href="#section-2.4.5" class="xref">2.4.5</a>.  <a href="#name-technologies-to-implement-re" class="xref">Technologies to implement REQ.SEC.UPDATE.SECURITY</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.5">
+                <p id="section-toc.1-1.2.2.5.1"><a href="#section-2.5" class="xref">2.5</a>.  <a href="#name-threat-supply-chain-attacks" class="xref">Threat: Supply Chain Attacks</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.5.2.1">
+                    <p id="section-toc.1-1.2.2.5.2.1.1"><a href="#section-2.5.1" class="xref">2.5.1</a>.  <a href="#name-riskswsupply" class="xref">RISK.SW.SUPPLY</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.5.2.2">
+                    <p id="section-toc.1-1.2.2.5.2.2.1"><a href="#section-2.5.2" class="xref">2.5.2</a>.  <a href="#name-threatswsupply" class="xref">THREAT.SW.SUPPLY</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.5.2.3">
+                    <p id="section-toc.1-1.2.2.5.2.3.1"><a href="#section-2.5.3" class="xref">2.5.3</a>.  <a href="#name-reqsecswbom" class="xref">REQ.SEC.SW.BOM</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.5.2.4">
+                    <p id="section-toc.1-1.2.2.5.2.4.1"><a href="#section-2.5.4" class="xref">2.5.4</a>.  <a href="#name-technologies-to-implement-req" class="xref">Technologies to implement REQ.SEC.UPDATE.SECURITY</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.6">
+                <p id="section-toc.1-1.2.2.6.1"><a href="#section-2.6" class="xref">2.6</a>.  <a href="#name-risk-verification-informati" class="xref">Risk: Verification Information Supply Chain</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.6.2.1">
+                    <p id="section-toc.1-1.2.2.6.2.1.1"><a href="#section-2.6.1" class="xref">2.6.1</a>.  <a href="#name-riskverifierdefaults" class="xref">RISK.VERIFIER.DEFAULTS</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.6.2.2">
+                    <p id="section-toc.1-1.2.2.6.2.2.1"><a href="#section-2.6.2" class="xref">2.6.2</a>.  <a href="#name-threattrustelevation" class="xref">THREAT.TRUST.ELEVATION</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.6.2.3">
+                    <p id="section-toc.1-1.2.2.6.2.3.1"><a href="#section-2.6.3" class="xref">2.6.3</a>.  <a href="#name-reqsecverifierdata" class="xref">REQ.SEC.VERIFIER.DATA</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.6.2.4">
+                    <p id="section-toc.1-1.2.2.6.2.4.1"><a href="#section-2.6.4" class="xref">2.6.4</a>.  <a href="#name-technologies-to-implement-reqs" class="xref">Technologies to implement REQ.SEC.VERIFIER.DATA</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.7">
+                <p id="section-toc.1-1.2.2.7.1"><a href="#section-2.7" class="xref">2.7</a>.  <a href="#name-threat-spurious-network-cap" class="xref">Threat: Spurious Network Capabilites</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.7.2.1">
+                    <p id="section-toc.1-1.2.2.7.2.1.1"><a href="#section-2.7.1" class="xref">2.7.1</a>.  <a href="#name-threatnetspuriousfunctions" class="xref">THREAT.NET.SPURIOUS.FUNCTIONS</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.7.2.2">
+                    <p id="section-toc.1-1.2.2.7.2.2.1"><a href="#section-2.7.2" class="xref">2.7.2</a>.  <a href="#name-reqsecnetacl" class="xref">REQ.SEC.NET.ACL</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.7.2.3">
+                    <p id="section-toc.1-1.2.2.7.2.3.1"><a href="#section-2.7.3" class="xref">2.7.3</a>.  <a href="#name-threatnetbadacl" class="xref">THREAT.NET.BAD.ACL</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.7.2.4">
+                    <p id="section-toc.1-1.2.2.7.2.4.1"><a href="#section-2.7.4" class="xref">2.7.4</a>.  <a href="#name-reqsecnetaclsignature" class="xref">REQ.SEC.NET.ACL.SIGNATURE</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.7.2.5">
+                    <p id="section-toc.1-1.2.2.7.2.5.1"><a href="#section-2.7.5" class="xref">2.7.5</a>.  <a href="#name-threatnetwrongacl" class="xref">THREAT.NET.WRONG.ACL</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.7.2.6">
+                    <p id="section-toc.1-1.2.2.7.2.6.1"><a href="#section-2.7.6" class="xref">2.7.6</a>.  <a href="#name-reqsecnetacltrust" class="xref">REQ.SEC.NET.ACL.TRUST</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.7.2.7">
+                    <p id="section-toc.1-1.2.2.7.2.7.1"><a href="#section-2.7.7" class="xref">2.7.7</a>.  <a href="#name-risknetaclconflation" class="xref">RISK.NET.ACL.CONFLATION</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.7.2.8">
+                    <p id="section-toc.1-1.2.2.7.2.8.1"><a href="#section-2.7.8" class="xref">2.7.8</a>.  <a href="#name-reqsecnetaclseparation" class="xref">REQ.SEC.NET.ACL.SEPARATION</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.7.2.9">
+                    <p id="section-toc.1-1.2.2.7.2.9.1"><a href="#section-2.7.9" class="xref">2.7.9</a>.  <a href="#name-technologies-to-mitigate-sp" class="xref">Technologies to Mitigate Spurious Network Capabilities</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.8">
+                <p id="section-toc.1-1.2.2.8.1"><a href="#section-2.8" class="xref">2.8</a>.  <a href="#name-risk-dos-of-acl-server" class="xref">Risk: DoS of ACL server</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.8.2.1">
+                    <p id="section-toc.1-1.2.2.8.2.1.1"><a href="#section-2.8.1" class="xref">2.8.1</a>.  <a href="#name-risknetaclupdate" class="xref">RISK.NET.ACL.UPDATE</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.8.2.2">
+                    <p id="section-toc.1-1.2.2.8.2.2.1"><a href="#section-2.8.2" class="xref">2.8.2</a>.  <a href="#name-threatnetacldos" class="xref">THREAT.NET.ACL.DOS</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.8.2.3">
+                    <p id="section-toc.1-1.2.2.8.2.3.1"><a href="#section-2.8.3" class="xref">2.8.3</a>.  <a href="#name-reqsecnetacllocal" class="xref">REQ.SEC.NET.ACL.LOCAL</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.8.2.4">
+                    <p id="section-toc.1-1.2.2.8.2.4.1"><a href="#section-2.8.4" class="xref">2.8.4</a>.  <a href="#name-technologies-to-implement-reqse" class="xref">Technologies to Implement REQ.SEC.NET.ACL.LOCAL</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.9">
+                <p id="section-toc.1-1.2.2.9.1"><a href="#section-2.9" class="xref">2.9</a>.  <a href="#name-threat-delays-in-acl-remedi" class="xref">Threat: Delays in ACL Remediation</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.9.2.1">
+                    <p id="section-toc.1-1.2.2.9.2.1.1"><a href="#section-2.9.1" class="xref">2.9.1</a>.  <a href="#name-threatnetaclbroad" class="xref">THREAT.NET.ACL.BROAD</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.9.2.2">
+                    <p id="section-toc.1-1.2.2.9.2.2.1"><a href="#section-2.9.2" class="xref">2.9.2</a>.  <a href="#name-reqsecnetacldynamic" class="xref">REQ.SEC.NET.ACL.DYNAMIC</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.9.2.3">
+                    <p id="section-toc.1-1.2.2.9.2.3.1"><a href="#section-2.9.3" class="xref">2.9.3</a>.  <a href="#name-technologies-that-implement" class="xref">Technologies that implement REQ.SEC.NET.ACL.DYNAMIC</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.10">
+                <p id="section-toc.1-1.2.2.10.1"><a href="#section-2.10" class="xref">2.10</a>. <a href="#name-threat-vulnerable-devices" class="xref">Threat: Vulnerable Devices</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.10.2.1">
+                    <p id="section-toc.1-1.2.2.10.2.1.1"><a href="#section-2.10.1" class="xref">2.10.1</a>.  <a href="#name-threatnetvulnerabledevice" class="xref">THREAT.NET.VULNERABLE.DEVICE</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.10.2.2">
+                    <p id="section-toc.1-1.2.2.10.2.2.1"><a href="#section-2.10.2" class="xref">2.10.2</a>.  <a href="#name-reqsecnetdmz" class="xref">REQ.SEC.NET.DMZ</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.10.2.3">
+                    <p id="section-toc.1-1.2.2.10.2.3.1"><a href="#section-2.10.3" class="xref">2.10.3</a>.  <a href="#name-technologies-to-implement-reqsec" class="xref">Technologies to Implement REQ.SEC.NET.DMZ</a></p>
+</li>
+                </ul>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
+            <p id="section-toc.1-1.3.1"><a href="#section-3" class="xref">3</a>.  <a href="#name-normative-references" class="xref">Normative References</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
+            <p id="section-toc.1-1.4.1"><a href="#appendix-A" class="xref"></a><a href="#name-authors-address" class="xref">Author's Address</a></p>
+</li>
+        </ul>
+</nav>
+</section>
+</div>
+<div id="introduction">
+<section id="section-1">
+      <h2 id="name-introduction">
+<a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
+      </h2>
+<p id="section-1-1">This memo serves as an entry-point to detail which technologies are available for use in IoT networks and to enable IoT designers to discover technologies that may solve their problems. This draft addresses.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-2">This draft addresses six trustworthiness problems in IoT devices; expressed simply as six questions:<a href="#section-1-2" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-1-3">
+<li id="section-1-3.1">What software is my device running?<a href="#section-1-3.1" class="pilcrow">¶</a>
+</li>
+        <li id="section-1-3.2">How should my device connect to a network?<a href="#section-1-3.2" class="pilcrow">¶</a>
+</li>
+        <li id="section-1-3.3">With which systems should my device communicate?<a href="#section-1-3.3" class="pilcrow">¶</a>
+</li>
+        <li id="section-1-3.4">What is the provenance of my device's software and corresponding policies?<a href="#section-1-3.4" class="pilcrow">¶</a>
+</li>
+        <li id="section-1-3.5">Who is authorised to initiate a software update and under which conditions?<a href="#section-1-3.5" class="pilcrow">¶</a>
+</li>
+        <li id="section-1-3.6">How should my device trust updates to its software?<a href="#section-1-3.6" class="pilcrow">¶</a>
+</li>
+      </ol>
+<p id="section-1-4">Each of these questions is answered by recently developed or developing standards. Each of these questions hides a security threat; so these threats are detailed in a threat model.<a href="#section-1-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="threats-and-risks-to-iot-deployments">
+<section id="section-2">
+      <h2 id="name-threats-and-risks-to-iot-de">
+<a href="#section-2" class="section-number selfRef">2. </a><a href="#name-threats-and-risks-to-iot-de" class="section-name selfRef">Threats and Risks to IoT Deployments</a>
+      </h2>
+<p id="section-2-1">For this threat model to be useful to implementers, there are certain usability requirements that must be included to explain the origin of a threat. These are noted where necessary.<a href="#section-2-1" class="pilcrow">¶</a></p>
+<p id="section-2-2">Sections are organised in groups of:<a href="#section-2-2" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-2-3.1">usability requirement (if needed)<a href="#section-2-3.1" class="pilcrow">¶</a>
+</li>
+        <li class="normal" id="section-2-3.2">threat<a href="#section-2-3.2" class="pilcrow">¶</a>
+</li>
+        <li class="normal" id="section-2-3.3">security requirement<a href="#section-2-3.3" class="pilcrow">¶</a>
+</li>
+        <li class="normal" id="section-2-3.4">mitigating technologies<a href="#section-2-3.4" class="pilcrow">¶</a>
+</li>
+      </ul>
+<div id="threat-iot-network-credential-exposure">
+<section id="section-2.1">
+        <h3 id="name-threat-iot-network-credenti">
+<a href="#section-2.1" class="section-number selfRef">2.1. </a><a href="#name-threat-iot-network-credenti" class="section-name selfRef">Threat: IoT Network Credential Exposure</a>
+        </h3>
+<p id="section-2.1-1">Network Credential Exposure describes the potential for exposure of credentials, including cryptographic material, used to access an IoT network. Note that "network" here describes a logical network, such as a LwM2M server and its clients.<a href="#section-2.1-1" class="pilcrow">¶</a></p>
+<p id="section-2.1-2">Each physical network technology provides its own onboarding techniques. Recommended practice is to follow best practices for the physical network technology in use.<a href="#section-2.1-2" class="pilcrow">¶</a></p>
+<div id="requsenetcredentials">
+<section id="section-2.1.1">
+          <h4 id="name-requsenetcredentials">
+<a href="#section-2.1.1" class="section-number selfRef">2.1.1. </a><a href="#name-requsenetcredentials" class="section-name selfRef">REQ.USE.NET.CREDENTIALS</a>
+          </h4>
+<p id="section-2.1.1-1">It must be possible to provide a device with credentials to access a network. This is typically referred to as device onboarding. This may be done by the manufacturer, the supply chain, the installer, or the end user. It may be done by the device or on behalf of the device by a trusted third party.<a href="#section-2.1.1-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="threatiotnetcredentials">
+<section id="section-2.1.2">
+          <h4 id="name-threatiotnetcredentials">
+<a href="#section-2.1.2" class="section-number selfRef">2.1.2. </a><a href="#name-threatiotnetcredentials" class="section-name selfRef">THREAT.IOT.NET.CREDENTIALS</a>
+          </h4>
+<p id="section-2.1.2-1">A threat actor extracts the credentials from a device or by eavesdropping on the credential provisioning flow<a href="#section-2.1.2-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="reqsecnetcredentials">
+<section id="section-2.1.3">
+          <h4 id="name-reqsecnetcredentials">
+<a href="#section-2.1.3" class="section-number selfRef">2.1.3. </a><a href="#name-reqsecnetcredentials" class="section-name selfRef">REQ.SEC.NET.CREDENTIALS</a>
+          </h4>
+<p id="section-2.1.3-1">Network access credentials must be provisioned to a device in a way that secures them against eavesdropping or extraction.<a href="#section-2.1.3-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="technologies-to-mitigate-threatiotnetcredentials">
+<section id="section-2.1.4">
+          <h4 id="name-technologies-to-mitigate-th">
+<a href="#section-2.1.4" class="section-number selfRef">2.1.4. </a><a href="#name-technologies-to-mitigate-th" class="section-name selfRef">Technologies to Mitigate THREAT.IOT.NET.CREDENTIALS</a>
+          </h4>
+<p id="section-2.1.4-1">Several technologies are available for device onboarding:<a href="#section-2.1.4-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-2.1.4-2.1">Lightweight M2M Bootstrap <span>[<a href="#LwM2M" class="xref">LwM2M</a>]</span> provides a mechanism to provision keying material and configuration of any kind, according to a well-defined data model.<a href="#section-2.1.4-2.1" class="pilcrow">¶</a>
+</li>
+            <li class="normal" id="section-2.1.4-2.2">FIDO Device Onboard <span>[<a href="#FDO" class="xref">FDO</a>]</span> provides a mechanism to deliver an arbitrary block of data to devices. This block of data can contain trust anchors, cryptographic information, and other device configuration.<a href="#section-2.1.4-2.2" class="pilcrow">¶</a>
+</li>
+            <li class="normal" id="section-2.1.4-2.3">BRSKI <span>[<a href="#RFC8995" class="xref">RFC8995</a>]</span> provides a mechanism for "Bootstrap Distribution of CA Certificates", as described in <span>[<a href="#RFC7030" class="xref">RFC7030</a>]</span>, Section 4.1.1.  In the process, a TLS connection is established that can be directly used for Enrollment over Secure Transport (EST).<a href="#section-2.1.4-2.3" class="pilcrow">¶</a>
+</li>
+            <li class="normal" id="section-2.1.4-2.4">Enrollment over Secure Transport (EST) <span>[<a href="#RFC7030" class="xref">RFC7030</a>]</span> provides a mechanism to deliver certificates and, optionally, private keys to devices.<a href="#section-2.1.4-2.4" class="pilcrow">¶</a>
+</li>
+          </ul>
+</section>
+</div>
+</section>
+</div>
+<div id="threat-trust-anchor-private-key-disclosure">
+<section id="section-2.2">
+        <h3 id="name-threat-trust-anchor-private">
+<a href="#section-2.2" class="section-number selfRef">2.2. </a><a href="#name-threat-trust-anchor-private" class="section-name selfRef">Threat: Trust Anchor Private Key Disclosure</a>
+        </h3>
+<p id="section-2.2-1">When a trust anchor of a device is used regularly, the chances of its private key being disclosed increase.<a href="#section-2.2-1" class="pilcrow">¶</a></p>
+<div id="threatiottadisclosure">
+<section id="section-2.2.1">
+          <h4 id="name-threatiottadisclosure">
+<a href="#section-2.2.1" class="section-number selfRef">2.2.1. </a><a href="#name-threatiottadisclosure" class="section-name selfRef">THREAT.IOT.TA.DISCLOSURE</a>
+          </h4>
+<p id="section-2.2.1-1">A private key trusted by one or more devices is disclosed. This could be caused by: a threat actor within the organisation, a compromise of a service using the key, etc.<a href="#section-2.2.1-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="reqsectarotation">
+<section id="section-2.2.2">
+          <h4 id="name-reqsectarotation">
+<a href="#section-2.2.2" class="section-number selfRef">2.2.2. </a><a href="#name-reqsectarotation" class="section-name selfRef">REQ.SEC.TA.ROTATION</a>
+          </h4>
+<p id="section-2.2.2-1">It must be possible to deploy new keys to devices in order to update their active trust anchors. This does not mean that the ultimate trust anchor over a device is changed, but that its delegates are changed, enabling infrequent use of the ultimate trust anchor and higher security key management protocols to be deployed, such as key ceremonies and M of N threshold signatures.<a href="#section-2.2.2-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="technologies-to-mitigate-threatiottadisclosure">
+<section id="section-2.2.3">
+          <h4 id="name-technologies-to-mitigate-thr">
+<a href="#section-2.2.3" class="section-number selfRef">2.2.3. </a><a href="#name-technologies-to-mitigate-thr" class="section-name selfRef">Technologies to mitigate THREAT.IOT.TA.DISCLOSURE</a>
+          </h4>
+<p id="section-2.2.3-1">Several technologies are available for trust anchor rotation:<a href="#section-2.2.3-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-2.2.3-2.1">Lightweight M2M Bootstrap <span>[<a href="#LwM2M" class="xref">LwM2M</a>]</span> provides a mechanism to provision keying material and configuration of any kind, according to a well-defined data model.<a href="#section-2.2.3-2.1" class="pilcrow">¶</a>
+</li>
+            <li class="normal" id="section-2.2.3-2.2">FIDO Device Onboard <span>[<a href="#FDO" class="xref">FDO</a>]</span> provides a mechanism to deliver an arbitrary block of data to devices. This block of data can contain trust anchors, cryptographic information, and other device configuration.<a href="#section-2.2.3-2.2" class="pilcrow">¶</a>
+</li>
+            <li class="normal" id="section-2.2.3-2.3">Enrollment over Secure Transport (EST) <span>[<a href="#RFC7030" class="xref">RFC7030</a>]</span> provides a mechanism to deliver certificates and, optionally, private keys to devices.<a href="#section-2.2.3-2.3" class="pilcrow">¶</a>
+</li>
+          </ul>
+</section>
+</div>
+</section>
+</div>
+<div id="threat-incorrect-firmwareversion">
+<section id="section-2.3">
+        <h3 id="name-threat-incorrect-firmware-v">
+<a href="#section-2.3" class="section-number selfRef">2.3. </a><a href="#name-threat-incorrect-firmware-v" class="section-name selfRef">Threat: Incorrect Firmware/Version</a>
+        </h3>
+<p id="section-2.3-1">Incorrect firmware/version can come in two forms.<a href="#section-2.3-1" class="pilcrow">¶</a></p>
+<div id="threatfwold">
+<section id="section-2.3.1">
+          <h4 id="name-threatfwold">
+<a href="#section-2.3.1" class="section-number selfRef">2.3.1. </a><a href="#name-threatfwold" class="section-name selfRef">THREAT.FW.OLD</a>
+          </h4>
+<p id="section-2.3.1-1">Old firmware present on device allows compromise of data sent to device, poisoning of data sent to service<a href="#section-2.3.1-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="threatdevrogue">
+<section id="section-2.3.2">
+          <h4 id="name-threatdevrogue">
+<a href="#section-2.3.2" class="section-number selfRef">2.3.2. </a><a href="#name-threatdevrogue" class="section-name selfRef">THREAT.DEV.ROGUE</a>
+          </h4>
+<p id="section-2.3.2-1">Rogue or simulated device emulates a real device, allows compromise of data sent to the device, or poisoning of data sent to service<a href="#section-2.3.2-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="reqsecfwmeasure">
+<section id="section-2.3.3">
+          <h4 id="name-reqsecfwmeasure">
+<a href="#section-2.3.3" class="section-number selfRef">2.3.3. </a><a href="#name-reqsecfwmeasure" class="section-name selfRef">REQ.SEC.FW.MEASURE</a>
+          </h4>
+<p id="section-2.3.3-1">To enable devices to report their current software version and related data securely, devices SHOULD support a support a mechanism to securely measure their firmware. This allows an IoT network to restrict access by non-compliant devices.<a href="#section-2.3.3-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="technologies-to-implement-reqsecfwmeasure">
+<section id="section-2.3.4">
+          <h4 id="name-technologies-to-implement-r">
+<a href="#section-2.3.4" class="section-number selfRef">2.3.4. </a><a href="#name-technologies-to-implement-r" class="section-name selfRef">Technologies to implement REQ.SEC.FW.MEASURE</a>
+          </h4>
+<p id="section-2.3.4-1">The technology used for securely measuring and reporting the firmware of a device is typically called remote attestation. A protocol is under development for conveying remote attestation measurements in a trustworthy way in <span>[<a href="#I-D.ietf-rats-architecture" class="xref">I-D.ietf-rats-architecture</a>]</span>. Likewise, document format is under development in <span>[<a href="#I-D.ietf-rats-eat" class="xref">I-D.ietf-rats-eat</a>]</span>.<a href="#section-2.3.4-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="threat-vulnerable-firmware">
+<section id="section-2.4">
+        <h3 id="name-threat-vulnerable-firmware">
+<a href="#section-2.4" class="section-number selfRef">2.4. </a><a href="#name-threat-vulnerable-firmware" class="section-name selfRef">Threat: Vulnerable Firmware</a>
+        </h3>
+<p id="section-2.4-1">Devices with old firmware might have a known vulnerability. This could allow a threat actor to take over the device.<a href="#section-2.4-1" class="pilcrow">¶</a></p>
+<div id="threatfwknownvulnerability">
+<section id="section-2.4.1">
+          <h4 id="name-threatfwknownvulnerability">
+<a href="#section-2.4.1" class="section-number selfRef">2.4.1. </a><a href="#name-threatfwknownvulnerability" class="section-name selfRef">THREAT.FW.KNOWN.VULNERABILITY</a>
+          </h4>
+<p id="section-2.4.1-1">If old firmware with known vulnerability cannot be altered. This allows exploit of known a vulnerability.<a href="#section-2.4.1-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="reqsecfwremoteupdate">
+<section id="section-2.4.2">
+          <h4 id="name-reqsecfwremoteupdate">
+<a href="#section-2.4.2" class="section-number selfRef">2.4.2. </a><a href="#name-reqsecfwremoteupdate" class="section-name selfRef">REQ.SEC.FW.REMOTE.UPDATE</a>
+          </h4>
+<p id="section-2.4.2-1">Software on unattended devices must be remotely-updatable.<a href="#section-2.4.2-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="threatupdatecompromise">
+<section id="section-2.4.3">
+          <h4 id="name-threatupdatecompromise">
+<a href="#section-2.4.3" class="section-number selfRef">2.4.3. </a><a href="#name-threatupdatecompromise" class="section-name selfRef">THREAT.UPDATE.COMPROMISE</a>
+          </h4>
+<p id="section-2.4.3-1">Compromise of the update system is fundamentally equivalent to persistent remote code execution. A threat actor that gains firmware update capability has extensive power over the device.<a href="#section-2.4.3-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="reqsecupdatesecurity">
+<section id="section-2.4.4">
+          <h4 id="name-reqsecupdatesecurity">
+<a href="#section-2.4.4" class="section-number selfRef">2.4.4. </a><a href="#name-reqsecupdatesecurity" class="section-name selfRef">REQ.SEC.UPDATE.SECURITY</a>
+          </h4>
+<p id="section-2.4.4-1">Software update mechanism must be secured (see RFC9124)<a href="#section-2.4.4-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="technologies-to-implement-reqsecupdatesecurity">
+<section id="section-2.4.5">
+          <h4 id="name-technologies-to-implement-re">
+<a href="#section-2.4.5" class="section-number selfRef">2.4.5. </a><a href="#name-technologies-to-implement-re" class="section-name selfRef">Technologies to implement REQ.SEC.UPDATE.SECURITY</a>
+          </h4>
+<p id="section-2.4.5-1">To enable devices to be updated securely in the field, they can support a remote update protocol such as <span>[<a href="#I-D.ietf-suit-manifest" class="xref">I-D.ietf-suit-manifest</a>]</span>. For securely deploying software to Trusted Execution Environments, the a secure Trusted Application delivery protocol should be used, such as <span>[<a href="#I-D.ietf-teep-architecture" class="xref">I-D.ietf-teep-architecture</a>]</span>.<a href="#section-2.4.5-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="threat-supply-chain-attacks">
+<section id="section-2.5">
+        <h3 id="name-threat-supply-chain-attacks">
+<a href="#section-2.5" class="section-number selfRef">2.5. </a><a href="#name-threat-supply-chain-attacks" class="section-name selfRef">Threat: Supply Chain Attacks</a>
+        </h3>
+<p id="section-2.5-1">Software of unknown origin may be used in a device. If an threat actor can gain control over the software supply chain, they may be able to sneak their code onto a device.<a href="#section-2.5-1" class="pilcrow">¶</a></p>
+<div id="riskswsupply">
+<section id="section-2.5.1">
+          <h4 id="name-riskswsupply">
+<a href="#section-2.5.1" class="section-number selfRef">2.5.1. </a><a href="#name-riskswsupply" class="section-name selfRef">RISK.SW.SUPPLY</a>
+          </h4>
+<p id="section-2.5.1-1">Software of unknown origin may be used in a device<a href="#section-2.5.1-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="threatswsupply">
+<section id="section-2.5.2">
+          <h4 id="name-threatswsupply">
+<a href="#section-2.5.2" class="section-number selfRef">2.5.2. </a><a href="#name-threatswsupply" class="section-name selfRef">THREAT.SW.SUPPLY</a>
+          </h4>
+<p id="section-2.5.2-1">If software origin is not verified, a threat actor may deliberately and secretly seed the software supply chain with vulnerable code, enabling further compromise.<a href="#section-2.5.2-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="reqsecswbom">
+<section id="section-2.5.3">
+          <h4 id="name-reqsecswbom">
+<a href="#section-2.5.3" class="section-number selfRef">2.5.3. </a><a href="#name-reqsecswbom" class="section-name selfRef">REQ.SEC.SW.BOM</a>
+          </h4>
+<p id="section-2.5.3-1">To prove the provenance of a firmware update, update manifests SHOULD include (directly, or by secure reference) a Software Identifier or Software Bill of Materials,<a href="#section-2.5.3-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="technologies-to-implement-reqsecupdatesecurity-1">
+<section id="section-2.5.4">
+          <h4 id="name-technologies-to-implement-req">
+<a href="#section-2.5.4" class="section-number selfRef">2.5.4. </a><a href="#name-technologies-to-implement-req" class="section-name selfRef">Technologies to implement REQ.SEC.UPDATE.SECURITY</a>
+          </h4>
+<p id="section-2.5.4-1">In order to enable a device to prove provenance of its software, it or its network can use a software identifier such as <span>[<a href="#I-D.ietf-sacm-coswid" class="xref">I-D.ietf-sacm-coswid</a>]</span>. Optionally, this software idenifier can be encapsulated in a manifest that includes hardware properties as well, such as <span>[<a href="#I-D.birkholz-rats-corim" class="xref">I-D.birkholz-rats-corim</a>]</span>.<a href="#section-2.5.4-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="risk-verification-information-supply-chain">
+<section id="section-2.6">
+        <h3 id="name-risk-verification-informati">
+<a href="#section-2.6" class="section-number selfRef">2.6. </a><a href="#name-risk-verification-informati" class="section-name selfRef">Risk: Verification Information Supply Chain</a>
+        </h3>
+<p id="section-2.6-1">Correct values for attestation results may not be known by Verifiers, causing them to log values, but not limit them.<a href="#section-2.6-1" class="pilcrow">¶</a></p>
+<div id="riskverifierdefaults">
+<section id="section-2.6.1">
+          <h4 id="name-riskverifierdefaults">
+<a href="#section-2.6.1" class="section-number selfRef">2.6.1. </a><a href="#name-riskverifierdefaults" class="section-name selfRef">RISK.VERIFIER.DEFAULTS</a>
+          </h4>
+<p id="section-2.6.1-1">Without access to a source of verification information such as expected attestation results, a verifier may not be able to make correct decisions about the trustworthiness of a device.<a href="#section-2.6.1-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="threattrustelevation">
+<section id="section-2.6.2">
+          <h4 id="name-threattrustelevation">
+<a href="#section-2.6.2" class="section-number selfRef">2.6.2. </a><a href="#name-threattrustelevation" class="section-name selfRef">THREAT.TRUST.ELEVATION</a>
+          </h4>
+<p id="section-2.6.2-1">A threat actor deploys compromised software to devices; this is detected by monitoring systems, but not identified as an attack. If a threat actor can cause an attestation system to trust a device more than it should, this forms a new class of elevation of privilege: elevation of trust.<a href="#section-2.6.2-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="reqsecverifierdata">
+<section id="section-2.6.3">
+          <h4 id="name-reqsecverifierdata">
+<a href="#section-2.6.3" class="section-number selfRef">2.6.3. </a><a href="#name-reqsecverifierdata" class="section-name selfRef">REQ.SEC.VERIFIER.DATA</a>
+          </h4>
+<p id="section-2.6.3-1">Monitoring systems must know the expected values in Attestation results.<a href="#section-2.6.3-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="technologies-to-implement-reqsecverifierdata">
+<section id="section-2.6.4">
+          <h4 id="name-technologies-to-implement-reqs">
+<a href="#section-2.6.4" class="section-number selfRef">2.6.4. </a><a href="#name-technologies-to-implement-reqs" class="section-name selfRef">Technologies to implement REQ.SEC.VERIFIER.DATA</a>
+          </h4>
+<p id="section-2.6.4-1">To enable a Relying Party of the Remote Attestation to correctly evaluate the Attestation Report, the SBoM (such as <span>[<a href="#I-D.ietf-sacm-coswid" class="xref">I-D.ietf-sacm-coswid</a>]</span>) can contain expected values for the Attestation Report. In addition, the expected information for hardware properties can be contained in another manifest, such as <span>[<a href="#I-D.birkholz-rats-corim" class="xref">I-D.birkholz-rats-corim</a>]</span>.<a href="#section-2.6.4-1" class="pilcrow">¶</a></p>
+<p id="section-2.6.4-2">NOTE: Remote attestation terminology is fluid on this topic. A "Verifier" can be any system that appraises Evidence in remote attestation. It is expected that "appraisal" will be spread across at least two systems to maintain confidentiality and separation of responsibility: 1) a Verifier that ensures that the attestation Evidence is produced by genuine hardware, not tampered with, and not signed by revoked keys and 2) a monitoring system taking on the role of Verifier and Relying Party that appraises whether a device has the correct software versions and initiates remediation if not.<a href="#section-2.6.4-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="threat-spurious-network-capabilites">
+<section id="section-2.7">
+        <h3 id="name-threat-spurious-network-cap">
+<a href="#section-2.7" class="section-number selfRef">2.7. </a><a href="#name-threat-spurious-network-cap" class="section-name selfRef">Threat: Spurious Network Capabilites</a>
+        </h3>
+<p id="section-2.7-1">Devices may have additional, unneeded capabilites that are detrimental to network security. While the best option is to disable this functionality in software, this is not always practical<a href="#section-2.7-1" class="pilcrow">¶</a></p>
+<div id="threatnetspuriousfunctions">
+<section id="section-2.7.1">
+          <h4 id="name-threatnetspuriousfunctions">
+<a href="#section-2.7.1" class="section-number selfRef">2.7.1. </a><a href="#name-threatnetspuriousfunctions" class="section-name selfRef">THREAT.NET.SPURIOUS.FUNCTIONS</a>
+          </h4>
+<p id="section-2.7.1-1">Devices may contain intentional or accidental capabilities to make networks vulnerable or launch attacks on other networks. These capabilities are extremely costly to discover by inspection or audit.
+Requirement: Devices (or their supply chains) must advertise their network access requirements and networks must enforce that devices adhere to their stated network access requirements.<a href="#section-2.7.1-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="reqsecnetacl">
+<section id="section-2.7.2">
+          <h4 id="name-reqsecnetacl">
+<a href="#section-2.7.2" class="section-number selfRef">2.7.2. </a><a href="#name-reqsecnetacl" class="section-name selfRef">REQ.SEC.NET.ACL</a>
+          </h4>
+<p id="section-2.7.2-1">To ensure that network infrastructure is configured discern the difference between authentic traffic and anomalous traffic, network infrastructure can implement fine-grained access control over how a device can use a network<a href="#section-2.7.2-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="threatnetbadacl">
+<section id="section-2.7.3">
+          <h4 id="name-threatnetbadacl">
+<a href="#section-2.7.3" class="section-number selfRef">2.7.3. </a><a href="#name-threatnetbadacl" class="section-name selfRef">THREAT.NET.BAD.ACL</a>
+          </h4>
+<p id="section-2.7.3-1">If a service hosting network access requirements documents is compromised, it can be used to enable malicious devices to mount attacks.<a href="#section-2.7.3-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="reqsecnetaclsignature">
+<section id="section-2.7.4">
+          <h4 id="name-reqsecnetaclsignature">
+<a href="#section-2.7.4" class="section-number selfRef">2.7.4. </a><a href="#name-reqsecnetaclsignature" class="section-name selfRef">REQ.SEC.NET.ACL.SIGNATURE</a>
+          </h4>
+<p id="section-2.7.4-1">Network access ACL documents should be signed. Best practice is to use offline keys for signing.<a href="#section-2.7.4-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="threatnetwrongacl">
+<section id="section-2.7.5">
+          <h4 id="name-threatnetwrongacl">
+<a href="#section-2.7.5" class="section-number selfRef">2.7.5. </a><a href="#name-threatnetwrongacl" class="section-name selfRef">THREAT.NET.WRONG.ACL</a>
+          </h4>
+<p id="section-2.7.5-1">If devices are permitted to self-report ACLs without authentication by a trusted party, they can report any ACL recognised by the network. A device can mis-advertise its network access requirements, pretending to be a different, but recognised and more privileged device (potentially cloning MAC addresses, keys, etc.)<a href="#section-2.7.5-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="reqsecnetacltrust">
+<section id="section-2.7.6">
+          <h4 id="name-reqsecnetacltrust">
+<a href="#section-2.7.6" class="section-number selfRef">2.7.6. </a><a href="#name-reqsecnetacltrust" class="section-name selfRef">REQ.SEC.NET.ACL.TRUST</a>
+          </h4>
+<p id="section-2.7.6-1">Network Access Requirements documents must be secured against tampering and misreporting<a href="#section-2.7.6-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="risknetaclconflation">
+<section id="section-2.7.7">
+          <h4 id="name-risknetaclconflation">
+<a href="#section-2.7.7" class="section-number selfRef">2.7.7. </a><a href="#name-risknetaclconflation" class="section-name selfRef">RISK.NET.ACL.CONFLATION</a>
+          </h4>
+<p id="section-2.7.7-1">Network Access Requirements documents embedded in or referenced from device certificates conflate two capabilities for network operators: network access requirement authorship (potentially delegated) and network access requirement audit. While network operators should audit network access requirements, authoring those requirements should be done by the authors of the device behavior.<a href="#section-2.7.7-1" class="pilcrow">¶</a></p>
+<p id="section-2.7.7-2">Failure to separate these capabilities has the potential to lead to failed device behaviour due to wrong Network Access Requirements descriptions, leading to disabling of the network ACL system in the name of expediency.<a href="#section-2.7.7-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="reqsecnetaclseparation">
+<section id="section-2.7.8">
+          <h4 id="name-reqsecnetaclseparation">
+<a href="#section-2.7.8" class="section-number selfRef">2.7.8. </a><a href="#name-reqsecnetaclseparation" class="section-name selfRef">REQ.SEC.NET.ACL.SEPARATION</a>
+          </h4>
+<p id="section-2.7.8-1">Requirement: If Network Access Requirements are embedded in or referenced by device certificates, the responsibility for network access requirement authorship should be delegated to the device application authors. Alternatively, this can be done explicitly by tying device application authorship to device network access requirements authorship.<a href="#section-2.7.8-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="technologies-to-mitigate-spurious-network-capabilities">
+<section id="section-2.7.9">
+          <h4 id="name-technologies-to-mitigate-sp">
+<a href="#section-2.7.9" class="section-number selfRef">2.7.9. </a><a href="#name-technologies-to-mitigate-sp" class="section-name selfRef">Technologies to Mitigate Spurious Network Capabilities</a>
+          </h4>
+<ol start="1" type="1" class="normal type-1" id="section-2.7.9-1">
+<li id="section-2.7.9-1.1">THREAT.NET.SPURIOUS.FUNCTIONS can be mitigated by use of <span>[<a href="#RFC8520" class="xref">RFC8520</a>]</span> Manufacturer Usage Descriptions (MUDs) and a MUD Controller which accepts MUD files in order to automatically program rules into the network infrastructure.<a href="#section-2.7.9-1.1" class="pilcrow">¶</a>
+</li>
+            <li id="section-2.7.9-1.2">THREAT.NET.BAD.ACL To prevent a threat actor from distributing their own MUD files via a MUD server, these can be signed, preferably with an offline key as described in <span>[<a href="#RFC8520" class="xref">RFC8520</a>]</span>.<a href="#section-2.7.9-1.2" class="pilcrow">¶</a>
+</li>
+            <li id="section-2.7.9-1.3">THREAT.NET.WRONG.ACL can be mitigated by using 802.1X, or SUIT to contain a MUD file or MUD file reference and integrity check. Alternatively, the device's RATS attestation results can be compared to a known list of device profiles and a MUD can be applied as a result without intervention from the remote device.<a href="#section-2.7.9-1.3" class="pilcrow">¶</a>
+</li>
+            <li id="section-2.7.9-1.4">REQ.SEC.NET.ACL.SEPARATION can be mitigated either through key delegation or through the use of SUIT encapsulation of the MUD file. A third option is to use a third-party ACL provider, such as iotopia.<a href="#section-2.7.9-1.4" class="pilcrow">¶</a>
+</li>
+          </ol>
+</section>
+</div>
+</section>
+</div>
+<div id="risk-dos-of-acl-server">
+<section id="section-2.8">
+        <h3 id="name-risk-dos-of-acl-server">
+<a href="#section-2.8" class="section-number selfRef">2.8. </a><a href="#name-risk-dos-of-acl-server" class="section-name selfRef">Risk: DoS of ACL server</a>
+        </h3>
+<div id="risknetaclupdate">
+<section id="section-2.8.1">
+          <h4 id="name-risknetaclupdate">
+<a href="#section-2.8.1" class="section-number selfRef">2.8.1. </a><a href="#name-risknetaclupdate" class="section-name selfRef">RISK.NET.ACL.UPDATE</a>
+          </h4>
+<p id="section-2.8.1-1">Recently updated devices may incur latency penalties when a new network access requirements reference must be resolved and verified.<a href="#section-2.8.1-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="threatnetacldos">
+<section id="section-2.8.2">
+          <h4 id="name-threatnetacldos">
+<a href="#section-2.8.2" class="section-number selfRef">2.8.2. </a><a href="#name-threatnetacldos" class="section-name selfRef">THREAT.NET.ACL.DOS</a>
+          </h4>
+<p id="section-2.8.2-1">A threat actor may block access to a distributor of network access requirements documents, thus disabling all devices referencing the network access requirements documents it hosts, without any network intrusion necessary against target networks.<a href="#section-2.8.2-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="reqsecnetacllocal">
+<section id="section-2.8.3">
+          <h4 id="name-reqsecnetacllocal">
+<a href="#section-2.8.3" class="section-number selfRef">2.8.3. </a><a href="#name-reqsecnetacllocal" class="section-name selfRef">REQ.SEC.NET.ACL.LOCAL</a>
+          </h4>
+<p id="section-2.8.3-1">Network access requirements documents should be distributed in advance of use by any device because they constitute a non-local software dependency<a href="#section-2.8.3-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="technologies-to-implement-reqsecnetacllocal">
+<section id="section-2.8.4">
+          <h4 id="name-technologies-to-implement-reqse">
+<a href="#section-2.8.4" class="section-number selfRef">2.8.4. </a><a href="#name-technologies-to-implement-reqse" class="section-name selfRef">Technologies to Implement REQ.SEC.NET.ACL.LOCAL</a>
+          </h4>
+<p id="section-2.8.4-1">In order for network infrastructure to be configured in advance of any changes to devices, MUD files can be transported (directly or by secure reference) within update manifests.<a href="#section-2.8.4-1" class="pilcrow">¶</a></p>
+<p id="section-2.8.4-2">This allows local infrastructure to delay installation of a firmware update until a new MUD file can be fetched and audited.<a href="#section-2.8.4-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="threat-delays-in-acl-remediation">
+<section id="section-2.9">
+        <h3 id="name-threat-delays-in-acl-remedi">
+<a href="#section-2.9" class="section-number selfRef">2.9. </a><a href="#name-threat-delays-in-acl-remedi" class="section-name selfRef">Threat: Delays in ACL Remediation</a>
+        </h3>
+<p id="section-2.9-1">If an ACL is wrong, network operators need it to be fixed quickly.<a href="#section-2.9-1" class="pilcrow">¶</a></p>
+<div id="threatnetaclbroad">
+<section id="section-2.9.1">
+          <h4 id="name-threatnetaclbroad">
+<a href="#section-2.9.1" class="section-number selfRef">2.9.1. </a><a href="#name-threatnetaclbroad" class="section-name selfRef">THREAT.NET.ACL.BROAD</a>
+          </h4>
+<p id="section-2.9.1-1">A network access requirements document grants permissions to a device that are too broad, but the provider of firmware updates is slow to respond, meaning that MUD file delivery in SUIT will take too long.<a href="#section-2.9.1-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="reqsecnetacldynamic">
+<section id="section-2.9.2">
+          <h4 id="name-reqsecnetacldynamic">
+<a href="#section-2.9.2" class="section-number selfRef">2.9.2. </a><a href="#name-reqsecnetacldynamic" class="section-name selfRef">REQ.SEC.NET.ACL.DYNAMIC</a>
+          </h4>
+<p id="section-2.9.2-1">It must be possible to distribute reduced permissions to network access controllers to mitigate a wrong ACL. To enable rapid response to evolving threats, the MUD controller SHOULD also support dynamic update of MUD files.<a href="#section-2.9.2-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="technologies-that-implement-reqsecnetacldynamic">
+<section id="section-2.9.3">
+          <h4 id="name-technologies-that-implement">
+<a href="#section-2.9.3" class="section-number selfRef">2.9.3. </a><a href="#name-technologies-that-implement" class="section-name selfRef">Technologies that implement REQ.SEC.NET.ACL.DYNAMIC</a>
+          </h4>
+<p id="section-2.9.3-1">If a MUD file is delivered by SUIT rather than via a remote server, then a secondary delivery channel can be used. This can include manually overriding the ACL in the network infrastructure. It can also include using SUIT to deliver the key that is used to verify signed MUD files from a specific URL, however in this scenario, THREAT.NET.ACL.DOS remains unmitigated.<a href="#section-2.9.3-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="threat-vulnerable-devices">
+<section id="section-2.10">
+        <h3 id="name-threat-vulnerable-devices">
+<a href="#section-2.10" class="section-number selfRef">2.10. </a><a href="#name-threat-vulnerable-devices" class="section-name selfRef">Threat: Vulnerable Devices</a>
+        </h3>
+<p id="section-2.10-1">If a vulnerable device is connected to the network, it could be a risk to the whole network.<a href="#section-2.10-1" class="pilcrow">¶</a></p>
+<div id="threatnetvulnerabledevice">
+<section id="section-2.10.1">
+          <h4 id="name-threatnetvulnerabledevice">
+<a href="#section-2.10.1" class="section-number selfRef">2.10.1. </a><a href="#name-threatnetvulnerabledevice" class="section-name selfRef">THREAT.NET.VULNERABLE.DEVICE</a>
+          </h4>
+<p id="section-2.10.1-1">Old firmware with known vulnerability allows exploit until it is updated.<a href="#section-2.10.1-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="reqsecnetdmz">
+<section id="section-2.10.2">
+          <h4 id="name-reqsecnetdmz">
+<a href="#section-2.10.2" class="section-number selfRef">2.10.2. </a><a href="#name-reqsecnetdmz" class="section-name selfRef">REQ.SEC.NET.DMZ</a>
+          </h4>
+<p id="section-2.10.2-1">Network infrastructure can apply risk management policy to devices that attest non-compliant configuration. For example, a device with out-of-date firmware may only be permitted to access the update system.<a href="#section-2.10.2-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="technologies-to-implement-reqsecnetdmz">
+<section id="section-2.10.3">
+          <h4 id="name-technologies-to-implement-reqsec">
+<a href="#section-2.10.3" class="section-number selfRef">2.10.3. </a><a href="#name-technologies-to-implement-reqsec" class="section-name selfRef">Technologies to Implement REQ.SEC.NET.DMZ</a>
+          </h4>
+<p id="section-2.10.3-1">Using MUD and RATS, a network operator can force a device onto a DMZ network containing only attestation and SUIT update services until it successfully attests a correct firmware version.<a href="#section-2.10.3-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+</section>
+</div>
+<section id="section-3">
+      <h2 id="name-normative-references">
+<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
+      </h2>
+<dl class="references">
+<dt id="FDO">[FDO]</dt>
+      <dd>
+<span class="refAuthor">FIDO Alliance, .</span>, <span class="refTitle">"FIDO Device Onboarding"</span>, <span>n.d.</span>, <span>&lt;<a href="https://fidoalliance.org/specs/FDO/FIDO-Device-Onboard-RD-v1.0-20201202.html">https://fidoalliance.org/specs/FDO/FIDO-Device-Onboard-RD-v1.0-20201202.html</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.birkholz-rats-corim">[I-D.birkholz-rats-corim]</dt>
+      <dd>
+<span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Fossati, T.</span>, <span class="refAuthor">Deshpande, Y.</span>, <span class="refAuthor">Smith, N.</span>, and <span class="refAuthor">W. Pan</span>, <span class="refTitle">"Concise Reference Integrity Manifest"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-birkholz-rats-corim-03</span>, <time datetime="2022-07-11" class="refDate">11 July 2022</time>, <span>&lt;<a href="https://www.ietf.org/archive/id/draft-birkholz-rats-corim-03.txt">https://www.ietf.org/archive/id/draft-birkholz-rats-corim-03.txt</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.ietf-rats-architecture">[I-D.ietf-rats-architecture]</dt>
+      <dd>
+<span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Thaler, D.</span>, <span class="refAuthor">Richardson, M.</span>, <span class="refAuthor">Smith, N.</span>, and <span class="refAuthor">W. Pan</span>, <span class="refTitle">"Remote Attestation Procedures Architecture"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-architecture-18</span>, <time datetime="2022-06-14" class="refDate">14 June 2022</time>, <span>&lt;<a href="https://www.ietf.org/archive/id/draft-ietf-rats-architecture-18.txt">https://www.ietf.org/archive/id/draft-ietf-rats-architecture-18.txt</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.ietf-rats-eat">[I-D.ietf-rats-eat]</dt>
+      <dd>
+<span class="refAuthor">Lundblade, L.</span>, <span class="refAuthor">Mandyam, G.</span>, and <span class="refAuthor">J. O'Donoghue</span>, <span class="refTitle">"The Entity Attestation Token (EAT)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-eat-14</span>, <time datetime="2022-07-10" class="refDate">10 July 2022</time>, <span>&lt;<a href="https://www.ietf.org/archive/id/draft-ietf-rats-eat-14.txt">https://www.ietf.org/archive/id/draft-ietf-rats-eat-14.txt</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.ietf-sacm-coswid">[I-D.ietf-sacm-coswid]</dt>
+      <dd>
+<span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Fitzgerald-McKay, J.</span>, <span class="refAuthor">Schmidt, C.</span>, and <span class="refAuthor">D. Waltermire</span>, <span class="refTitle">"Concise Software Identification Tags"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-sacm-coswid-21</span>, <time datetime="2022-03-07" class="refDate">7 March 2022</time>, <span>&lt;<a href="https://www.ietf.org/archive/id/draft-ietf-sacm-coswid-21.txt">https://www.ietf.org/archive/id/draft-ietf-sacm-coswid-21.txt</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.ietf-suit-manifest">[I-D.ietf-suit-manifest]</dt>
+      <dd>
+<span class="refAuthor">Moran, B.</span>, <span class="refAuthor">Tschofenig, H.</span>, <span class="refAuthor">Birkholz, H.</span>, and <span class="refAuthor">K. Zandberg</span>, <span class="refTitle">"A Concise Binary Object Representation (CBOR)-based Serialization Format for the Software Updates for Internet of Things (SUIT) Manifest"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-suit-manifest-18</span>, <time datetime="2022-07-11" class="refDate">11 July 2022</time>, <span>&lt;<a href="https://www.ietf.org/archive/id/draft-ietf-suit-manifest-18.txt">https://www.ietf.org/archive/id/draft-ietf-suit-manifest-18.txt</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.ietf-teep-architecture">[I-D.ietf-teep-architecture]</dt>
+      <dd>
+<span class="refAuthor">Pei, M.</span>, <span class="refAuthor">Tschofenig, H.</span>, <span class="refAuthor">Thaler, D.</span>, and <span class="refAuthor">D. Wheeler</span>, <span class="refTitle">"Trusted Execution Environment Provisioning (TEEP) Architecture"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-teep-architecture-18</span>, <time datetime="2022-07-11" class="refDate">11 July 2022</time>, <span>&lt;<a href="https://www.ietf.org/archive/id/draft-ietf-teep-architecture-18.txt">https://www.ietf.org/archive/id/draft-ietf-teep-architecture-18.txt</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="IoTopia">[IoTopia]</dt>
+      <dd>
+<span class="refTitle">"Global Platform Iotopia"</span>, <span>n.d.</span>, <span>&lt;<a href="https://globalplatform.org/iotopia/mud-file-service/">https://globalplatform.org/iotopia/mud-file-service/</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="LwM2M">[LwM2M]</dt>
+      <dd>
+<span class="refTitle">"LwM2M Core Specification"</span>, <span>n.d.</span>, <span>&lt;<a href="http://openmobilealliance.org/release/LightweightM2M/V1_2-20201110-A/OMA-TS-LightweightM2M_Core-V1_2-20201110-A.pdf">http://openmobilealliance.org/release/LightweightM2M/V1_2-20201110-A/OMA-TS-LightweightM2M_Core-V1_2-20201110-A.pdf</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC7030">[RFC7030]</dt>
+      <dd>
+<span class="refAuthor">Pritikin, M., Ed.</span>, <span class="refAuthor">Yee, P., Ed.</span>, and <span class="refAuthor">D. Harkins, Ed.</span>, <span class="refTitle">"Enrollment over Secure Transport"</span>, <span class="seriesInfo">RFC 7030</span>, <span class="seriesInfo">DOI 10.17487/RFC7030</span>, <time datetime="2013-10" class="refDate">October 2013</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7030">https://www.rfc-editor.org/info/rfc7030</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8520">[RFC8520]</dt>
+      <dd>
+<span class="refAuthor">Lear, E.</span>, <span class="refAuthor">Droms, R.</span>, and <span class="refAuthor">D. Romascanu</span>, <span class="refTitle">"Manufacturer Usage Description Specification"</span>, <span class="seriesInfo">RFC 8520</span>, <span class="seriesInfo">DOI 10.17487/RFC8520</span>, <time datetime="2019-03" class="refDate">March 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8520">https://www.rfc-editor.org/info/rfc8520</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8995">[RFC8995]</dt>
+      <dd>
+<span class="refAuthor">Pritikin, M.</span>, <span class="refAuthor">Richardson, M.</span>, <span class="refAuthor">Eckert, T.</span>, <span class="refAuthor">Behringer, M.</span>, and <span class="refAuthor">K. Watsen</span>, <span class="refTitle">"Bootstrapping Remote Secure Key Infrastructure (BRSKI)"</span>, <span class="seriesInfo">RFC 8995</span>, <span class="seriesInfo">DOI 10.17487/RFC8995</span>, <time datetime="2021-05" class="refDate">May 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8995">https://www.rfc-editor.org/info/rfc8995</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="SWID">[SWID]</dt>
+    <dd>
+<span class="refAuthor">NIST, .</span>, <span class="refTitle">"Software Identification (SWID) Tagging"</span>, <span>n.d.</span>, <span>&lt;<a href="https://csrc.nist.gov/Projects/Software-Identification-SWID/guidelines">https://csrc.nist.gov/Projects/Software-Identification-SWID/guidelines</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+</dl>
+</section>
+<div id="authors-addresses">
+<section id="appendix-A">
+      <h2 id="name-authors-address">
+<a href="#name-authors-address" class="section-name selfRef">Author's Address</a>
+      </h2>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Brendan Moran</span></div>
+<div dir="auto" class="left"><span class="org">Arm Limited</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:Brendan.Moran@arm.com" class="email">Brendan.Moran@arm.com</a>
+</div>
+</address>
+</section>
+</div>
+<script>const toc = document.getElementById("toc");
+toc.querySelector("h2").addEventListener("click", e => {
+  toc.classList.toggle("active");
+});
+toc.querySelector("nav").addEventListener("click", e => {
+  toc.classList.remove("active");
+});
+</script>
+</body>
+</html>
