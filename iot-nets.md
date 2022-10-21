@@ -116,11 +116,15 @@ Requirements that pertain to hardware, procedure, and policy compliance are note
 
 ### Hardware Immutable Root of Trust
 
-ENISA GP-TM-01
+ENISA GP-TM-01: Employ a hardware-based immutable root of trust.
+
+This is an architectural requirement.
 
 ### Hardware-Backed Secret Storage
 
-ENISA GP-TM-02
+ENISA GP-TM-02: Use hardware that incorporates security features to strengthen the protection and integrity of the device – for example, specialised security chips / coprocessors that integrate security at the transistor level, embedded in the processor, providing, among other things, a trusted storage of device identity and authentication means, protection of keys at rest and in use, and preventing unprivileged from accessing to security sensitive code. Protection against local and physical attacks can be covered via functional security.
+
+This is an architectural requirement.
 
 ## Software Integrity & Authenticity
 

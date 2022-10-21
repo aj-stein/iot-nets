@@ -82,13 +82,13 @@ Table of Contents
        3.2.4.  Resilience to Failure . . . . . . . . . . . . . . . .   5
        3.2.5.  Trust Anchor Management . . . . . . . . . . . . . . .   5
      3.3.  Default Security & Privacy  . . . . . . . . . . . . . . .   5
-       3.3.1.  Security ON by Default  . . . . . . . . . . . . . . .   5
+       3.3.1.  Security ON by Default  . . . . . . . . . . . . . . .   6
        3.3.2.  Default Unique Passwords  . . . . . . . . . . . . . .   6
      3.4.  Data Protection . . . . . . . . . . . . . . . . . . . . .   6
-     3.5.  System Safety and Reliability . . . . . . . . . . . . . .   6
+     3.5.  System Safety and Reliability . . . . . . . . . . . . . .   7
      3.6.  Secure Software / Firmware updates  . . . . . . . . . . .   7
-     3.7.  Authentication  . . . . . . . . . . . . . . . . . . . . .   7
-       3.7.1.  Align Authentication Schemes with Threat Models . . .   7
+     3.7.  Authentication  . . . . . . . . . . . . . . . . . . . . .   8
+       3.7.1.  Align Authentication Schemes with Threat Models . . .   8
        3.7.2.  Password Rules  . . . . . . . . . . . . . . . . . . .   8
      3.8.  Authorisation . . . . . . . . . . . . . . . . . . . . . .   8
        3.8.1.  Principle of Least Privilege  . . . . . . . . . . . .   8
@@ -159,9 +159,9 @@ Internet-Draft     IoT networking security guidelines       October 2022
 
 3.1.1.  Hardware Immutable Root of Trust
 
-   ENISA GP-TM-01
+   ENISA GP-TM-01: Employ a hardware-based immutable root of trust.
 
-
+   This is an architectural requirement.
 
 
 
@@ -172,7 +172,17 @@ Internet-Draft     IoT networking security guidelines       October 2022
 
 3.1.2.  Hardware-Backed Secret Storage
 
-   ENISA GP-TM-02
+   ENISA GP-TM-02: Use hardware that incorporates security features to
+   strengthen the protection and integrity of the device - for example,
+   specialised security chips / coprocessors that integrate security at
+   the transistor level, embedded in the processor, providing, among
+   other things, a trusted storage of device identity and authentication
+   means, protection of keys at rest and in use, and preventing
+   unprivileged from accessing to security sensitive code.  Protection
+   against local and physical attacks can be covered via functional
+   security.
+
+   This is an architectural requirement.
 
 3.2.  Software Integrity & Authenticity
 
@@ -207,6 +217,15 @@ Internet-Draft     IoT networking security guidelines       October 2022
    run-time protection and secure execution monitoring to make sure
    malicious attacks do not overwrite code after it is loaded.
 
+
+
+
+
+Moran                     Expires 24 April 2023                 [Page 4]
+
+Internet-Draft     IoT networking security guidelines       October 2022
+
+
    Satisfying this requirement requires a secure invocation mechanism.
    In monolithic IoT software images, this is accomplished by Secure
    Boot.  In IoT devices with more fully-featured operating systems,
@@ -216,15 +235,6 @@ Internet-Draft     IoT networking security guidelines       October 2022
    Secure Invocation can be achieved using the SUIT Manifest format,
    which provides for secure invocation procedures.  See
    [I-D.ietf-suit-manifest].
-
-
-
-
-
-Moran                     Expires 24 April 2023                 [Page 4]
-
-Internet-Draft     IoT networking security guidelines       October 2022
-
 
    To satisfy the associated requirement of run-time protection and
    secure execution monitoring, the use of a TEE is recommended to
@@ -264,6 +274,14 @@ Internet-Draft     IoT networking security guidelines       October 2022
 
 3.3.  Default Security & Privacy
 
+
+
+
+Moran                     Expires 24 April 2023                 [Page 5]
+
+Internet-Draft     IoT networking security guidelines       October 2022
+
+
 3.3.1.  Security ON by Default
 
    ENISA GP-TM-08: Any applicable security features should be enabled by
@@ -272,15 +290,6 @@ Internet-Draft     IoT networking security guidelines       October 2022
 
    This is a procedural requirement, rather than a protocol or document
    requirement.
-
-
-
-
-
-Moran                     Expires 24 April 2023                 [Page 5]
-
-Internet-Draft     IoT networking security guidelines       October 2022
-
 
 3.3.2.  Default Unique Passwords
 
@@ -320,15 +329,6 @@ Internet-Draft     IoT networking security guidelines       October 2022
       objection to processing, and their right not to be evaluated on
       the basis of automated processing.
 
-3.5.  System Safety and Reliability
-
-   Safety and reliability requirements are procedural/architectural.
-   Implementors should ensure they have processes and architectures in
-   place to meet these requirements.
-
-   ENISA Safety and Reliability requirements:
-
-
 
 
 
@@ -337,6 +337,14 @@ Moran                     Expires 24 April 2023                 [Page 6]
 
 Internet-Draft     IoT networking security guidelines       October 2022
 
+
+3.5.  System Safety and Reliability
+
+   Safety and reliability requirements are procedural/architectural.
+   Implementors should ensure they have processes and architectures in
+   place to meet these requirements.
+
+   ENISA Safety and Reliability requirements:
 
    *  GP-TM-15: Design with system and operational disruption in mind,
       preventing the system from causing an unacceptable risk of injury
@@ -375,14 +383,6 @@ Internet-Draft     IoT networking security guidelines       October 2022
       user-configured preferences, security, and/or privacy settings
       without user notification.
 
-3.7.  Authentication
-
-3.7.1.  Align Authentication Schemes with Threat Models
-
-   ENISA GP-TM-21: Design the authentication and authorisation schemes
-   (unique per device) based on the system-level threat models.
-
-   This is a procedural / architectural requirement.
 
 
 
@@ -393,6 +393,15 @@ Moran                     Expires 24 April 2023                 [Page 7]
 
 Internet-Draft     IoT networking security guidelines       October 2022
 
+
+3.7.  Authentication
+
+3.7.1.  Align Authentication Schemes with Threat Models
+
+   ENISA GP-TM-21: Design the authentication and authorisation schemes
+   (unique per device) based on the system-level threat models.
+
+   This is a procedural / architectural requirement.
 
 3.7.2.  Password Rules
 
@@ -432,15 +441,6 @@ Internet-Draft     IoT networking security guidelines       October 2022
    Principle of least privilege (POLP): applications must operate at the
    lowest privilege level possible.
 
-   This is a procedural / architectural requirement, however at the
-   network level, this can be implemented using Manufacturer Usage
-   Descriptions (see [RFC8520]).
-
-
-
-
-
-
 
 
 
@@ -449,6 +449,10 @@ Moran                     Expires 24 April 2023                 [Page 8]
 
 Internet-Draft     IoT networking security guidelines       October 2022
 
+
+   This is a procedural / architectural requirement, however at the
+   network level, this can be implemented using Manufacturer Usage
+   Descriptions (see [RFC8520]).
 
 3.8.2.  Software Isolation
 
@@ -494,10 +498,6 @@ Internet-Draft     IoT networking security guidelines       October 2022
       that the test/debug modes are secure, so they cannot be used to
       maliciously access the devices.  In general, lock down physical
       ports to only trusted connections.
-
-
-
-
 
 
 
