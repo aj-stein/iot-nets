@@ -28,7 +28,7 @@ author:
       ins: B. Moran
       name: Brendan Moran
       organization: Arm Limited
-      email: Brendan.Moran@arm.com
+      email: brendan.moran.ietf@gmail.com
 
 
 normative:
