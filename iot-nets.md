@@ -1,7 +1,7 @@
 ---
 title: A summary of security-enabling technologies for IoT devices
 abbrev: IoT networking security guidelines
-docname: draft-moran-iot-nets-01
+docname: draft-moran-iot-nets-02
 category: info
 
 ipr: trust200902
@@ -35,6 +35,12 @@ normative:
   RFC8520:
   RFC8995:
   RFC7030:
+  RFC8446:
+  RFC9019:
+  RFC9203:
+  RFC8152:
+  RFC9000:
+  RFC9147:
   FDO:
     title: "FIDO Device Onboarding"
     author:
@@ -43,20 +49,40 @@ normative:
     target: https://fidoalliance.org/specs/FDO/FIDO-Device-Onboard-RD-v1.0-20201202.html
   LwM2M:
     title: "LwM2M Core Specification"
-    author:
     target: http://openmobilealliance.org/release/LightweightM2M/V1_2-20201110-A/OMA-TS-LightweightM2M_Core-V1_2-20201110-A.pdf
-  SWID:
-    title: "Software Identification (SWID) Tagging"
     author:
     -
       ins: "NIST"
     target: https://csrc.nist.gov/Projects/Software-Identification-SWID/guidelines
+  ENISA-Baseline:
+    title: "Baseline Security Recommendations for IoT in the context of Critical Information Infrastructures"
+    author:
+    -
+      ins: "ENISA"
+    target: https://www.enisa.europa.eu/publications/baseline-security-recommendations-for-iot/
+  ETSI-Baseline:
+    title: "Cyber Security for Consumer Internet of Things: Baseline Requirements"
+    author:
+    -
+      ins: "ETSI"
+    target: https://www.etsi.org/deliver/etsi_en/303600_303699/303645/02.01.01_60/en_303645v020101p.pdf
+  NIST-Baseline:
+    title: "IoT Device Cybersecurity Capability Core Baseline"
+    author:
+    -
+      ins: "NIST"
+    target: https://www.nist.gov/publications/iot-device-cybersecurity-capability-core-baseline
+
+
   I-D.ietf-rats-eat:
   I-D.ietf-suit-manifest:
   I-D.ietf-sacm-coswid:
   I-D.birkholz-rats-corim:
   I-D.ietf-teep-architecture:
+  I-D.ietf-teep-protocol:
   I-D.ietf-rats-architecture:
+  I-D.ietf-suit-report:
+  I-D.fossati-tls-attestation:
 
   IoTopia:
     title: "Global Platform Iotopia"
@@ -72,259 +98,269 @@ The IETF has developed security technologies that help to secure the Internet of
 
 This memo serves as an entry-point to detail which technologies are available for use in IoT networks and to enable IoT designers to discover technologies that may solve their problems. This draft addresses.
 
-This draft addresses six trustworthiness problems in IoT devices; expressed simply as six questions:
+Many baseline security requirements documents have been drafted by standards setting organisations, however these documents typically do not specify the technologies available to satisfy those requirements. They also do not express the next steps if an implementor wants to go above and beyond the baseline in order to differentiate their products and enable even better security. This memo defines the mapping from some IoT baseline security requirements definitions to ietf and related security technologies. It also highlights some gaps in those IoT baseline security requirements.
 
-1.  What software is my device running?
-2.  How should my device connect to a network?
-3.  With which systems should my device communicate?
-4.  What is the provenance of my device's software and corresponding policies?
-5.  Who is authorised to initiate a software update and under which conditions?
-6.  How should my device trust updates to its software?
+# Survey of baseline security requirements 
 
-Each of these questions is answered by recently developed or developing standards. Each of these questions hides a security threat; so these threats are detailed in a threat model.
+At time of writing, there are IoT baseline security requirements provided by several organisations:
 
-# Threats and Risks to IoT Deployments
+* ENISA's Baseline Security Recommendations for IoT in the context of Critical Information Infrastructures ({{ENISA-Baseline}})
+* ETSI's Cyber Security for Consumer Internet of Things: Baseline Requirements {{ETSI-Baseline}}
+* NIST's IoT Device Cybersecurity Capability Core Baseline {{NIST-Baseline}}
 
-For this threat model to be useful to implementers, there are certain usability requirements that must be included to explain the origin of a threat. These are noted where necessary.
+# Requirement Mapping
 
-Sections are organised in groups of: 
+Requirements that pertain to hardware, procedure, and policy compliance are noted, but do not map to ietf and related technologies.
 
-- usability requirement (if needed)
-- threat
-- security requirement
-- mitigating technologies
+## Hardware Security
 
-## Threat: IoT Network Credential Exposure
+### Hardware Immutable Root of Trust
 
-Network Credential Exposure describes the potential for exposure of credentials, including cryptographic material, used to access an IoT network. Note that "network" here describes a logical network, such as a LwM2M server and its clients.
+ENISA GP-TM-01
 
-Each physical network technology provides its own onboarding techniques. Recommended practice is to follow best practices for the physical network technology in use.
+### Hardware-Backed Secret Storage
 
+ENISA GP-TM-02
 
-### REQ.USE.NET.CREDENTIALS
+## Software Integrity & Authenticity
 
-It must be possible to provide a device with credentials to access a network. This is typically referred to as device onboarding. This may be done by the manufacturer, the supply chain, the installer, or the end user. It may be done by the device or on behalf of the device by a trusted third party.
+### Boot Environment Trustworthiness and Integrity
 
-### THREAT.IOT.NET.CREDENTIALS
+ENISA GP-TM-03: Trust must be established in the boot environment before any trust in any other software or executable program can be claimed.
 
-A threat actor extracts the credentials from a device or by eavesdropping on the credential provisioning flow
+Satisfying this requirement can be done in several ways, increasing in security guarantees:
 
-### REQ.SEC.NET.CREDENTIALS
+1. Implement secure boot to verify the bootloader and boot environment. Trust is established purely by construction: if code is running in the boot environment, it must have been signed, therefore it is trustworthy.
+2. Record critical measurements of each step of boot in a TPM. Trust is established by evaluating the measurements recorded by the TPM.
+3. Use Remote Attestation. Remote attestation allows a device to report to third parties the critical measurements it has recorded (either in a TPM or signed by each stage) in order to prove the trustworthiness of the boot environment and running software. Remote Attestation is implemented in {{I-D.ietf-rats-eat}}.
 
-Network access credentials must be provisioned to a device in a way that secures them against eavesdropping or extraction.
+### Code Integrity and Authenticity
 
-### Technologies to Mitigate THREAT.IOT.NET.CREDENTIALS
+ENISA GP-TM-04: Sign code cryptographically to ensure it has not been tampered with after signing it as safe for the device, and implement run-time protection and secure execution monitoring to make sure malicious attacks do not overwrite code after it is loaded.
 
-Several technologies are available for device onboarding:
+Satisfying this requirement requires a secure invocation mechanism. In monolithic IoT software images, this is accomplished by Secure Boot. In IoT devices with more fully-featured operating systems, this is accomplished with an operating system-specific code signing practice.
 
-- Lightweight M2M Bootstrap {{LwM2M}} provides a mechanism to provision keying material and configuration of any kind, according to a well-defined data model.
-- FIDO Device Onboard {{FDO}} provides a mechanism to deliver an arbitrary block of data to devices. This block of data can contain trust anchors, cryptographic information, and other device configuration. 
-- BRSKI {{RFC8995}} provides a mechanism for "Bootstrap Distribution of CA Certificates", as described in [RFC7030], Section 4.1.1.  In the process, a TLS connection is established that can be directly used for Enrollment over Secure Transport (EST).
-- Enrollment over Secure Transport (EST) {{RFC7030}} provides a mechanism to deliver certificates and, optionally, private keys to devices.
+Secure Invocation can be achieved using the SUIT Manifest format, which provides for secure invocation procedures. See {{I-D.ietf-suit-manifest}}.
 
-## Threat: Trust Anchor Private Key Disclosure
+To satisfy the associated requirement of run-time protection and secure execution monitoring, the use of a TEE is recommended to protect sensitive processes. The TEEP protocol (see {{I-D.ietf-teep-architecture}}) is recommended for managing TEEs.
 
-When a trust anchor of a device is used regularly, the chances of its private key being disclosed increase.
+### Secure Firmware Update
 
-### THREAT.IOT.TA.DISCLOSURE
+ENISA GP-TM-05: Control the installation of software in operating systems, to prevent unauthenticated software and files from being loaded onto it.
 
-A private key trusted by one or more devices is disclosed. This could be caused by: a threat actor within the organisation, a compromise of a service using the key, etc.
+Many fully-featured operating systems have dedicated means of implementing this requirement. The SUIT manifest (See {{I-D.ietf-suit-manifest}}) is recommended as a means of providing secure, authenticated software update. Where the software is deployed to a TEE, TEEP (See {{I-D.ietf-teep-protocol}}) is recommended for software update and management.
 
-### REQ.SEC.TA.ROTATION
+### Resilience to Failure
 
-It must be possible to deploy new keys to devices in order to update their active trust anchors. This does not mean that the ultimate trust anchor over a device is changed, but that its delegates are changed, enabling infrequent use of the ultimate trust anchor and higher security key management protocols to be deployed, such as key ceremonies and M of N threshold signatures.
+ENISA GP-TM-06: Enable a system to return to a state that was known to be secure, after a security breach has occured or if an upgrade has not been successful.
 
-### Technologies to mitigate THREAT.IOT.TA.DISCLOSURE
+While there is no specificaiton for this, it is also required in {{RFC9019}}
 
-Several technologies are available for trust anchor rotation:
+### Trust Anchor Management
 
-- Lightweight M2M Bootstrap {{LwM2M}} provides a mechanism to provision keying material and configuration of any kind, according to a well-defined data model.
-- FIDO Device Onboard {{FDO}} provides a mechanism to deliver an arbitrary block of data to devices. This block of data can contain trust anchors, cryptographic information, and other device configuration. 
-- Enrollment over Secure Transport (EST) {{RFC7030}} provides a mechanism to deliver certificates and, optionally, private keys to devices.
+ENISA GP-TM-07: Use protocols and mechanisms able to represent and manage trust and trust relationships.
 
-## Threat: Incorrect Firmware/Version
+EST ({{https://datatracker.ietf.org/doc/html/rfc7030}}) and LwM2M Bootstrap ({{LwM2M}}) provide a mechanism to replace trust anchors (manage trust/trust relationships).
 
-Incorrect firmware/version can come in two forms.
+## Default Security & Privacy
 
-### THREAT.FW.OLD
+### Security ON by Default
 
-Old firmware present on device allows compromise of data sent to device, poisoning of data sent to service
+ENISA GP-TM-08: Any applicable security features should be enabled by default, and any unused or insecure functionalities should be disabled by default.
 
-### THREAT.DEV.ROGUE
+This is a procedural requirement, rather than a protocol or document requirement.
 
-Rogue or simulated device emulates a real device, allows compromise of data sent to the device, or poisoning of data sent to service
+### Default Unique Passwords
 
-### REQ.SEC.FW.MEASURE
+ENISA GP-TM-09: Establish hard to crack, device-individual default passwords.
 
-To enable devices to report their current software version and related data securely, devices SHOULD support a support a mechanism to securely measure their firmware. This allows an IoT network to restrict access by non-compliant devices.
+This is a procedural requirement, rather than a protocol or document requirement.
 
-### Technologies to implement REQ.SEC.FW.MEASURE
+## Data Protection
 
-The technology used for securely measuring and reporting the firmware of a device is typically called remote attestation. A protocol is under development for conveying remote attestation measurements in a trustworthy way in {{I-D.ietf-rats-architecture}}. Likewise, document format is under development in {{I-D.ietf-rats-eat}}.
+The data protection requirements are largely procedural/architectural. While this memo can recommend using TEEs to protect data, and TEEP ({{I-D.ietf-teep-architecture}}) to manage TEEs, implementors must choose to architect their software in such a way that TEEs are helpful in meeting these requirements.
 
-## Threat: Vulnerable Firmware
+ENISA Data Protection requirements:
 
-Devices with old firmware might have a known vulnerability. This could allow a threat actor to take over the device.
+* GP-TM-10: Personal data must be collected and processed fairly and lawfully, it should never be collected and processed without the data subject’s consent.
+* GP-TM-11: Make sure that personal data is used for the specified purposes for which they were collected, and that any further processing of personal data is compatible and that the data subjects are well informed.
+* GP-TM-12: Minimise the data collected and retained.
+* GP-TM-13: IoT stakeholders must be compliant with the EU General Data Protection Regulation (GDPR).
+* GP-TM-14: Users of IoT products and services must be able to exercise their rights to information, access, erasure, rectification, data portability, restriction of processing, objection to processing, and their right not to be evaluated on the basis of automated processing.
 
-### THREAT.FW.KNOWN.VULNERABILITY
+## System Safety and Reliability
 
-If old firmware with known vulnerability cannot be altered. This allows exploit of known a vulnerability.
+Safety and reliability requirements are procedural/architectural. Implementors should ensure they have processes and architectures in place to meet these requirements.
 
-### REQ.SEC.FW.REMOTE.UPDATE
+ENISA Safety and Reliability requirements:
 
-Software on unattended devices must be remotely-updatable.
+* GP-TM-15: Design with system and operational disruption in mind, preventing the system from causing an unacceptable risk of injury or physical damage.
+* GP-TM-16: Mechanisms for self-diagnosis and self-repair/healing to recover from failure, malfunction or a compromised state.
+* GP-TM-17: Ensure standalone operation - essential features should continue to work with a loss of communications and chronicle negative impacts from compromised devices or cloud-based systems.
 
-### THREAT.UPDATE.COMPROMISE
+## Secure Software / Firmware updates
 
-Compromise of the update system is fundamentally equivalent to persistent remote code execution. A threat actor that gains firmware update capability has extensive power over the device.
+Technical requirements for Software Updates are provided for in SUIT ({{I-D.ietf-suit-manifest}}) and TEEP ({{I-D.ietf-teep-protocol}}). Procedural and architectural requirements should be independently assessed by the implementor.
 
-### REQ.SEC.UPDATE.SECURITY
+ENISA Software Update Requirements:
 
-Software update mechanism must be secured (see RFC9124)
+* GP-TM-18: Ensure that the device software/firmware, its configuration and its applications have the ability to update Over-The-Air (OTA), that the update server is secure, that the update file is transmitted via a secure connection, that it does not contain sensitive data (e.g. hardcoded credentials), that it is signed by an authorised trust entity and encrypted using accepted encryption methods, and that the update package has its digital signature, signing certificate and signing certificate chain, verified by the device before the update process begins.
+* GP-TM-19: Offer an automatic firmware update mechanism.
+* GP-TM-20: (Procedural / Architectural) Backward compatibility of firmware updates. Automatic firmware updates should not modify user-configured preferences, security, and/or privacy settings without user notification. 
 
-### Technologies to implement REQ.SEC.UPDATE.SECURITY
+## Authentication
 
-To enable devices to be updated securely in the field, they can support a remote update protocol such as {{I-D.ietf-suit-manifest}}. For securely deploying software to Trusted Execution Environments, the a secure Trusted Application delivery protocol should be used, such as {{I-D.ietf-teep-architecture}}.
+### Align Authentication Schemes with Threat Models
 
-## Threat: Supply Chain Attacks
+ENISA GP-TM-21: Design the authentication and authorisation schemes (unique per device) based on the system-level threat models.
 
-Software of unknown origin may be used in a device. If an threat actor can gain control over the software supply chain, they may be able to sneak their code onto a device.
+This is a procedural / architectural requirement.
 
-### RISK.SW.SUPPLY
+### Password Rules
 
-Software of unknown origin may be used in a device
+ENISA applies the following requirements to Password-based authentication:
 
-### THREAT.SW.SUPPLY
+* GP-TM-22: Ensure that default passwords and even default usernames are changed during the initial setup, and that weak, null or blank passwords are not allowed.
+* GP-TM-23: Authentication mechanisms must use strong passwords or personal identification numbers (PINs), and should consider using two-factor authentication (2FA) or multi-factor authentication (MFA) like Smartphones, Biometrics, etc., on top of certificates.
+* GP-TM-24: Authentication credentials shall be salted, hashed and/or encrypted.
+* GP-TM-25: Protect against ‘brute force’ and/or other abusive login attempts. This protection should also consider keys stored in devices.
+* GP-TM-26: Ensure password recovery or reset mechanism is robust and does not supply an attacker with information indicating a valid account. The same applies to key update and recovery mechanisms.
 
-If software origin is not verified, a threat actor may deliberately and secretly seed the software supply chain with vulnerable code, enabling further compromise.
+As an alternative, implementors are encouraged to consider passwordless schemes, such as FIDO.
 
-### REQ.SEC.SW.BOM
+## Authorisation
 
-To prove the provenance of a firmware update, update manifests SHOULD include (directly, or by secure reference) a Software Identifier or Software Bill of Materials,
+### Principle of Least Privilege
 
-### Technologies to implement REQ.SEC.UPDATE.SECURITY
+ENISA GP-TM-27: Limit the actions allowed for a given system by Implementing fine-grained authorisation mechanisms and using the Principle of least privilege (POLP): applications must operate at the lowest privilege level possible.
 
-In order to enable a device to prove provenance of its software, it or its network can use a software identifier such as {{I-D.ietf-sacm-coswid}}. Optionally, this software idenifier can be encapsulated in a manifest that includes hardware properties as well, such as {{I-D.birkholz-rats-corim}}.
+This is a procedural / architectural requirement, however at the network level, this can be implemented using Manufacturer Usage Descriptions (see {{RFC8520}}).
 
-## Risk: Verification Information Supply Chain
+### Software Isolation
 
-Correct values for attestation results may not be known by Verifiers, causing them to log values, but not limit them.
+ENISA GP-TM-28: Device firmware should be designed to isolate privileged code, processes and data from portions of the firmware that do not need access to them. Device hardware should provide isolation concepts to prevent unprivileged from accessing security sensitive code.
 
-### RISK.VERIFIER.DEFAULTS
+Implementors should use TEEs to address this requirement. The provisioning and management of TEEs can be accomplished using TEEP (see {{I-D.ietf-teep-architecture}}).
 
-Without access to a source of verification information such as expected attestation results, a verifier may not be able to make correct decisions about the trustworthiness of a device.
+### Access Control
 
-### THREAT.TRUST.ELEVATION
+ENISA GP-TM-29: Data integrity and confidentiality must be enforced by access controls. When the subject requesting access has been authorised to access particular processes, it is necessary to enforce the defined security policy.
+ENISA GP-TM-30: Ensure a context-based security and privacy that reflects different levels of importance.
 
-A threat actor deploys compromised software to devices; this is detected by monitoring systems, but not identified as an attack. If a threat actor can cause an attestation system to trust a device more than it should, this forms a new class of elevation of privilege: elevation of trust.
+These requirements are complex and require a variety of technologies to implement. Use of TEEs can provide a building block for these requirements, but is not sufficient in itself to meet these requiremnents.
 
-### REQ.SEC.VERIFIER.DATA
+## Environmental and Physical Security
 
-Monitoring systems must know the expected values in Attestation results.
+ENISA defines the following physical security requirements. These are hardware-architectural requirements and not covered by protocol and format specifications.
 
-### Technologies to implement REQ.SEC.VERIFIER.DATA
+* GP-TM-31: Measures for tamper protection and detection. Detection and reaction to hardware
+tampering should not rely on network connectivity.
+* GP-TM-32: Ensure that the device cannot be easily disassembled and that the data storage medium is encrypted at rest and cannot be easily removed.
+* GP-TM-33: Ensure that devices only feature the essential physical external ports (such as USB) necessary for them to function and that the test/debug modes are secure, so they cannot be used to maliciously access the devices. In general, lock down physical ports to only trusted connections.
 
-To enable a Relying Party of the Remote Attestation to correctly evaluate the Attestation Report, the SBoM (such as {{I-D.ietf-sacm-coswid}}) can contain expected values for the Attestation Report. In addition, the expected information for hardware properties can be contained in another manifest, such as {{I-D.birkholz-rats-corim}}.
+## Cryptography
 
-NOTE: Remote attestation terminology is fluid on this topic. A "Verifier" can be any system that appraises Evidence in remote attestation. It is expected that "appraisal" will be spread across at least two systems to maintain confidentiality and separation of responsibility: 1) a Verifier that ensures that the attestation Evidence is produced by genuine hardware, not tampered with, and not signed by revoked keys and 2) a monitoring system taking on the role of Verifier and Relying Party that appraises whether a device has the correct software versions and initiates remediation if not.
+ENISA makes the following architectural cryptography requirements for IoT devices:
 
-## Threat: Spurious Network Capabilites
+* GP-TM-34: Ensure a proper and effective use of cryptography to protect the confidentiality, authenticity and/or integrity of data and information (including control messages), in transit and in rest. Ensure the proper selection of standard and strong encryption algorithms and strong keys, and disable insecure protocols. Verify the robustness of the implementation.
+* GP-TM-35: Cryptographic keys must be securely managed.
+* GP-TM-36: Build devices to be compatible with lightweight encryption and security techniques.
+* GP-TM-37: Support scalable key management schemes.
 
-Devices may have additional, unneeded capabilites that are detrimental to network security. While the best option is to disable this functionality in software, this is not always practical
+## Secure and Trusted Communications
 
-### THREAT.NET.SPURIOUS.FUNCTIONS
+### Data Security
 
-Devices may contain intentional or accidental capabilities to make networks vulnerable or launch attacks on other networks. These capabilities are extremely costly to discover by inspection or audit.
-Requirement: Devices (or their supply chains) must advertise their network access requirements and networks must enforce that devices adhere to their stated network access requirements.
+GP-TM-38: Guarantee the different security aspects -confidentiality (privacy), integrity, availability and authenticity- of the information in transit on the networks or stored in the IoT application or in the Cloud.
 
-### REQ.SEC.NET.ACL
+This Data Security requirement can be fulfilled using COSE {{RFC8152}} for ensuring the authenticity, integrity, and confidentiality of data either in transit or at rest. Secure Transport (see {{secure-transport}}) technologies can be used to protect data in transit.
 
-To ensure that network infrastructure is configured discern the difference between authentic traffic and anomalous traffic, network infrastructure can implement fine-grained access control over how a device can use a network
+### Secure Transport {#secure-transport}
 
-### THREAT.NET.BAD.ACL
+ENISA GP-TM-39: Ensure that communication security is provided using state-of-the-art, standardised security protocols, such as TLS for encryption.
+ENISA GP-TM-40: Ensure credentials are not exposed in internal or external network traffic.
 
-If a service hosting network access requirements documents is compromised, it can be used to enable malicious devices to mount attacks.
+This requirement is satisfied by several standards:
 
-### REQ.SEC.NET.ACL.SIGNATURE
+* TLS ({{RFC8446}}).
+* DTLS ({{RFC9147}}).
+* QUIC ({{RFC9000}}).
+* OSCORE ({{RFC9203}}).
 
-Network access ACL documents should be signed. Best practice is to use offline keys for signing.
+### Data Authenticity
 
-### THREAT.NET.WRONG.ACL
+ENISA GP-TM-41: Guarantee data authenticity to enable reliable exchanges from data emission to data reception. Data should always be signed whenever and wherever it is captured and stored.
 
-If devices are permitted to self-report ACLs without authentication by a trusted party, they can report any ACL recognised by the network. A device can mis-advertise its network access requirements, pretending to be a different, but recognised and more privileged device (potentially cloning MAC addresses, keys, etc.)
+The authenticity of data can be protected using COSE {{RFC8152}}.
 
-### REQ.SEC.NET.ACL.TRUST
+ENISA GP-TM-42: Do not trust data received and always verify any interconnections. Discover, identify and verify/authenticate the devices connected to the network before trust can be established, and preserve
+their integrity for reliable solutions and services.
 
-Network Access Requirements documents must be secured against tampering and misreporting
+Verifying communication partners can be done in many ways. Key technologies supporting authentication of communication partners are:
 
-### RISK.NET.ACL.CONFLATION
+* RATS: Remote attestation of a communication partner (See {{I-D.ietf-rats-architecture}}).
+* TLS/DTLS: Mutual authentication of communication partners (See {{RFC8446}} / {{RFC9147}}).
+* ATLS: Application-layer TLS for authenticating a connection that may traverse multiple secure transport connections.
+* Attested TLS: The use of attestation in session establishment in TLS (See {{I-D.fossati-tls-attestation}}).
 
-Network Access Requirements documents embedded in or referenced from device certificates conflate two capabilities for network operators: network access requirement authorship (potentially delegated) and network access requirement audit. While network operators should audit network access requirements, authoring those requirements should be done by the authors of the device behavior.
+### Least Privilege Communication
 
-Failure to separate these capabilities has the potential to lead to failed device behaviour due to wrong Network Access Requirements descriptions, leading to disabling of the network ACL system in the name of expediency.
+ENISA GP-TM-43: IoT devices should be restrictive rather than permissive in communicating.
 
-### REQ.SEC.NET.ACL.SEPARATION
+This Requirement can be enabled and enforced using Manufacturer Usage Descriptions, which codify expected communication (See {{RFC8520}})
 
-Requirement: If Network Access Requirements are embedded in or referenced by device certificates, the responsibility for network access requirement authorship should be delegated to the device application authors. Alternatively, this can be done explicitly by tying device application authorship to device network access requirements authorship.
+ENISA GP-TM-44: Make intentional connections. Prevent unauthorised connections to it or other devices the
+product is connected to, at all levels of the protocols.
 
-### Technologies to Mitigate Spurious Network Capabilities
+This requirement can be satisfied through authenticating connections (TLS / DTLS mutual authentication. See {{RFC8446}} / {{RFC9147}}) and declaring communication patterns (Manufacturer Usage Descriptions. See {{RFC8520}})
 
-1. THREAT.NET.SPURIOUS.FUNCTIONS can be mitigated by use of {{RFC8520}} Manufacturer Usage Descriptions (MUDs) and a MUD Controller which accepts MUD files in order to automatically program rules into the network infrastructure.
-2. THREAT.NET.BAD.ACL To prevent a threat actor from distributing their own MUD files via a MUD server, these can be signed, preferably with an offline key as described in {{RFC8520}}.
-3. THREAT.NET.WRONG.ACL can be mitigated by using 802.1X, or SUIT to contain a MUD file or MUD file reference and integrity check. Alternatively, the device's RATS attestation results can be compared to a known list of device profiles and a MUD can be applied as a result without intervention from the remote device.
-4. REQ.SEC.NET.ACL.SEPARATION can be mitigated either through key delegation or through the use of SUIT encapsulation of the MUD file. A third option is to use a third-party ACL provider, such as iotopia.
+Architectural / Procedural requirements: 
 
-## Risk: DoS of ACL server
+* ENISA GP-TM-45: Disable specific ports and/or network connections for selective connectivity.
+* ENISA GP-TM-46: Rate limiting. Controlling the traffic sent or received by a network to reduce the risk of automated attacks.
 
-### RISK.NET.ACL.UPDATE
+## Secure Interfaces and network services
 
-Recently updated devices may incur latency penalties when a new network access requirements reference must be resolved and verified.
+ENISA Architectural / Procedural requirements: 
 
-### THREAT.NET.ACL.DOS
+* GP-TM-47: Risk Segmentation. Splitting network elements into separate components to help isolate security breaches and minimise the overall risk.
+* GP-TM-48: Protocols should be designed to ensure that, if a single device is compromised, it does not affect the whole set.
+* GP-TM-49: Avoid provisioning the same secret key in an entire product family, since compromising a single device would be enough to expose the rest of the product family.
+* GP-TM-50: Ensure only necessary ports are exposed and available.
+* GP-TM-51: Implement a DDoS-resistant and Load-Balancing infrastructure.
+* GP-TM-53: Avoid security issues when designing error messages.
 
-A threat actor may block access to a distributor of network access requirements documents, thus disabling all devices referencing the network access requirements documents it hosts, without any network intrusion necessary against target networks.
+### Encrypted User Sessions
 
-### REQ.SEC.NET.ACL.LOCAL
+ENISA GP-TM-52: Ensure web interfaces fully encrypt the user session, from the device to the backend services, and that they are not susceptible to XSS, CSRF, SQL injection, etc.
 
-Network access requirements documents should be distributed in advance of use by any device because they constitute a non-local software dependency
+This requirement can be partially satisfied through use of TLS or QUIC (See {{RFC8446}} and {{RFC9000}})
 
-### Technologies to Implement REQ.SEC.NET.ACL.LOCAL
+## Secure input and output handling
 
-In order for network infrastructure to be configured in advance of any changes to devices, MUD files can be transported (directly or by secure reference) within update manifests.
+Architectural / Procedural requirements: 
 
-This allows local infrastructure to delay installation of a firmware update until a new MUD file can be fetched and audited.
+ENISA GP-TM-54: Data input validation (ensuring that data is safe prior to use) and output filtering.
 
-## Threat: Delays in ACL Remediation
+## Logging
 
-If an ACL is wrong, network operators need it to be fixed quickly.
+Architectural / Procedural requirements: 
 
-### THREAT.NET.ACL.BROAD
+ENISA GP-TM-55: Implement a logging system that records events relating to user authentication, management of accounts and access rights, modifications to security rules, and the functioning of the system. Logs must be preserved on durable storage and retrievable via authenticated connections.
 
-A network access requirements document grants permissions to a device that are too broad, but the provider of firmware updates is slow to respond, meaning that MUD file delivery in SUIT will take too long.
+Certain logs can be transported via RATS: See {{I-D.ietf-rats-eat}}. Where assosciated with SUIT firmware updates, logs can be transported using SUIT Reports. See {{I-D.ietf-suit-report}}.
 
-### REQ.SEC.NET.ACL.DYNAMIC
+## Monitoring and Auditing
 
-It must be possible to distribute reduced permissions to network access controllers to mitigate a wrong ACL. To enable rapid response to evolving threats, the MUD controller SHOULD also support dynamic update of MUD files. 
+Architectural / Procedural requirements: 
 
-### Technologies that implement REQ.SEC.NET.ACL.DYNAMIC
+* ENISA GP-TM-56: Implement regular monitoring to verify the device behaviour, to detect malware and to discover integrity errors.
+* ENISA GP-TM-57: Conduct periodic audits and reviews of security controls to ensure that the controls are effective. Perform penetration tests at least biannually.
 
-If a MUD file is delivered by SUIT rather than via a remote server, then a secondary delivery channel can be used. This can include manually overriding the ACL in the network infrastructure. It can also include using SUIT to deliver the key that is used to verify signed MUD files from a specific URL, however in this scenario, THREAT.NET.ACL.DOS remains unmitigated.
 
-## Threat: Vulnerable Devices
+# Security Considerations
 
-If a vulnerable device is connected to the network, it could be a risk to the whole network.
-
-### THREAT.NET.VULNERABLE.DEVICE
-
-Old firmware with known vulnerability allows exploit until it is updated.
-
-### REQ.SEC.NET.DMZ
-
-Network infrastructure can apply risk management policy to devices that attest non-compliant configuration. For example, a device with out-of-date firmware may only be permitted to access the update system.
-
-### Technologies to Implement REQ.SEC.NET.DMZ
-
-Using MUD and RATS, a network operator can force a device onto a DMZ network containing only attestation and SUIT update services until it successfully attests a correct firmware version.
+No additional security considerations are required; they are laid out in the preceeding sections.
 
 --- back
 

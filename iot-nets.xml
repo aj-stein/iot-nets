@@ -17,7 +17,7 @@
 <?rfc docmapping="yes"?>
 <?rfc toc_levels="4"?>
 
-<rfc ipr="trust200902" docName="draft-moran-iot-nets-01" category="info">
+<rfc ipr="trust200902" docName="draft-moran-iot-nets-02" category="info">
 
   <front>
     <title abbrev="IoT networking security guidelines">A summary of security-enabling technologies for IoT devices</title>
@@ -29,7 +29,7 @@
       </address>
     </author>
 
-    <date year="2022" month="July" day="12"/>
+    <date year="2022" month="October" day="21"/>
 
     <area>Security</area>
     <workgroup>IOTOPS</workgroup>
@@ -54,323 +54,332 @@
 
 <t>This memo serves as an entry-point to detail which technologies are available for use in IoT networks and to enable IoT designers to discover technologies that may solve their problems. This draft addresses.</t>
 
-<t>This draft addresses six trustworthiness problems in IoT devices; expressed simply as six questions:</t>
+<t>Many baseline security requirements documents have been drafted by standards setting organisations, however these documents typically do not specify the technologies available to satisfy those requirements. They also do not express the next steps if an implementor wants to go above and beyond the baseline in order to differentiate their products and enable even better security. This memo defines the mapping from some IoT baseline security requirements definitions to ietf and related security technologies. It also highlights some gaps in those IoT baseline security requirements.</t>
+
+</section>
+<section anchor="survey-of-baseline-security-requirements"><name>Survey of baseline security requirements</name>
+
+<t>At time of writing, there are IoT baseline security requirements provided by several organisations:</t>
+
+<t><list style="symbols">
+  <t>ENISA's Baseline Security Recommendations for IoT in the context of Critical Information Infrastructures (<xref target="ENISA-Baseline"/>)</t>
+  <t>ETSI's Cyber Security for Consumer Internet of Things: Baseline Requirements <xref target="ETSI-Baseline"/></t>
+  <t>NIST's IoT Device Cybersecurity Capability Core Baseline <xref target="NIST-Baseline"/></t>
+</list></t>
+
+</section>
+<section anchor="requirement-mapping"><name>Requirement Mapping</name>
+
+<t>Requirements that pertain to hardware, procedure, and policy compliance are noted, but do not map to ietf and related technologies.</t>
+
+<section anchor="hardware-security"><name>Hardware Security</name>
+
+<section anchor="hardware-immutable-root-of-trust"><name>Hardware Immutable Root of Trust</name>
+
+<t>ENISA GP-TM-01</t>
+
+</section>
+<section anchor="hardware-backed-secret-storage"><name>Hardware-Backed Secret Storage</name>
+
+<t>ENISA GP-TM-02</t>
+
+</section>
+</section>
+<section anchor="software-integrity-authenticity"><name>Software Integrity &amp; Authenticity</name>
+
+<section anchor="boot-environment-trustworthiness-and-integrity"><name>Boot Environment Trustworthiness and Integrity</name>
+
+<t>ENISA GP-TM-03: Trust must be established in the boot environment before any trust in any other software or executable program can be claimed.</t>
+
+<t>Satisfying this requirement can be done in several ways, increasing in security guarantees:</t>
 
 <t><list style="numbers">
-  <t>What software is my device running?</t>
-  <t>How should my device connect to a network?</t>
-  <t>With which systems should my device communicate?</t>
-  <t>What is the provenance of my device's software and corresponding policies?</t>
-  <t>Who is authorised to initiate a software update and under which conditions?</t>
-  <t>How should my device trust updates to its software?</t>
+  <t>Implement secure boot to verify the bootloader and boot environment. Trust is established purely by construction: if code is running in the boot environment, it must have been signed, therefore it is trustworthy.</t>
+  <t>Record critical measurements of each step of boot in a TPM. Trust is established by evaluating the measurements recorded by the TPM.</t>
+  <t>Use Remote Attestation. Remote attestation allows a device to report to third parties the critical measurements it has recorded (either in a TPM or signed by each stage) in order to prove the trustworthiness of the boot environment and running software. Remote Attestation is implemented in <xref target="I-D.ietf-rats-eat"/>.</t>
 </list></t>
 
-<t>Each of these questions is answered by recently developed or developing standards. Each of these questions hides a security threat; so these threats are detailed in a threat model.</t>
+</section>
+<section anchor="code-integrity-and-authenticity"><name>Code Integrity and Authenticity</name>
+
+<t>ENISA GP-TM-04: Sign code cryptographically to ensure it has not been tampered with after signing it as safe for the device, and implement run-time protection and secure execution monitoring to make sure malicious attacks do not overwrite code after it is loaded.</t>
+
+<t>Satisfying this requirement requires a secure invocation mechanism. In monolithic IoT software images, this is accomplished by Secure Boot. In IoT devices with more fully-featured operating systems, this is accomplished with an operating system-specific code signing practice.</t>
+
+<t>Secure Invocation can be achieved using the SUIT Manifest format, which provides for secure invocation procedures. See <xref target="I-D.ietf-suit-manifest"/>.</t>
+
+<t>To satisfy the associated requirement of run-time protection and secure execution monitoring, the use of a TEE is recommended to protect sensitive processes. The TEEP protocol (see <xref target="I-D.ietf-teep-architecture"/>) is recommended for managing TEEs.</t>
 
 </section>
-<section anchor="threats-and-risks-to-iot-deployments"><name>Threats and Risks to IoT Deployments</name>
+<section anchor="secure-firmware-update"><name>Secure Firmware Update</name>
 
-<t>For this threat model to be useful to implementers, there are certain usability requirements that must be included to explain the origin of a threat. These are noted where necessary.</t>
+<t>ENISA GP-TM-05: Control the installation of software in operating systems, to prevent unauthenticated software and files from being loaded onto it.</t>
 
-<t>Sections are organised in groups of:</t>
+<t>Many fully-featured operating systems have dedicated means of implementing this requirement. The SUIT manifest (See <xref target="I-D.ietf-suit-manifest"/>) is recommended as a means of providing secure, authenticated software update. Where the software is deployed to a TEE, TEEP (See <xref target="I-D.ietf-teep-protocol"/>) is recommended for software update and management.</t>
+
+</section>
+<section anchor="resilience-to-failure"><name>Resilience to Failure</name>
+
+<t>ENISA GP-TM-06: Enable a system to return to a state that was known to be secure, after a security breach has occured or if an upgrade has not been successful.</t>
+
+<t>While there is no specificaiton for this, it is also required in <xref target="RFC9019"/></t>
+
+</section>
+<section anchor="trust-anchor-management"><name>Trust Anchor Management</name>
+
+<t>ENISA GP-TM-07: Use protocols and mechanisms able to represent and manage trust and trust relationships.</t>
+
+<t>EST (<eref target="https://datatracker.ietf.org/doc/html/rfc7030"/>) and LwM2M Bootstrap (<xref target="LwM2M"/>) provide a mechanism to replace trust anchors (manage trust/trust relationships).</t>
+
+</section>
+</section>
+<section anchor="default-security-privacy"><name>Default Security &amp; Privacy</name>
+
+<section anchor="security-on-by-default"><name>Security ON by Default</name>
+
+<t>ENISA GP-TM-08: Any applicable security features should be enabled by default, and any unused or insecure functionalities should be disabled by default.</t>
+
+<t>This is a procedural requirement, rather than a protocol or document requirement.</t>
+
+</section>
+<section anchor="default-unique-passwords"><name>Default Unique Passwords</name>
+
+<t>ENISA GP-TM-09: Establish hard to crack, device-individual default passwords.</t>
+
+<t>This is a procedural requirement, rather than a protocol or document requirement.</t>
+
+</section>
+</section>
+<section anchor="data-protection"><name>Data Protection</name>
+
+<t>The data protection requirements are largely procedural/architectural. While this memo can recommend using TEEs to protect data, and TEEP (<xref target="I-D.ietf-teep-architecture"/>) to manage TEEs, implementors must choose to architect their software in such a way that TEEs are helpful in meeting these requirements.</t>
+
+<t>ENISA Data Protection requirements:</t>
 
 <t><list style="symbols">
-  <t>usability requirement (if needed)</t>
-  <t>threat</t>
-  <t>security requirement</t>
-  <t>mitigating technologies</t>
+  <t>GP-TM-10: Personal data must be collected and processed fairly and lawfully, it should never be collected and processed without the data subject’s consent.</t>
+  <t>GP-TM-11: Make sure that personal data is used for the specified purposes for which they were collected, and that any further processing of personal data is compatible and that the data subjects are well informed.</t>
+  <t>GP-TM-12: Minimise the data collected and retained.</t>
+  <t>GP-TM-13: IoT stakeholders must be compliant with the EU General Data Protection Regulation (GDPR).</t>
+  <t>GP-TM-14: Users of IoT products and services must be able to exercise their rights to information, access, erasure, rectification, data portability, restriction of processing, objection to processing, and their right not to be evaluated on the basis of automated processing.</t>
 </list></t>
 
-<section anchor="threat-iot-network-credential-exposure"><name>Threat: IoT Network Credential Exposure</name>
-
-<t>Network Credential Exposure describes the potential for exposure of credentials, including cryptographic material, used to access an IoT network. Note that "network" here describes a logical network, such as a LwM2M server and its clients.</t>
-
-<t>Each physical network technology provides its own onboarding techniques. Recommended practice is to follow best practices for the physical network technology in use.</t>
-
-<section anchor="requsenetcredentials"><name>REQ.USE.NET.CREDENTIALS</name>
-
-<t>It must be possible to provide a device with credentials to access a network. This is typically referred to as device onboarding. This may be done by the manufacturer, the supply chain, the installer, or the end user. It may be done by the device or on behalf of the device by a trusted third party.</t>
-
 </section>
-<section anchor="threatiotnetcredentials"><name>THREAT.IOT.NET.CREDENTIALS</name>
+<section anchor="system-safety-and-reliability"><name>System Safety and Reliability</name>
 
-<t>A threat actor extracts the credentials from a device or by eavesdropping on the credential provisioning flow</t>
+<t>Safety and reliability requirements are procedural/architectural. Implementors should ensure they have processes and architectures in place to meet these requirements.</t>
 
-</section>
-<section anchor="reqsecnetcredentials"><name>REQ.SEC.NET.CREDENTIALS</name>
-
-<t>Network access credentials must be provisioned to a device in a way that secures them against eavesdropping or extraction.</t>
-
-</section>
-<section anchor="technologies-to-mitigate-threatiotnetcredentials"><name>Technologies to Mitigate THREAT.IOT.NET.CREDENTIALS</name>
-
-<t>Several technologies are available for device onboarding:</t>
+<t>ENISA Safety and Reliability requirements:</t>
 
 <t><list style="symbols">
-  <t>Lightweight M2M Bootstrap <xref target="LwM2M"/> provides a mechanism to provision keying material and configuration of any kind, according to a well-defined data model.</t>
-  <t>FIDO Device Onboard <xref target="FDO"/> provides a mechanism to deliver an arbitrary block of data to devices. This block of data can contain trust anchors, cryptographic information, and other device configuration.</t>
-  <t>BRSKI <xref target="RFC8995"/> provides a mechanism for "Bootstrap Distribution of CA Certificates", as described in <xref target="RFC7030"></xref>, Section 4.1.1.  In the process, a TLS connection is established that can be directly used for Enrollment over Secure Transport (EST).</t>
-  <t>Enrollment over Secure Transport (EST) <xref target="RFC7030"/> provides a mechanism to deliver certificates and, optionally, private keys to devices.</t>
+  <t>GP-TM-15: Design with system and operational disruption in mind, preventing the system from causing an unacceptable risk of injury or physical damage.</t>
+  <t>GP-TM-16: Mechanisms for self-diagnosis and self-repair/healing to recover from failure, malfunction or a compromised state.</t>
+  <t>GP-TM-17: Ensure standalone operation - essential features should continue to work with a loss of communications and chronicle negative impacts from compromised devices or cloud-based systems.</t>
 </list></t>
 
 </section>
-</section>
-<section anchor="threat-trust-anchor-private-key-disclosure"><name>Threat: Trust Anchor Private Key Disclosure</name>
+<section anchor="secure-software-firmware-updates"><name>Secure Software / Firmware updates</name>
 
-<t>When a trust anchor of a device is used regularly, the chances of its private key being disclosed increase.</t>
+<t>Technical requirements for Software Updates are provided for in SUIT (<xref target="I-D.ietf-suit-manifest"/>) and TEEP (<xref target="I-D.ietf-teep-protocol"/>). Procedural and architectural requirements should be independently assessed by the implementor.</t>
 
-<section anchor="threatiottadisclosure"><name>THREAT.IOT.TA.DISCLOSURE</name>
-
-<t>A private key trusted by one or more devices is disclosed. This could be caused by: a threat actor within the organisation, a compromise of a service using the key, etc.</t>
-
-</section>
-<section anchor="reqsectarotation"><name>REQ.SEC.TA.ROTATION</name>
-
-<t>It must be possible to deploy new keys to devices in order to update their active trust anchors. This does not mean that the ultimate trust anchor over a device is changed, but that its delegates are changed, enabling infrequent use of the ultimate trust anchor and higher security key management protocols to be deployed, such as key ceremonies and M of N threshold signatures.</t>
-
-</section>
-<section anchor="technologies-to-mitigate-threatiottadisclosure"><name>Technologies to mitigate THREAT.IOT.TA.DISCLOSURE</name>
-
-<t>Several technologies are available for trust anchor rotation:</t>
+<t>ENISA Software Update Requirements:</t>
 
 <t><list style="symbols">
-  <t>Lightweight M2M Bootstrap <xref target="LwM2M"/> provides a mechanism to provision keying material and configuration of any kind, according to a well-defined data model.</t>
-  <t>FIDO Device Onboard <xref target="FDO"/> provides a mechanism to deliver an arbitrary block of data to devices. This block of data can contain trust anchors, cryptographic information, and other device configuration.</t>
-  <t>Enrollment over Secure Transport (EST) <xref target="RFC7030"/> provides a mechanism to deliver certificates and, optionally, private keys to devices.</t>
+  <t>GP-TM-18: Ensure that the device software/firmware, its configuration and its applications have the ability to update Over-The-Air (OTA), that the update server is secure, that the update file is transmitted via a secure connection, that it does not contain sensitive data (e.g. hardcoded credentials), that it is signed by an authorised trust entity and encrypted using accepted encryption methods, and that the update package has its digital signature, signing certificate and signing certificate chain, verified by the device before the update process begins.</t>
+  <t>GP-TM-19: Offer an automatic firmware update mechanism.</t>
+  <t>GP-TM-20: (Procedural / Architectural) Backward compatibility of firmware updates. Automatic firmware updates should not modify user-configured preferences, security, and/or privacy settings without user notification.</t>
+</list></t>
+
+</section>
+<section anchor="authentication"><name>Authentication</name>
+
+<section anchor="align-authentication-schemes-with-threat-models"><name>Align Authentication Schemes with Threat Models</name>
+
+<t>ENISA GP-TM-21: Design the authentication and authorisation schemes (unique per device) based on the system-level threat models.</t>
+
+<t>This is a procedural / architectural requirement.</t>
+
+</section>
+<section anchor="password-rules"><name>Password Rules</name>
+
+<t>ENISA applies the following requirements to Password-based authentication:</t>
+
+<t><list style="symbols">
+  <t>GP-TM-22: Ensure that default passwords and even default usernames are changed during the initial setup, and that weak, null or blank passwords are not allowed.</t>
+  <t>GP-TM-23: Authentication mechanisms must use strong passwords or personal identification numbers (PINs), and should consider using two-factor authentication (2FA) or multi-factor authentication (MFA) like Smartphones, Biometrics, etc., on top of certificates.</t>
+  <t>GP-TM-24: Authentication credentials shall be salted, hashed and/or encrypted.</t>
+  <t>GP-TM-25: Protect against ‘brute force’ and/or other abusive login attempts. This protection should also consider keys stored in devices.</t>
+  <t>GP-TM-26: Ensure password recovery or reset mechanism is robust and does not supply an attacker with information indicating a valid account. The same applies to key update and recovery mechanisms.</t>
+</list></t>
+
+<t>As an alternative, implementors are encouraged to consider passwordless schemes, such as FIDO.</t>
+
+</section>
+</section>
+<section anchor="authorisation"><name>Authorisation</name>
+
+<section anchor="principle-of-least-privilege"><name>Principle of Least Privilege</name>
+
+<t>ENISA GP-TM-27: Limit the actions allowed for a given system by Implementing fine-grained authorisation mechanisms and using the Principle of least privilege (POLP): applications must operate at the lowest privilege level possible.</t>
+
+<t>This is a procedural / architectural requirement, however at the network level, this can be implemented using Manufacturer Usage Descriptions (see <xref target="RFC8520"/>).</t>
+
+</section>
+<section anchor="software-isolation"><name>Software Isolation</name>
+
+<t>ENISA GP-TM-28: Device firmware should be designed to isolate privileged code, processes and data from portions of the firmware that do not need access to them. Device hardware should provide isolation concepts to prevent unprivileged from accessing security sensitive code.</t>
+
+<t>Implementors should use TEEs to address this requirement. The provisioning and management of TEEs can be accomplished using TEEP (see <xref target="I-D.ietf-teep-architecture"/>).</t>
+
+</section>
+<section anchor="access-control"><name>Access Control</name>
+
+<t>ENISA GP-TM-29: Data integrity and confidentiality must be enforced by access controls. When the subject requesting access has been authorised to access particular processes, it is necessary to enforce the defined security policy.
+ENISA GP-TM-30: Ensure a context-based security and privacy that reflects different levels of importance.</t>
+
+<t>These requirements are complex and require a variety of technologies to implement. Use of TEEs can provide a building block for these requirements, but is not sufficient in itself to meet these requiremnents.</t>
+
+</section>
+</section>
+<section anchor="environmental-and-physical-security"><name>Environmental and Physical Security</name>
+
+<t>ENISA defines the following physical security requirements. These are hardware-architectural requirements and not covered by protocol and format specifications.</t>
+
+<t><list style="symbols">
+  <t>GP-TM-31: Measures for tamper protection and detection. Detection and reaction to hardware
+tampering should not rely on network connectivity.</t>
+  <t>GP-TM-32: Ensure that the device cannot be easily disassembled and that the data storage medium is encrypted at rest and cannot be easily removed.</t>
+  <t>GP-TM-33: Ensure that devices only feature the essential physical external ports (such as USB) necessary for them to function and that the test/debug modes are secure, so they cannot be used to maliciously access the devices. In general, lock down physical ports to only trusted connections.</t>
+</list></t>
+
+</section>
+<section anchor="cryptography"><name>Cryptography</name>
+
+<t>ENISA makes the following architectural cryptography requirements for IoT devices:</t>
+
+<t><list style="symbols">
+  <t>GP-TM-34: Ensure a proper and effective use of cryptography to protect the confidentiality, authenticity and/or integrity of data and information (including control messages), in transit and in rest. Ensure the proper selection of standard and strong encryption algorithms and strong keys, and disable insecure protocols. Verify the robustness of the implementation.</t>
+  <t>GP-TM-35: Cryptographic keys must be securely managed.</t>
+  <t>GP-TM-36: Build devices to be compatible with lightweight encryption and security techniques.</t>
+  <t>GP-TM-37: Support scalable key management schemes.</t>
+</list></t>
+
+</section>
+<section anchor="secure-and-trusted-communications"><name>Secure and Trusted Communications</name>
+
+<section anchor="data-security"><name>Data Security</name>
+
+<t>GP-TM-38: Guarantee the different security aspects -confidentiality (privacy), integrity, availability and authenticity- of the information in transit on the networks or stored in the IoT application or in the Cloud.</t>
+
+<t>This Data Security requirement can be fulfilled using COSE <xref target="RFC8152"/> for ensuring the authenticity, integrity, and confidentiality of data either in transit or at rest. Secure Transport (see <xref target="secure-transport"/>) technologies can be used to protect data in transit.</t>
+
+</section>
+<section anchor="secure-transport"><name>Secure Transport</name>
+
+<t>ENISA GP-TM-39: Ensure that communication security is provided using state-of-the-art, standardised security protocols, such as TLS for encryption.
+ENISA GP-TM-40: Ensure credentials are not exposed in internal or external network traffic.</t>
+
+<t>This requirement is satisfied by several standards:</t>
+
+<t><list style="symbols">
+  <t>TLS (<xref target="RFC8446"/>).</t>
+  <t>DTLS (<xref target="RFC9147"/>).</t>
+  <t>QUIC (<xref target="RFC9000"/>).</t>
+  <t>OSCORE (<xref target="RFC9203"/>).</t>
+</list></t>
+
+</section>
+<section anchor="data-authenticity"><name>Data Authenticity</name>
+
+<t>ENISA GP-TM-41: Guarantee data authenticity to enable reliable exchanges from data emission to data reception. Data should always be signed whenever and wherever it is captured and stored.</t>
+
+<t>The authenticity of data can be protected using COSE <xref target="RFC8152"/>.</t>
+
+<t>ENISA GP-TM-42: Do not trust data received and always verify any interconnections. Discover, identify and verify/authenticate the devices connected to the network before trust can be established, and preserve
+their integrity for reliable solutions and services.</t>
+
+<t>Verifying communication partners can be done in many ways. Key technologies supporting authentication of communication partners are:</t>
+
+<t><list style="symbols">
+  <t>RATS: Remote attestation of a communication partner (See <xref target="I-D.ietf-rats-architecture"/>).</t>
+  <t>TLS/DTLS: Mutual authentication of communication partners (See <xref target="RFC8446"/> / <xref target="RFC9147"/>).</t>
+  <t>ATLS: Application-layer TLS for authenticating a connection that may traverse multiple secure transport connections.</t>
+  <t>Attested TLS: The use of attestation in session establishment in TLS (See <xref target="I-D.fossati-tls-attestation"/>).</t>
+</list></t>
+
+</section>
+<section anchor="least-privilege-communication"><name>Least Privilege Communication</name>
+
+<t>ENISA GP-TM-43: IoT devices should be restrictive rather than permissive in communicating.</t>
+
+<t>This Requirement can be enabled and enforced using Manufacturer Usage Descriptions, which codify expected communication (See <xref target="RFC8520"/>)</t>
+
+<t>ENISA GP-TM-44: Make intentional connections. Prevent unauthorised connections to it or other devices the
+product is connected to, at all levels of the protocols.</t>
+
+<t>This requirement can be satisfied through authenticating connections (TLS / DTLS mutual authentication. See <xref target="RFC8446"/> / <xref target="RFC9147"/>) and declaring communication patterns (Manufacturer Usage Descriptions. See <xref target="RFC8520"/>)</t>
+
+<t>Architectural / Procedural requirements:</t>
+
+<t><list style="symbols">
+  <t>ENISA GP-TM-45: Disable specific ports and/or network connections for selective connectivity.</t>
+  <t>ENISA GP-TM-46: Rate limiting. Controlling the traffic sent or received by a network to reduce the risk of automated attacks.</t>
 </list></t>
 
 </section>
 </section>
-<section anchor="threat-incorrect-firmwareversion"><name>Threat: Incorrect Firmware/Version</name>
+<section anchor="secure-interfaces-and-network-services"><name>Secure Interfaces and network services</name>
 
-<t>Incorrect firmware/version can come in two forms.</t>
+<t>ENISA Architectural / Procedural requirements:</t>
 
-<section anchor="threatfwold"><name>THREAT.FW.OLD</name>
+<t><list style="symbols">
+  <t>GP-TM-47: Risk Segmentation. Splitting network elements into separate components to help isolate security breaches and minimise the overall risk.</t>
+  <t>GP-TM-48: Protocols should be designed to ensure that, if a single device is compromised, it does not affect the whole set.</t>
+  <t>GP-TM-49: Avoid provisioning the same secret key in an entire product family, since compromising a single device would be enough to expose the rest of the product family.</t>
+  <t>GP-TM-50: Ensure only necessary ports are exposed and available.</t>
+  <t>GP-TM-51: Implement a DDoS-resistant and Load-Balancing infrastructure.</t>
+  <t>GP-TM-53: Avoid security issues when designing error messages.</t>
+</list></t>
 
-<t>Old firmware present on device allows compromise of data sent to device, poisoning of data sent to service</t>
+<section anchor="encrypted-user-sessions"><name>Encrypted User Sessions</name>
 
-</section>
-<section anchor="threatdevrogue"><name>THREAT.DEV.ROGUE</name>
+<t>ENISA GP-TM-52: Ensure web interfaces fully encrypt the user session, from the device to the backend services, and that they are not susceptible to XSS, CSRF, SQL injection, etc.</t>
 
-<t>Rogue or simulated device emulates a real device, allows compromise of data sent to the device, or poisoning of data sent to service</t>
-
-</section>
-<section anchor="reqsecfwmeasure"><name>REQ.SEC.FW.MEASURE</name>
-
-<t>To enable devices to report their current software version and related data securely, devices SHOULD support a support a mechanism to securely measure their firmware. This allows an IoT network to restrict access by non-compliant devices.</t>
-
-</section>
-<section anchor="technologies-to-implement-reqsecfwmeasure"><name>Technologies to implement REQ.SEC.FW.MEASURE</name>
-
-<t>The technology used for securely measuring and reporting the firmware of a device is typically called remote attestation. A protocol is under development for conveying remote attestation measurements in a trustworthy way in <xref target="I-D.ietf-rats-architecture"/>. Likewise, document format is under development in <xref target="I-D.ietf-rats-eat"/>.</t>
+<t>This requirement can be partially satisfied through use of TLS or QUIC (See <xref target="RFC8446"/> and <xref target="RFC9000"/>)</t>
 
 </section>
 </section>
-<section anchor="threat-vulnerable-firmware"><name>Threat: Vulnerable Firmware</name>
+<section anchor="secure-input-and-output-handling"><name>Secure input and output handling</name>
 
-<t>Devices with old firmware might have a known vulnerability. This could allow a threat actor to take over the device.</t>
+<t>Architectural / Procedural requirements:</t>
 
-<section anchor="threatfwknownvulnerability"><name>THREAT.FW.KNOWN.VULNERABILITY</name>
-
-<t>If old firmware with known vulnerability cannot be altered. This allows exploit of known a vulnerability.</t>
+<t>ENISA GP-TM-54: Data input validation (ensuring that data is safe prior to use) and output filtering.</t>
 
 </section>
-<section anchor="reqsecfwremoteupdate"><name>REQ.SEC.FW.REMOTE.UPDATE</name>
+<section anchor="logging"><name>Logging</name>
 
-<t>Software on unattended devices must be remotely-updatable.</t>
+<t>Architectural / Procedural requirements:</t>
 
-</section>
-<section anchor="threatupdatecompromise"><name>THREAT.UPDATE.COMPROMISE</name>
+<t>ENISA GP-TM-55: Implement a logging system that records events relating to user authentication, management of accounts and access rights, modifications to security rules, and the functioning of the system. Logs must be preserved on durable storage and retrievable via authenticated connections.</t>
 
-<t>Compromise of the update system is fundamentally equivalent to persistent remote code execution. A threat actor that gains firmware update capability has extensive power over the device.</t>
-
-</section>
-<section anchor="reqsecupdatesecurity"><name>REQ.SEC.UPDATE.SECURITY</name>
-
-<t>Software update mechanism must be secured (see RFC9124)</t>
+<t>Certain logs can be transported via RATS: See <xref target="I-D.ietf-rats-eat"/>. Where assosciated with SUIT firmware updates, logs can be transported using SUIT Reports. See <xref target="I-D.ietf-suit-report"/>.</t>
 
 </section>
-<section anchor="technologies-to-implement-reqsecupdatesecurity"><name>Technologies to implement REQ.SEC.UPDATE.SECURITY</name>
+<section anchor="monitoring-and-auditing"><name>Monitoring and Auditing</name>
 
-<t>To enable devices to be updated securely in the field, they can support a remote update protocol such as <xref target="I-D.ietf-suit-manifest"/>. For securely deploying software to Trusted Execution Environments, the a secure Trusted Application delivery protocol should be used, such as <xref target="I-D.ietf-teep-architecture"/>.</t>
+<t>Architectural / Procedural requirements:</t>
 
-</section>
-</section>
-<section anchor="threat-supply-chain-attacks"><name>Threat: Supply Chain Attacks</name>
-
-<t>Software of unknown origin may be used in a device. If an threat actor can gain control over the software supply chain, they may be able to sneak their code onto a device.</t>
-
-<section anchor="riskswsupply"><name>RISK.SW.SUPPLY</name>
-
-<t>Software of unknown origin may be used in a device</t>
-
-</section>
-<section anchor="threatswsupply"><name>THREAT.SW.SUPPLY</name>
-
-<t>If software origin is not verified, a threat actor may deliberately and secretly seed the software supply chain with vulnerable code, enabling further compromise.</t>
-
-</section>
-<section anchor="reqsecswbom"><name>REQ.SEC.SW.BOM</name>
-
-<t>To prove the provenance of a firmware update, update manifests SHOULD include (directly, or by secure reference) a Software Identifier or Software Bill of Materials,</t>
-
-</section>
-<section anchor="technologies-to-implement-reqsecupdatesecurity-1"><name>Technologies to implement REQ.SEC.UPDATE.SECURITY</name>
-
-<t>In order to enable a device to prove provenance of its software, it or its network can use a software identifier such as <xref target="I-D.ietf-sacm-coswid"/>. Optionally, this software idenifier can be encapsulated in a manifest that includes hardware properties as well, such as <xref target="I-D.birkholz-rats-corim"/>.</t>
-
-</section>
-</section>
-<section anchor="risk-verification-information-supply-chain"><name>Risk: Verification Information Supply Chain</name>
-
-<t>Correct values for attestation results may not be known by Verifiers, causing them to log values, but not limit them.</t>
-
-<section anchor="riskverifierdefaults"><name>RISK.VERIFIER.DEFAULTS</name>
-
-<t>Without access to a source of verification information such as expected attestation results, a verifier may not be able to make correct decisions about the trustworthiness of a device.</t>
-
-</section>
-<section anchor="threattrustelevation"><name>THREAT.TRUST.ELEVATION</name>
-
-<t>A threat actor deploys compromised software to devices; this is detected by monitoring systems, but not identified as an attack. If a threat actor can cause an attestation system to trust a device more than it should, this forms a new class of elevation of privilege: elevation of trust.</t>
-
-</section>
-<section anchor="reqsecverifierdata"><name>REQ.SEC.VERIFIER.DATA</name>
-
-<t>Monitoring systems must know the expected values in Attestation results.</t>
-
-</section>
-<section anchor="technologies-to-implement-reqsecverifierdata"><name>Technologies to implement REQ.SEC.VERIFIER.DATA</name>
-
-<t>To enable a Relying Party of the Remote Attestation to correctly evaluate the Attestation Report, the SBoM (such as <xref target="I-D.ietf-sacm-coswid"/>) can contain expected values for the Attestation Report. In addition, the expected information for hardware properties can be contained in another manifest, such as <xref target="I-D.birkholz-rats-corim"/>.</t>
-
-<t>NOTE: Remote attestation terminology is fluid on this topic. A "Verifier" can be any system that appraises Evidence in remote attestation. It is expected that "appraisal" will be spread across at least two systems to maintain confidentiality and separation of responsibility: 1) a Verifier that ensures that the attestation Evidence is produced by genuine hardware, not tampered with, and not signed by revoked keys and 2) a monitoring system taking on the role of Verifier and Relying Party that appraises whether a device has the correct software versions and initiates remediation if not.</t>
-
-</section>
-</section>
-<section anchor="threat-spurious-network-capabilites"><name>Threat: Spurious Network Capabilites</name>
-
-<t>Devices may have additional, unneeded capabilites that are detrimental to network security. While the best option is to disable this functionality in software, this is not always practical</t>
-
-<section anchor="threatnetspuriousfunctions"><name>THREAT.NET.SPURIOUS.FUNCTIONS</name>
-
-<t>Devices may contain intentional or accidental capabilities to make networks vulnerable or launch attacks on other networks. These capabilities are extremely costly to discover by inspection or audit.
-Requirement: Devices (or their supply chains) must advertise their network access requirements and networks must enforce that devices adhere to their stated network access requirements.</t>
-
-</section>
-<section anchor="reqsecnetacl"><name>REQ.SEC.NET.ACL</name>
-
-<t>To ensure that network infrastructure is configured discern the difference between authentic traffic and anomalous traffic, network infrastructure can implement fine-grained access control over how a device can use a network</t>
-
-</section>
-<section anchor="threatnetbadacl"><name>THREAT.NET.BAD.ACL</name>
-
-<t>If a service hosting network access requirements documents is compromised, it can be used to enable malicious devices to mount attacks.</t>
-
-</section>
-<section anchor="reqsecnetaclsignature"><name>REQ.SEC.NET.ACL.SIGNATURE</name>
-
-<t>Network access ACL documents should be signed. Best practice is to use offline keys for signing.</t>
-
-</section>
-<section anchor="threatnetwrongacl"><name>THREAT.NET.WRONG.ACL</name>
-
-<t>If devices are permitted to self-report ACLs without authentication by a trusted party, they can report any ACL recognised by the network. A device can mis-advertise its network access requirements, pretending to be a different, but recognised and more privileged device (potentially cloning MAC addresses, keys, etc.)</t>
-
-</section>
-<section anchor="reqsecnetacltrust"><name>REQ.SEC.NET.ACL.TRUST</name>
-
-<t>Network Access Requirements documents must be secured against tampering and misreporting</t>
-
-</section>
-<section anchor="risknetaclconflation"><name>RISK.NET.ACL.CONFLATION</name>
-
-<t>Network Access Requirements documents embedded in or referenced from device certificates conflate two capabilities for network operators: network access requirement authorship (potentially delegated) and network access requirement audit. While network operators should audit network access requirements, authoring those requirements should be done by the authors of the device behavior.</t>
-
-<t>Failure to separate these capabilities has the potential to lead to failed device behaviour due to wrong Network Access Requirements descriptions, leading to disabling of the network ACL system in the name of expediency.</t>
-
-</section>
-<section anchor="reqsecnetaclseparation"><name>REQ.SEC.NET.ACL.SEPARATION</name>
-
-<t>Requirement: If Network Access Requirements are embedded in or referenced by device certificates, the responsibility for network access requirement authorship should be delegated to the device application authors. Alternatively, this can be done explicitly by tying device application authorship to device network access requirements authorship.</t>
-
-</section>
-<section anchor="technologies-to-mitigate-spurious-network-capabilities"><name>Technologies to Mitigate Spurious Network Capabilities</name>
-
-<t><list style="numbers">
-  <t>THREAT.NET.SPURIOUS.FUNCTIONS can be mitigated by use of <xref target="RFC8520"/> Manufacturer Usage Descriptions (MUDs) and a MUD Controller which accepts MUD files in order to automatically program rules into the network infrastructure.</t>
-  <t>THREAT.NET.BAD.ACL To prevent a threat actor from distributing their own MUD files via a MUD server, these can be signed, preferably with an offline key as described in <xref target="RFC8520"/>.</t>
-  <t>THREAT.NET.WRONG.ACL can be mitigated by using 802.1X, or SUIT to contain a MUD file or MUD file reference and integrity check. Alternatively, the device's RATS attestation results can be compared to a known list of device profiles and a MUD can be applied as a result without intervention from the remote device.</t>
-  <t>REQ.SEC.NET.ACL.SEPARATION can be mitigated either through key delegation or through the use of SUIT encapsulation of the MUD file. A third option is to use a third-party ACL provider, such as iotopia.</t>
+<t><list style="symbols">
+  <t>ENISA GP-TM-56: Implement regular monitoring to verify the device behaviour, to detect malware and to discover integrity errors.</t>
+  <t>ENISA GP-TM-57: Conduct periodic audits and reviews of security controls to ensure that the controls are effective. Perform penetration tests at least biannually.</t>
 </list></t>
 
 </section>
 </section>
-<section anchor="risk-dos-of-acl-server"><name>Risk: DoS of ACL server</name>
+<section anchor="security-considerations"><name>Security Considerations</name>
 
-<section anchor="risknetaclupdate"><name>RISK.NET.ACL.UPDATE</name>
+<t>No additional security considerations are required; they are laid out in the preceeding sections.</t>
 
-<t>Recently updated devices may incur latency penalties when a new network access requirements reference must be resolved and verified.</t>
-
-</section>
-<section anchor="threatnetacldos"><name>THREAT.NET.ACL.DOS</name>
-
-<t>A threat actor may block access to a distributor of network access requirements documents, thus disabling all devices referencing the network access requirements documents it hosts, without any network intrusion necessary against target networks.</t>
-
-</section>
-<section anchor="reqsecnetacllocal"><name>REQ.SEC.NET.ACL.LOCAL</name>
-
-<t>Network access requirements documents should be distributed in advance of use by any device because they constitute a non-local software dependency</t>
-
-</section>
-<section anchor="technologies-to-implement-reqsecnetacllocal"><name>Technologies to Implement REQ.SEC.NET.ACL.LOCAL</name>
-
-<t>In order for network infrastructure to be configured in advance of any changes to devices, MUD files can be transported (directly or by secure reference) within update manifests.</t>
-
-<t>This allows local infrastructure to delay installation of a firmware update until a new MUD file can be fetched and audited.</t>
-
-</section>
-</section>
-<section anchor="threat-delays-in-acl-remediation"><name>Threat: Delays in ACL Remediation</name>
-
-<t>If an ACL is wrong, network operators need it to be fixed quickly.</t>
-
-<section anchor="threatnetaclbroad"><name>THREAT.NET.ACL.BROAD</name>
-
-<t>A network access requirements document grants permissions to a device that are too broad, but the provider of firmware updates is slow to respond, meaning that MUD file delivery in SUIT will take too long.</t>
-
-</section>
-<section anchor="reqsecnetacldynamic"><name>REQ.SEC.NET.ACL.DYNAMIC</name>
-
-<t>It must be possible to distribute reduced permissions to network access controllers to mitigate a wrong ACL. To enable rapid response to evolving threats, the MUD controller SHOULD also support dynamic update of MUD files.</t>
-
-</section>
-<section anchor="technologies-that-implement-reqsecnetacldynamic"><name>Technologies that implement REQ.SEC.NET.ACL.DYNAMIC</name>
-
-<t>If a MUD file is delivered by SUIT rather than via a remote server, then a secondary delivery channel can be used. This can include manually overriding the ACL in the network infrastructure. It can also include using SUIT to deliver the key that is used to verify signed MUD files from a specific URL, however in this scenario, THREAT.NET.ACL.DOS remains unmitigated.</t>
-
-</section>
-</section>
-<section anchor="threat-vulnerable-devices"><name>Threat: Vulnerable Devices</name>
-
-<t>If a vulnerable device is connected to the network, it could be a risk to the whole network.</t>
-
-<section anchor="threatnetvulnerabledevice"><name>THREAT.NET.VULNERABLE.DEVICE</name>
-
-<t>Old firmware with known vulnerability allows exploit until it is updated.</t>
-
-</section>
-<section anchor="reqsecnetdmz"><name>REQ.SEC.NET.DMZ</name>
-
-<t>Network infrastructure can apply risk management policy to devices that attest non-compliant configuration. For example, a device with out-of-date firmware may only be permitted to access the update system.</t>
-
-</section>
-<section anchor="technologies-to-implement-reqsecnetdmz"><name>Technologies to Implement REQ.SEC.NET.DMZ</name>
-
-<t>Using MUD and RATS, a network operator can force a device onto a DMZ network containing only attestation and SUIT update services until it successfully attests a correct firmware version.</t>
-
-</section>
-</section>
 </section>
 
 
@@ -430,6 +439,93 @@ Requirement: Devices (or their supply chains) must advertise their network acces
 </reference>
 
 
+
+<reference anchor='RFC8446' target='https://www.rfc-editor.org/info/rfc8446'>
+<front>
+<title>The Transport Layer Security (TLS) Protocol Version 1.3</title>
+<author fullname='E. Rescorla' initials='E.' surname='Rescorla'><organization/></author>
+<date month='August' year='2018'/>
+<abstract><t>This document specifies version 1.3 of the Transport Layer Security (TLS) protocol.  TLS allows client/server applications to communicate over the Internet in a way that is designed to prevent eavesdropping, tampering, and message forgery.</t><t>This document updates RFCs 5705 and 6066, and obsoletes RFCs 5077, 5246, and 6961.  This document also specifies new requirements for TLS 1.2 implementations.</t></abstract>
+</front>
+<seriesInfo name='RFC' value='8446'/>
+<seriesInfo name='DOI' value='10.17487/RFC8446'/>
+</reference>
+
+
+
+<reference anchor='RFC9019' target='https://www.rfc-editor.org/info/rfc9019'>
+<front>
+<title>A Firmware Update Architecture for Internet of Things</title>
+<author fullname='B. Moran' initials='B.' surname='Moran'><organization/></author>
+<author fullname='H. Tschofenig' initials='H.' surname='Tschofenig'><organization/></author>
+<author fullname='D. Brown' initials='D.' surname='Brown'><organization/></author>
+<author fullname='M. Meriac' initials='M.' surname='Meriac'><organization/></author>
+<date month='April' year='2021'/>
+<abstract><t>Vulnerabilities in Internet of Things (IoT) devices have raised the need for a reliable and secure firmware update mechanism suitable for devices with resource constraints. Incorporating such an update mechanism is a fundamental requirement for fixing vulnerabilities, but it also enables other important capabilities such as updating configuration settings and adding new functionality.</t><t>In addition to the definition of terminology and an architecture, this document provides the motivation for the standardization of a manifest format as a transport-agnostic means for describing and protecting firmware updates.</t></abstract>
+</front>
+<seriesInfo name='RFC' value='9019'/>
+<seriesInfo name='DOI' value='10.17487/RFC9019'/>
+</reference>
+
+
+
+<reference anchor='RFC9203' target='https://www.rfc-editor.org/info/rfc9203'>
+<front>
+<title>The Object Security for Constrained RESTful Environments (OSCORE) Profile of the Authentication and Authorization for Constrained Environments (ACE) Framework</title>
+<author fullname='F. Palombini' initials='F.' surname='Palombini'><organization/></author>
+<author fullname='L. Seitz' initials='L.' surname='Seitz'><organization/></author>
+<author fullname='G. Selander' initials='G.' surname='Selander'><organization/></author>
+<author fullname='M. Gunnarsson' initials='M.' surname='Gunnarsson'><organization/></author>
+<date month='August' year='2022'/>
+<abstract><t>This document specifies a profile for the Authentication and Authorization for Constrained Environments (ACE) framework.  It utilizes Object Security for Constrained RESTful Environments (OSCORE) to provide communication security and proof-of-possession for a key owned by the client and bound to an OAuth 2.0 access token.</t></abstract>
+</front>
+<seriesInfo name='RFC' value='9203'/>
+<seriesInfo name='DOI' value='10.17487/RFC9203'/>
+</reference>
+
+
+
+<reference anchor='RFC8152' target='https://www.rfc-editor.org/info/rfc8152'>
+<front>
+<title>CBOR Object Signing and Encryption (COSE)</title>
+<author fullname='J. Schaad' initials='J.' surname='Schaad'><organization/></author>
+<date month='July' year='2017'/>
+<abstract><t>Concise Binary Object Representation (CBOR) is a data format designed for small code size and small message size.  There is a need for the ability to have basic security services defined for this data format. This document defines the CBOR Object Signing and Encryption (COSE) protocol.  This specification describes how to create and process signatures, message authentication codes, and encryption using CBOR for serialization.  This specification additionally describes how to represent cryptographic keys using CBOR.</t></abstract>
+</front>
+<seriesInfo name='RFC' value='8152'/>
+<seriesInfo name='DOI' value='10.17487/RFC8152'/>
+</reference>
+
+
+
+<reference anchor='RFC9000' target='https://www.rfc-editor.org/info/rfc9000'>
+<front>
+<title>QUIC: A UDP-Based Multiplexed and Secure Transport</title>
+<author fullname='J. Iyengar' initials='J.' role='editor' surname='Iyengar'><organization/></author>
+<author fullname='M. Thomson' initials='M.' role='editor' surname='Thomson'><organization/></author>
+<date month='May' year='2021'/>
+<abstract><t>This document defines the core of the QUIC transport protocol.  QUIC provides applications with flow-controlled streams for structured communication, low-latency connection establishment, and network path migration. QUIC includes security measures that ensure confidentiality, integrity, and availability in a range of deployment circumstances.  Accompanying documents describe the integration of TLS for key negotiation, loss detection, and an exemplary congestion control algorithm.</t></abstract>
+</front>
+<seriesInfo name='RFC' value='9000'/>
+<seriesInfo name='DOI' value='10.17487/RFC9000'/>
+</reference>
+
+
+
+<reference anchor='RFC9147' target='https://www.rfc-editor.org/info/rfc9147'>
+<front>
+<title>The Datagram Transport Layer Security (DTLS) Protocol Version 1.3</title>
+<author fullname='E. Rescorla' initials='E.' surname='Rescorla'><organization/></author>
+<author fullname='H. Tschofenig' initials='H.' surname='Tschofenig'><organization/></author>
+<author fullname='N. Modadugu' initials='N.' surname='Modadugu'><organization/></author>
+<date month='April' year='2022'/>
+<abstract><t>This document specifies version 1.3 of the Datagram Transport Layer Security (DTLS) protocol. DTLS 1.3 allows client/server applications to communicate over the Internet in a way that is designed to prevent eavesdropping, tampering, and message forgery.</t><t>The DTLS 1.3 protocol is based on the Transport Layer Security (TLS) 1.3 protocol and provides equivalent security guarantees with the exception of order protection / non-replayability.  Datagram semantics of the underlying transport are preserved by the DTLS protocol.</t><t>This document obsoletes RFC 6347.</t></abstract>
+</front>
+<seriesInfo name='RFC' value='9147'/>
+<seriesInfo name='DOI' value='10.17487/RFC9147'/>
+</reference>
+
+
 <reference anchor="FDO" target="https://fidoalliance.org/specs/FDO/FIDO-Device-Onboard-RD-v1.0-20201202.html">
   <front>
     <title>FIDO Device Onboarding</title>
@@ -439,18 +535,36 @@ Requirement: Devices (or their supply chains) must advertise their network acces
     <date year="n.d."/>
   </front>
 </reference>
-<reference anchor="LwM2M" target="http://openmobilealliance.org/release/LightweightM2M/V1_2-20201110-A/OMA-TS-LightweightM2M_Core-V1_2-20201110-A.pdf">
+<reference anchor="LwM2M" target="https://csrc.nist.gov/Projects/Software-Identification-SWID/guidelines">
   <front>
     <title>LwM2M Core Specification</title>
-    <author >
+    <author initials="." surname="NIST">
       <organization></organization>
     </author>
     <date year="n.d."/>
   </front>
 </reference>
-<reference anchor="SWID" target="https://csrc.nist.gov/Projects/Software-Identification-SWID/guidelines">
+<reference anchor="ENISA-Baseline" target="https://www.enisa.europa.eu/publications/baseline-security-recommendations-for-iot/">
   <front>
-    <title>Software Identification (SWID) Tagging</title>
+    <title>Baseline Security Recommendations for IoT in the context of Critical Information Infrastructures</title>
+    <author initials="." surname="ENISA">
+      <organization></organization>
+    </author>
+    <date year="n.d."/>
+  </front>
+</reference>
+<reference anchor="ETSI-Baseline" target="https://www.etsi.org/deliver/etsi_en/303600_303699/303645/02.01.01_60/en_303645v020101p.pdf">
+  <front>
+    <title>Cyber Security for Consumer Internet of Things: Baseline Requirements</title>
+    <author initials="." surname="ETSI">
+      <organization></organization>
+    </author>
+    <date year="n.d."/>
+  </front>
+</reference>
+<reference anchor="NIST-Baseline" target="https://www.nist.gov/publications/iot-device-cybersecurity-capability-core-baseline">
+  <front>
+    <title>IoT Device Cybersecurity Capability Core Baseline</title>
     <author initials="." surname="NIST">
       <organization></organization>
     </author>
@@ -463,51 +577,56 @@ Requirement: Devices (or their supply chains) must advertise their network acces
 <reference anchor='I-D.ietf-rats-eat'>
    <front>
       <title>The Entity Attestation Token (EAT)</title>
-      <author fullname='Laurence Lundblade'>
-	 <organization>Security Theory LLC</organization>
+      <author fullname='Laurence Lundblade' initials='L.' surname='Lundblade'>
+         <organization>Security Theory LLC</organization>
       </author>
-      <author fullname='Giridhar Mandyam'>
-	 <organization>Qualcomm Technologies Inc.</organization>
+      <author fullname='Giridhar Mandyam' initials='G.' surname='Mandyam'>
+         <organization>Qualcomm Technologies Inc.</organization>
       </author>
-      <author fullname='Jeremy O&#39;Donoghue'>
-	 <organization>Qualcomm Technologies Inc.</organization>
+      <author fullname='Jeremy O&#39;Donoghue' initials='J.' surname='O&#39;Donoghue'>
+         <organization>Qualcomm Technologies Inc.</organization>
       </author>
-      <date day='10' month='July' year='2022'/>
+      <author fullname='Carl Wallace' initials='C.' surname='Wallace'>
+         <organization>Red Hound Software, Inc.</organization>
+      </author>
+      <date day='9' month='October' year='2022'/>
       <abstract>
 	 <t>   An Entity Attestation Token (EAT) provides an attested claims set
    that describes state and characteristics of an entity, a device like
-   a phone, IoT device, network equipment or such.  This claims set is
-   used by a relying party, server or service to determine how much it
-   wishes to trust the entity.
+   a smartphone, IoT device, network equipment or such.  This claims set
+   is used by a relying party, server or service to determine how much
+   it wishes to trust the entity.
 
    An EAT is either a CBOR Web Token (CWT) or JSON Web Token (JWT) with
-   attestation-oriented claims.  To a large degree, all this document
-   does is extend CWT and JWT.
+   attestation-oriented claims.
 
 	 </t>
       </abstract>
    </front>
-   <seriesInfo name='Internet-Draft' value='draft-ietf-rats-eat-14'/>
-   <format target='https://www.ietf.org/archive/id/draft-ietf-rats-eat-14.txt' type='TXT'/>
+   <seriesInfo name='Internet-Draft' value='draft-ietf-rats-eat-16'/>
+   <format target='https://www.ietf.org/archive/id/draft-ietf-rats-eat-16.txt' type='TXT'/>
 </reference>
 
 
 <reference anchor='I-D.ietf-suit-manifest'>
    <front>
       <title>A Concise Binary Object Representation (CBOR)-based Serialization Format for the Software Updates for Internet of Things (SUIT) Manifest</title>
-      <author fullname='Brendan Moran'>
-	 <organization>Arm Limited</organization>
+      <author fullname='Brendan Moran' initials='B.' surname='Moran'>
+         <organization>Arm Limited</organization>
       </author>
-      <author fullname='Hannes Tschofenig'>
-	 <organization>Arm Limited</organization>
+      <author fullname='Hannes Tschofenig' initials='H.' surname='Tschofenig'>
+         <organization>Arm Limited</organization>
       </author>
-      <author fullname='Henk Birkholz'>
-	 <organization>Fraunhofer SIT</organization>
+      <author fullname='Henk Birkholz' initials='H.' surname='Birkholz'>
+         <organization>Fraunhofer SIT</organization>
       </author>
-      <author fullname='Koen Zandberg'>
-	 <organization>Inria</organization>
+      <author fullname='Koen Zandberg' initials='K.' surname='Zandberg'>
+         <organization>Inria</organization>
       </author>
-      <date day='11' month='July' year='2022'/>
+      <author fullname='Øyvind Rønningstad' initials='O.' surname='Rønningstad'>
+         <organization>Nordic Semiconductor</organization>
+      </author>
+      <date day='7' month='October' year='2022'/>
       <abstract>
 	 <t>   This specification describes the format of a manifest.  A manifest is
    a bundle of metadata about code/data obtained by a recipient (chiefly
@@ -521,27 +640,27 @@ Requirement: Devices (or their supply chains) must advertise their network acces
 	 </t>
       </abstract>
    </front>
-   <seriesInfo name='Internet-Draft' value='draft-ietf-suit-manifest-18'/>
-   <format target='https://www.ietf.org/archive/id/draft-ietf-suit-manifest-18.txt' type='TXT'/>
+   <seriesInfo name='Internet-Draft' value='draft-ietf-suit-manifest-20'/>
+   <format target='https://www.ietf.org/archive/id/draft-ietf-suit-manifest-20.txt' type='TXT'/>
 </reference>
 
 
 <reference anchor='I-D.ietf-sacm-coswid'>
    <front>
       <title>Concise Software Identification Tags</title>
-      <author fullname='Henk Birkholz'>
-	 <organization>Fraunhofer SIT</organization>
+      <author fullname='Henk Birkholz' initials='H.' surname='Birkholz'>
+         <organization>Fraunhofer SIT</organization>
       </author>
-      <author fullname='Jessica Fitzgerald-McKay'>
-	 <organization>National Security Agency</organization>
+      <author fullname='Jessica Fitzgerald-McKay' initials='J.' surname='Fitzgerald-McKay'>
+         <organization>National Security Agency</organization>
       </author>
-      <author fullname='Charles Schmidt'>
-	 <organization>The MITRE Corporation</organization>
+      <author fullname='Charles Schmidt' initials='C.' surname='Schmidt'>
+         <organization>The MITRE Corporation</organization>
       </author>
-      <author fullname='David Waltermire'>
-	 <organization>National Institute of Standards and Technology</organization>
+      <author fullname='David Waltermire' initials='D.' surname='Waltermire'>
+         <organization>National Institute of Standards and Technology</organization>
       </author>
-      <date day='7' month='March' year='2022'/>
+      <date day='20' month='July' year='2022'/>
       <abstract>
 	 <t>   ISO/IEC 19770-2:2015 Software Identification (SWID) tags provide an
    extensible XML-based structure to identify and describe individual
@@ -556,28 +675,28 @@ Requirement: Devices (or their supply chains) must advertise their network acces
 	 </t>
       </abstract>
    </front>
-   <seriesInfo name='Internet-Draft' value='draft-ietf-sacm-coswid-21'/>
-   <format target='https://www.ietf.org/archive/id/draft-ietf-sacm-coswid-21.txt' type='TXT'/>
+   <seriesInfo name='Internet-Draft' value='draft-ietf-sacm-coswid-22'/>
+   <format target='https://www.ietf.org/archive/id/draft-ietf-sacm-coswid-22.txt' type='TXT'/>
 </reference>
 
 
 <reference anchor='I-D.birkholz-rats-corim'>
    <front>
       <title>Concise Reference Integrity Manifest</title>
-      <author fullname='Henk Birkholz'>
-	 <organization>Fraunhofer SIT</organization>
+      <author fullname='Henk Birkholz' initials='H.' surname='Birkholz'>
+         <organization>Fraunhofer SIT</organization>
       </author>
-      <author fullname='Thomas Fossati'>
-	 <organization>arm</organization>
+      <author fullname='Thomas Fossati' initials='T.' surname='Fossati'>
+         <organization>arm</organization>
       </author>
-      <author fullname='Yogesh Deshpande'>
-	 <organization>arm</organization>
+      <author fullname='Yogesh Deshpande' initials='Y.' surname='Deshpande'>
+         <organization>arm</organization>
       </author>
-      <author fullname='Ned Smith'>
-	 <organization>Intel</organization>
+      <author fullname='Ned Smith' initials='N.' surname='Smith'>
+         <organization>Intel</organization>
       </author>
-      <author fullname='Wei Pan'>
-	 <organization>Huawei Technologies</organization>
+      <author fullname='Wei Pan' initials='W.' surname='Pan'>
+         <organization>Huawei Technologies</organization>
       </author>
       <date day='11' month='July' year='2022'/>
       <abstract>
@@ -608,17 +727,17 @@ Requirement: Devices (or their supply chains) must advertise their network acces
 <reference anchor='I-D.ietf-teep-architecture'>
    <front>
       <title>Trusted Execution Environment Provisioning (TEEP) Architecture</title>
-      <author fullname='Mingliang Pei'>
-	 <organization>Broadcom</organization>
+      <author fullname='Mingliang Pei' initials='M.' surname='Pei'>
+         <organization>Broadcom</organization>
       </author>
-      <author fullname='Hannes Tschofenig'>
-	 <organization>Arm Limited</organization>
+      <author fullname='Hannes Tschofenig' initials='H.' surname='Tschofenig'>
+         <organization>Arm Limited</organization>
       </author>
-      <author fullname='Dave Thaler'>
-	 <organization>Microsoft</organization>
+      <author fullname='Dave Thaler' initials='D.' surname='Thaler'>
+         <organization>Microsoft</organization>
       </author>
-      <author fullname='David Wheeler'>
-	 <organization>Amazon</organization>
+      <author fullname='Dave Wheeler' initials='D. M.' surname='Wheeler'>
+         <organization>Amazon</organization>
       </author>
       <date day='11' month='July' year='2022'/>
       <abstract>
@@ -637,25 +756,58 @@ Requirement: Devices (or their supply chains) must advertise their network acces
 </reference>
 
 
+<reference anchor='I-D.ietf-teep-protocol'>
+   <front>
+      <title>Trusted Execution Environment Provisioning (TEEP) Protocol</title>
+      <author fullname='Hannes Tschofenig' initials='H.' surname='Tschofenig'>
+         <organization>Arm Ltd.</organization>
+      </author>
+      <author fullname='Mingliang Pei' initials='M.' surname='Pei'>
+         <organization>Broadcom</organization>
+      </author>
+      <author fullname='Dave Wheeler' initials='D. M.' surname='Wheeler'>
+         <organization>Amazon</organization>
+      </author>
+      <author fullname='Dave Thaler' initials='D.' surname='Thaler'>
+         <organization>Microsoft</organization>
+      </author>
+      <author fullname='Akira Tsukamoto' initials='A.' surname='Tsukamoto'>
+         <organization>AIST</organization>
+      </author>
+      <date day='28' month='July' year='2022'/>
+      <abstract>
+	 <t>   This document specifies a protocol that installs, updates, and
+   deletes Trusted Components in a device with a Trusted Execution
+   Environment (TEE).  This specification defines an interoperable
+   protocol for managing the lifecycle of Trusted Components.
+
+	 </t>
+      </abstract>
+   </front>
+   <seriesInfo name='Internet-Draft' value='draft-ietf-teep-protocol-10'/>
+   <format target='https://www.ietf.org/archive/id/draft-ietf-teep-protocol-10.txt' type='TXT'/>
+</reference>
+
+
 <reference anchor='I-D.ietf-rats-architecture'>
    <front>
       <title>Remote Attestation Procedures Architecture</title>
-      <author fullname='Henk Birkholz'>
-	 <organization>Fraunhofer SIT</organization>
+      <author fullname='Henk Birkholz' initials='H.' surname='Birkholz'>
+         <organization>Fraunhofer SIT</organization>
       </author>
-      <author fullname='Dave Thaler'>
-	 <organization>Microsoft</organization>
+      <author fullname='Dave Thaler' initials='D.' surname='Thaler'>
+         <organization>Microsoft</organization>
       </author>
-      <author fullname='Michael Richardson'>
-	 <organization>Sandelman Software Works</organization>
+      <author fullname='Michael Richardson' initials='M.' surname='Richardson'>
+         <organization>Sandelman Software Works</organization>
       </author>
-      <author fullname='Ned Smith'>
-	 <organization>Intel Corporation</organization>
+      <author fullname='Ned Smith' initials='N.' surname='Smith'>
+         <organization>Intel Corporation</organization>
       </author>
-      <author fullname='Wei Pan'>
-	 <organization>Huawei Technologies</organization>
+      <author fullname='Wei Pan' initials='W.' surname='Pan'>
+         <organization>Huawei Technologies</organization>
       </author>
-      <date day='14' month='June' year='2022'/>
+      <date day='28' month='September' year='2022'/>
       <abstract>
 	 <t>   In network protocol exchanges it is often useful for one end of a
    communication to know whether the other end is in an intended
@@ -668,8 +820,75 @@ Requirement: Devices (or their supply chains) must advertise their network acces
 	 </t>
       </abstract>
    </front>
-   <seriesInfo name='Internet-Draft' value='draft-ietf-rats-architecture-18'/>
-   <format target='https://www.ietf.org/archive/id/draft-ietf-rats-architecture-18.txt' type='TXT'/>
+   <seriesInfo name='Internet-Draft' value='draft-ietf-rats-architecture-22'/>
+   <format target='https://www.ietf.org/archive/id/draft-ietf-rats-architecture-22.txt' type='TXT'/>
+</reference>
+
+
+<reference anchor='I-D.ietf-suit-report'>
+   <front>
+      <title>Secure Reporting of Update Status</title>
+      <author fullname='Brendan Moran' initials='B.' surname='Moran'>
+         <organization>Arm Limited</organization>
+      </author>
+      <author fullname='Henk Birkholz' initials='H.' surname='Birkholz'>
+         <organization>Fraunhofer SIT</organization>
+      </author>
+      <date day='11' month='July' year='2022'/>
+      <abstract>
+	 <t>   The Software Update for the Internet of Things (SUIT) manifest
+   provides a way for many different update and boot workflows to be
+   described by a common format.  However, this does not provide a
+   feedback mechanism for developers in the event that an update or boot
+   fails.
+
+   This specification describes a lightweight feedback mechanism that
+   allows a developer in possession of a manifest to reconstruct the
+   decisions made and actions performed by a manifest processor.
+
+	 </t>
+      </abstract>
+   </front>
+   <seriesInfo name='Internet-Draft' value='draft-ietf-suit-report-02'/>
+   <format target='https://www.ietf.org/archive/id/draft-ietf-suit-report-02.txt' type='TXT'/>
+</reference>
+
+
+<reference anchor='I-D.fossati-tls-attestation'>
+   <front>
+      <title>Using Attestation in Transport Layer Security (TLS) and Datagram Transport Layer Security (DTLS)</title>
+      <author fullname='Hannes Tschofenig' initials='H.' surname='Tschofenig'>
+         <organization>Arm Limited</organization>
+      </author>
+      <author fullname='Thomas Fossati' initials='T.' surname='Fossati'>
+         <organization>Arm Limited</organization>
+      </author>
+      <author fullname='Paul Howard' initials='P.' surname='Howard'>
+         <organization>Arm Limited</organization>
+      </author>
+      <author fullname='Ionuț Mihalcea' initials='I.' surname='Mihalcea'>
+         <organization>Arm Limited</organization>
+      </author>
+      <author fullname='Yogesh Deshpande' initials='Y.' surname='Deshpande'>
+         <organization>Arm Limited</organization>
+      </author>
+      <date day='26' month='August' year='2022'/>
+      <abstract>
+	 <t>   Various attestation technologies have been developed and formats have
+   been standardized.  Examples include the Entity Attestation Token
+   (EAT) and Trusted Platform Modules (TPMs).  Once attestation
+   information has been produced on a device it needs to be communicated
+   to a relying party.  This information exchange may happen at
+   different layers in the protocol stack.
+
+   This specification provides a generic way of passing attestation
+   information in the TLS handshake.
+
+	 </t>
+      </abstract>
+   </front>
+   <seriesInfo name='Internet-Draft' value='draft-fossati-tls-attestation-01'/>
+   <format target='https://www.ietf.org/archive/id/draft-fossati-tls-attestation-01.txt' type='TXT'/>
 </reference>
 
 
@@ -693,147 +912,172 @@ Requirement: Devices (or their supply chains) must advertise their network acces
   </back>
 
 <!-- ##markdown-source:
-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
-59tLHT8OBv8D2/XLQWpFAAA=
+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
+/B8OuWon0E8AAA==
 
 -->
 
