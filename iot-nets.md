@@ -93,12 +93,15 @@ normative:
 The IETF has developed security technologies that help to secure the Internet of Things even over constrained networks and when targetting constrained nodes. These technologies can be used independenly or can be composed into larger systems to mitigate a variety of threats. This documents illustrates an overview over these technologies and highlights their relationships. Ultimately, a threat model is presented as a basis to derive requirements that interconnect existing and emerging solution technologies.
 
 --- middle
-
 # Introduction
 
 This memo serves as an entry-point to detail which technologies are available for use in IoT networks and to enable IoT designers to discover technologies that may solve their problems. This draft addresses.
 
 Many baseline security requirements documents have been drafted by standards setting organisations, however these documents typically do not specify the technologies available to satisfy those requirements. They also do not express the next steps if an implementor wants to go above and beyond the baseline in order to differentiate their products and enable even better security. This memo defines the mapping from some IoT baseline security requirements definitions to ietf and related security technologies. It also highlights some gaps in those IoT baseline security requirements.
+
+#  Conventions and Terminology
+
+{::boilerplate bcp14}
 
 # Survey of baseline security requirements 
 
@@ -122,7 +125,7 @@ This is an architectural requirement.
 
 ### Hardware-Backed Secret Storage
 
-ENISA GP-TM-02: Use hardware that incorporates security features to strengthen the protection and integrity of the device – for example, specialised security chips / coprocessors that integrate security at the transistor level, embedded in the processor, providing, among other things, a trusted storage of device identity and authentication means, protection of keys at rest and in use, and preventing unprivileged from accessing to security sensitive code. Protection against local and physical attacks can be covered via functional security.
+ENISA GP-TM-02: Use hardware that incorporates security features to strengthen the protection and integrity of the device - for example, specialised security chips / coprocessors that integrate security at the transistor level, embedded in the processor, providing, among other things, a trusted storage of device identity and authentication means, protection of keys at rest and in use, and preventing unprivileged from accessing to security sensitive code. Protection against local and physical attacks can be covered via functional security.
 
 This is an architectural requirement.
 
@@ -186,7 +189,7 @@ The data protection requirements are largely procedural/architectural. While thi
 
 ENISA Data Protection requirements:
 
-* GP-TM-10: Personal data must be collected and processed fairly and lawfully, it should never be collected and processed without the data subject’s consent.
+* GP-TM-10: Personal data must be collected and processed fairly and lawfully, it should never be collected and processed without the data subject's consent.
 * GP-TM-11: Make sure that personal data is used for the specified purposes for which they were collected, and that any further processing of personal data is compatible and that the data subjects are well informed.
 * GP-TM-12: Minimise the data collected and retained.
 * GP-TM-13: IoT stakeholders must be compliant with the EU General Data Protection Regulation (GDPR).
@@ -227,7 +230,7 @@ ENISA applies the following requirements to Password-based authentication:
 * GP-TM-22: Ensure that default passwords and even default usernames are changed during the initial setup, and that weak, null or blank passwords are not allowed.
 * GP-TM-23: Authentication mechanisms must use strong passwords or personal identification numbers (PINs), and should consider using two-factor authentication (2FA) or multi-factor authentication (MFA) like Smartphones, Biometrics, etc., on top of certificates.
 * GP-TM-24: Authentication credentials shall be salted, hashed and/or encrypted.
-* GP-TM-25: Protect against ‘brute force’ and/or other abusive login attempts. This protection should also consider keys stored in devices.
+* GP-TM-25: Protect against 'brute force' and/or other abusive login attempts. This protection should also consider keys stored in devices.
 * GP-TM-26: Ensure password recovery or reset mechanism is robust and does not supply an attacker with information indicating a valid account. The same applies to key update and recovery mechanisms.
 
 As an alternative, implementors are encouraged to consider passwordless schemes, such as FIDO.
