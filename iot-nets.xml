@@ -17,7 +17,7 @@
 <?rfc docmapping="yes"?>
 <?rfc toc_levels="4"?>
 
-<rfc ipr="trust200902" docName="draft-moran-iot-nets-02" category="info">
+<rfc ipr="trust200902" docName="draft-ietf-iotops-requirement-map-00" category="info">
 
   <front>
     <title abbrev="IoT networking security guidelines">A summary of security-enabling technologies for IoT devices</title>
@@ -29,7 +29,7 @@
       </address>
     </author>
 
-    <date year="2022" month="October" day="21"/>
+    <date year="2023" month="March" day="13"/>
 
     <area>Security</area>
     <workgroup>IOTOPS</workgroup>
@@ -587,7 +587,7 @@ product is connected to, at all levels of the protocols.</t>
 
 
 
-<reference anchor='I-D.ietf-rats-eat'>
+<reference anchor='I-D.ietf-rats-eat' target='https://datatracker.ietf.org/doc/html/draft-ietf-rats-eat-19'>
    <front>
       <title>The Entity Attestation Token (EAT)</title>
       <author fullname='Laurence Lundblade' initials='L.' surname='Lundblade'>
@@ -602,7 +602,7 @@ product is connected to, at all levels of the protocols.</t>
       <author fullname='Carl Wallace' initials='C.' surname='Wallace'>
          <organization>Red Hound Software, Inc.</organization>
       </author>
-      <date day='9' month='October' year='2022'/>
+      <date day='19' month='December' year='2022'/>
       <abstract>
 	 <t>   An Entity Attestation Token (EAT) provides an attested claims set
    that describes state and characteristics of an entity, a device like
@@ -616,12 +616,12 @@ product is connected to, at all levels of the protocols.</t>
 	 </t>
       </abstract>
    </front>
-   <seriesInfo name='Internet-Draft' value='draft-ietf-rats-eat-16'/>
-   <format target='https://www.ietf.org/archive/id/draft-ietf-rats-eat-16.txt' type='TXT'/>
+   <seriesInfo name='Internet-Draft' value='draft-ietf-rats-eat-19'/>
+   
 </reference>
 
 
-<reference anchor='I-D.ietf-suit-manifest'>
+<reference anchor='I-D.ietf-suit-manifest' target='https://datatracker.ietf.org/doc/html/draft-ietf-suit-manifest-22'>
    <front>
       <title>A Concise Binary Object Representation (CBOR)-based Serialization Format for the Software Updates for Internet of Things (SUIT) Manifest</title>
       <author fullname='Brendan Moran' initials='B.' surname='Moran'>
@@ -639,7 +639,7 @@ product is connected to, at all levels of the protocols.</t>
       <author fullname='Øyvind Rønningstad' initials='O.' surname='Rønningstad'>
          <organization>Nordic Semiconductor</organization>
       </author>
-      <date day='7' month='October' year='2022'/>
+      <date day='27' month='February' year='2023'/>
       <abstract>
 	 <t>   This specification describes the format of a manifest.  A manifest is
    a bundle of metadata about code/data obtained by a recipient (chiefly
@@ -653,12 +653,12 @@ product is connected to, at all levels of the protocols.</t>
 	 </t>
       </abstract>
    </front>
-   <seriesInfo name='Internet-Draft' value='draft-ietf-suit-manifest-20'/>
-   <format target='https://www.ietf.org/archive/id/draft-ietf-suit-manifest-20.txt' type='TXT'/>
+   <seriesInfo name='Internet-Draft' value='draft-ietf-suit-manifest-22'/>
+   
 </reference>
 
 
-<reference anchor='I-D.ietf-sacm-coswid'>
+<reference anchor='I-D.ietf-sacm-coswid' target='https://datatracker.ietf.org/doc/html/draft-ietf-sacm-coswid-24'>
    <front>
       <title>Concise Software Identification Tags</title>
       <author fullname='Henk Birkholz' initials='H.' surname='Birkholz'>
@@ -673,7 +673,7 @@ product is connected to, at all levels of the protocols.</t>
       <author fullname='David Waltermire' initials='D.' surname='Waltermire'>
          <organization>National Institute of Standards and Technology</organization>
       </author>
-      <date day='20' month='July' year='2022'/>
+      <date day='24' month='February' year='2023'/>
       <abstract>
 	 <t>   ISO/IEC 19770-2:2015 Software Identification (SWID) tags provide an
    extensible XML-based structure to identify and describe individual
@@ -688,12 +688,12 @@ product is connected to, at all levels of the protocols.</t>
 	 </t>
       </abstract>
    </front>
-   <seriesInfo name='Internet-Draft' value='draft-ietf-sacm-coswid-22'/>
-   <format target='https://www.ietf.org/archive/id/draft-ietf-sacm-coswid-22.txt' type='TXT'/>
+   <seriesInfo name='Internet-Draft' value='draft-ietf-sacm-coswid-24'/>
+   
 </reference>
 
 
-<reference anchor='I-D.birkholz-rats-corim'>
+<reference anchor='I-D.birkholz-rats-corim' target='https://datatracker.ietf.org/doc/html/draft-birkholz-rats-corim-03'>
    <front>
       <title>Concise Reference Integrity Manifest</title>
       <author fullname='Henk Birkholz' initials='H.' surname='Birkholz'>
@@ -733,11 +733,11 @@ product is connected to, at all levels of the protocols.</t>
       </abstract>
    </front>
    <seriesInfo name='Internet-Draft' value='draft-birkholz-rats-corim-03'/>
-   <format target='https://www.ietf.org/archive/id/draft-birkholz-rats-corim-03.txt' type='TXT'/>
+   
 </reference>
 
 
-<reference anchor='I-D.ietf-teep-architecture'>
+<reference anchor='I-D.ietf-teep-architecture' target='https://datatracker.ietf.org/doc/html/draft-ietf-teep-architecture-19'>
    <front>
       <title>Trusted Execution Environment Provisioning (TEEP) Architecture</title>
       <author fullname='Mingliang Pei' initials='M.' surname='Pei'>
@@ -752,7 +752,7 @@ product is connected to, at all levels of the protocols.</t>
       <author fullname='Dave Wheeler' initials='D. M.' surname='Wheeler'>
          <organization>Amazon</organization>
       </author>
-      <date day='11' month='July' year='2022'/>
+      <date day='24' month='October' year='2022'/>
       <abstract>
 	 <t>   A Trusted Execution Environment (TEE) is an environment that enforces
    that any code within that environment cannot be tampered with, and
@@ -764,17 +764,16 @@ product is connected to, at all levels of the protocols.</t>
 	 </t>
       </abstract>
    </front>
-   <seriesInfo name='Internet-Draft' value='draft-ietf-teep-architecture-18'/>
-   <format target='https://www.ietf.org/archive/id/draft-ietf-teep-architecture-18.txt' type='TXT'/>
+   <seriesInfo name='Internet-Draft' value='draft-ietf-teep-architecture-19'/>
+   
 </reference>
 
 
-<reference anchor='I-D.ietf-teep-protocol'>
+<reference anchor='I-D.ietf-teep-protocol' target='https://datatracker.ietf.org/doc/html/draft-ietf-teep-protocol-12'>
    <front>
       <title>Trusted Execution Environment Provisioning (TEEP) Protocol</title>
       <author fullname='Hannes Tschofenig' initials='H.' surname='Tschofenig'>
-         <organization>Arm Ltd.</organization>
-      </author>
+         </author>
       <author fullname='Mingliang Pei' initials='M.' surname='Pei'>
          <organization>Broadcom</organization>
       </author>
@@ -785,9 +784,8 @@ product is connected to, at all levels of the protocols.</t>
          <organization>Microsoft</organization>
       </author>
       <author fullname='Akira Tsukamoto' initials='A.' surname='Tsukamoto'>
-         <organization>AIST</organization>
-      </author>
-      <date day='28' month='July' year='2022'/>
+         </author>
+      <date day='13' month='March' year='2023'/>
       <abstract>
 	 <t>   This document specifies a protocol that installs, updates, and
    deletes Trusted Components in a device with a Trusted Execution
@@ -797,14 +795,14 @@ product is connected to, at all levels of the protocols.</t>
 	 </t>
       </abstract>
    </front>
-   <seriesInfo name='Internet-Draft' value='draft-ietf-teep-protocol-10'/>
-   <format target='https://www.ietf.org/archive/id/draft-ietf-teep-protocol-10.txt' type='TXT'/>
+   <seriesInfo name='Internet-Draft' value='draft-ietf-teep-protocol-12'/>
+   
 </reference>
 
 
-<reference anchor='I-D.ietf-rats-architecture'>
+<reference anchor='I-D.ietf-rats-architecture' target='https://datatracker.ietf.org/doc/html/draft-ietf-rats-architecture-22'>
    <front>
-      <title>Remote Attestation Procedures Architecture</title>
+      <title>Remote ATtestation procedureS (RATS) Architecture</title>
       <author fullname='Henk Birkholz' initials='H.' surname='Birkholz'>
          <organization>Fraunhofer SIT</organization>
       </author>
@@ -822,23 +820,16 @@ product is connected to, at all levels of the protocols.</t>
       </author>
       <date day='28' month='September' year='2022'/>
       <abstract>
-	 <t>   In network protocol exchanges it is often useful for one end of a
-   communication to know whether the other end is in an intended
-   operating state.  This document provides an architectural overview of
-   the entities involved that make such tests possible through the
-   process of generating, conveying, and evaluating evidentiary claims.
-   An attempt is made to provide for a model that is neutral toward
-   processor architectures, the content of claims, and protocols.
-
+	 <t>In network protocol exchanges, it is often useful for one end of a communication to know whether the other end is in an intended operating state.  This document provides an architectural overview of the entities involved that make such tests possible through the process of generating, conveying, and evaluating evidentiary Claims.  It provides a model that is neutral toward processor architectures, the content of Claims, and protocols.
 	 </t>
       </abstract>
    </front>
    <seriesInfo name='Internet-Draft' value='draft-ietf-rats-architecture-22'/>
-   <format target='https://www.ietf.org/archive/id/draft-ietf-rats-architecture-22.txt' type='TXT'/>
+   
 </reference>
 
 
-<reference anchor='I-D.ietf-suit-report'>
+<reference anchor='I-D.ietf-suit-report' target='https://datatracker.ietf.org/doc/html/draft-ietf-suit-report-04'>
    <front>
       <title>Secure Reporting of Update Status</title>
       <author fullname='Brendan Moran' initials='B.' surname='Moran'>
@@ -847,7 +838,7 @@ product is connected to, at all levels of the protocols.</t>
       <author fullname='Henk Birkholz' initials='H.' surname='Birkholz'>
          <organization>Fraunhofer SIT</organization>
       </author>
-      <date day='11' month='July' year='2022'/>
+      <date day='24' month='October' year='2022'/>
       <abstract>
 	 <t>   The Software Update for the Internet of Things (SUIT) manifest
    provides a way for many different update and boot workflows to be
@@ -862,19 +853,18 @@ product is connected to, at all levels of the protocols.</t>
 	 </t>
       </abstract>
    </front>
-   <seriesInfo name='Internet-Draft' value='draft-ietf-suit-report-02'/>
-   <format target='https://www.ietf.org/archive/id/draft-ietf-suit-report-02.txt' type='TXT'/>
+   <seriesInfo name='Internet-Draft' value='draft-ietf-suit-report-04'/>
+   
 </reference>
 
 
-<reference anchor='I-D.fossati-tls-attestation'>
+<reference anchor='I-D.fossati-tls-attestation' target='https://datatracker.ietf.org/doc/html/draft-fossati-tls-attestation-03'>
    <front>
       <title>Using Attestation in Transport Layer Security (TLS) and Datagram Transport Layer Security (DTLS)</title>
       <author fullname='Hannes Tschofenig' initials='H.' surname='Tschofenig'>
-         <organization>Arm Limited</organization>
-      </author>
-      <author fullname='Thomas Fossati' initials='T.' surname='Fossati'>
-         <organization>Arm Limited</organization>
+         </author>
+      <author fullname='Yaron Sheffer' initials='Y.' surname='Sheffer'>
+         <organization>Intuit</organization>
       </author>
       <author fullname='Paul Howard' initials='P.' surname='Howard'>
          <organization>Arm Limited</organization>
@@ -885,23 +875,27 @@ product is connected to, at all levels of the protocols.</t>
       <author fullname='Yogesh Deshpande' initials='Y.' surname='Deshpande'>
          <organization>Arm Limited</organization>
       </author>
-      <date day='26' month='August' year='2022'/>
+      <date day='13' month='March' year='2023'/>
       <abstract>
-	 <t>   Various attestation technologies have been developed and formats have
-   been standardized.  Examples include the Entity Attestation Token
-   (EAT) and Trusted Platform Modules (TPMs).  Once attestation
-   information has been produced on a device it needs to be communicated
-   to a relying party.  This information exchange may happen at
-   different layers in the protocol stack.
+	 <t>   Attestation is the process by which an entity produces evidence about
+   itself that another party can use to evaluate the trustworthiness of
+   that entity.
 
-   This specification provides a generic way of passing attestation
-   information in the TLS handshake.
+   In use cases that require the use of remote attestation, such as
+   confidential computing or device onboarding, an attester has to
+   convey evidence or attestation results to a relying party.  This
+   information exchange may happen at different layers in the protocol
+   stack.
+
+   This specification provides a generic way of passing evidence and
+   attestation results in the TLS handshake.  Functionality-wise this is
+   accomplished with the help of key attestation.
 
 	 </t>
       </abstract>
    </front>
-   <seriesInfo name='Internet-Draft' value='draft-fossati-tls-attestation-01'/>
-   <format target='https://www.ietf.org/archive/id/draft-fossati-tls-attestation-01.txt' type='TXT'/>
+   <seriesInfo name='Internet-Draft' value='draft-fossati-tls-attestation-03'/>
+   
 </reference>
 
 
@@ -956,180 +950,180 @@ product is connected to, at all levels of the protocols.</t>
   </back>
 
 <!-- ##markdown-source:
-H4sIACnFUmMAA7Vc23YbR3Z9x1dU7LXGlIMGeJNsMS+hSMnDFVHkENRM8qTV
+H4sIADKQD2QAA7Vc23YbR3Z9x1dU7LXGlIMGeJNsMS+hSMnDFVHkENRM8qTV
 6C4AFTW6MX0hzfHSv+Rb8mXZ51LV1U3SsmcyeqCAvlSdOnUu+1wKSZJMWtcW
 9sScmqbbbtP6wVQr09isq137kNgyXRauXJvWZpuyKqq1s41ZVbW5qG5Nbu9c
-ZptJulzW9u6Er5W2va/qz/SOH8WsO5dbDINH8yor0y3my+t01Sbbqk7LxFVt
-gveaZP9wkqWtXVf1w4lx5aqaTNyuPjFt3TXt4f7+azyQ1jY9MQsde0KTreuq
-22H6q9ur68Xks33AxRzfy9bWGDc5p7kmk6ZNy/xTWlQl5n8AMTt3MjGmXmU2
-b9qHQq8a01ZZ9NGVuS1bf6Gp6ra2qyZ8f9gOvra1y8LDWbXd4t1w15XEhTC2
-/blNCte0CQZZVgUeS6rv/xV3wKVtutuBiREdnwp7Z+mh48kk7dpNVYP6BPfo
-nytx483MXBJD9Zow+k1tyzwtB3eqep2W7m9p66oSW19vzXu3da3N9b7dpq44
-MUt5dca7NHO2Xf37mu7MsK7JZFJW9RZD3Fni4s27sx9fHu77j69fv9SPP+wf
-havHx6/04+v9g9f+4+H+kX/g4OVheGDfv/b64PgH+vju/OqECVSR/ebdxfmV
-OWchNFflskrrHCz7hp8JHMK/AZPkrdOicGmZWXm4Teu1xa5t2nbXnMznK5dX
-qT4xA7Pmzc5mzRwEzOntROZMdM7k5jy5O5jtJ4f7h/sH+DPbtNsCA7+/vzy8
-HJLMl8xZVVuzwJhu5TLehcd0gIxqZ8tttXSFHRBTW1xo7Py9W2/ae0t/Mej8
-zwefDoWEg4P95HR+dXma3C6S4VOfaOpk9Ohsl6++wrQPF4vbp3mVNXU2KyHF
-s3V1N7+uq/+2WdvMF9WqvYeuJhekPWGdyeIvF+fzyCAY8xZjnyZvsCJWjgG7
-/NWg7+bGilLlPFxvi1xp2o2FxpWkVmTEzvA8Zi1gB1YiqVVJn+sUStplbVfb
-5muywrQ9ve77+/uZxbrTme3qakf/zXcdrKUstJkvlfYkWNN6SHsCssj2zYkJ
-t4uLZ3hw9rC0dc8AWvAZ3u62uOpNHK33dgPhJyvgeXZj/9q52rIF+upCMf+v
-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
-v//NAPgn6w9zeWGlXzoiOzyZ/B9YuObDslMAAA==
+ZptJulzW9u6Er5W2va/qz/SOH8WsO5dbDINH8yor0y3my+t01SbOtqvEVW21
+a5La/rVztd3ask226S7Z359kaWvXVf1wYly5qiYTt6tPTFt3TXu4v/96/3CS
+1jY9MQudaEIzr+uq24GWq9ur68Xks33AxRzfy9bWIC45p4knk6ZNy/xTWlQl
+iHkAZTt3MjGmXmU2b9qHQq8a01ZZ9NGVOejzF5qqbmu7asL3h+3ga1u7LDyc
+VVtaW7jrSmJJGNv+3CaFa9oEgyyrAo8l1ff/ijtgGdixA0cjOj4V9s7SQ8eT
+Sdq1m6oG9Qnu0T9X4sabmbms6rTUa8L1N7Ut87Qc3KnqdVq6v6Wtq0rIQb01
+793WtTbX+3abuuLELOXV2ZZendHG/fua7sywrslkUlb1FkPcWeLizbuzH18e
+7vuPr1+/1I8/7B+Fq8fHr/Tj6/2D1/7j4f6Rf+Dg5WF4YN+/9vrg+Af6+O78
+6oQJVPn95t3F+ZU5Z4k0V+WySuscLPuGnwkcwr8Bk+St06JwaZlZebhN67XF
+rm3adteczOcrl1epPjEDs+bNzmbNHATM6e1E5kx0zuTmPLk7mO0nh/uH+wf4
+M9u02wIDv7+/PLwcksyXzFlVW7PAmG7lMt6Fx3SAjGpny221dIUdEFNbXGjs
+/L1bb9p7S38x6PzPB58OhYSDg/3kdH51eZrcLpLhU59o6mT06GyXr77CtA8X
+i9uneZU1dTYrIcWzdXU3v66r/7ZZ28wX1aq9h64mF6Q9YZ3J4i8X5/PIOhjz
+FmOfJm+wIlaOAbv81aDv5saKUuU8XG+YXGnajYXGlaRWZNHO8DxmLWAHViKp
+VUmf6xRK2mVtV9vma7LCtD297vv7+5nFutOZ7epqR//Ndx1Mpyy0mS+V9iSY
+1npIewKyyBLOiQm3i4tneHD2sLR1zwBa8Bne7ra46k0crfd2A+EnK+B5dtNb
+168vFPP/yjrbxrHo0a7d2XpOFz7Zcn60f/Rqf/8T/ff6NX87fjmHAuxDHQ4+
+vdqf2/KTXL0jads/2KmskTw9s17aTVVqXnrwKWfpLoUy8EdSIP/619b2vOzS
+2oLoDjYP25KIr0uymIgkC0QkGamS32XYQ2MuknM2k0mdtk1i0/Ykvth0jtxc
+6Va2Gd1Jsy2Ga+5d7q8vXf15UxV/k6EwldsOXmmt3SVpnW1gtlmWH9/d1fCy
+WVWcPKLs2feYxNru4OT89VXVNGBK0hZ4r21BurgNXm91W+1cOty/n4pqCa27
+LtKW9A4PtfTQ0zuw5od3+izLmJPn59suT1awfdCfmjZiPpkkSWLSJdQ3zeDP
+b6HvF29v35lN2hAwsQUMZt5jkAGAaTdpaza22MGVyiOWDcZjDTIYqTQVxJys
+CU2G7c09ymkMQIS53+ARWUtLuGfwYJXbZobBbGOHNGRww0trugZPEaqAeYdx
+LIC/an8PBmJXyX3QWdAMNTBG09ptQ5TDS7s1IJJJzV1aY88YvLUbgKKWJ3UN
+oYeOld64ouiILuwayOY13Tl7L4trHxNIS9vAUxTkLYhn1tUG7kaUYuN2mOJj
+0ToYU1s8TEGEzGy2WHNhMPcORhVTYwHYk9RAOxzTndsahsNEgE+3xBH/wb4S
+0mjsz1BG4icRgqfqNYPKqujYeMe0zkQati7PCzv5lvaxrnKYdTxIooFpt3ZL
+W13f0cqYAZi2fkh2FSYVolqgGWymyzYjRkA60jvcBBa2bHKxaeRjIrwr7MIw
+jJitwuPGrUuYCx7eNZlw+pEgbtMHWtadVR5DVTHENuwgAVaT5jm42fBaL9Py
+wXhb04v4gJ/9vm9SjLy0kFEeCbuxxHwEfwFXGrwuUiswsJHdnZpNdW97wehH
+ax925Echp3kF6W5Nw8jlgfVnyLbAMlIyjNvwUxDoAaWsHA8mLZrKD2l/Jslh
+kQN/4cAh8TsI8Iq2zW13Bb+JfbhPmaTKrCuYArCXd2FpHyraDLwdmITdQhhA
+66GtWK1sTUCEdCfwnORFtlH3kFV/CfaQ1imTdU9YmnK7ItTCEylCN6u62mIz
+tyIBX9sjGsAJdAFdZHR5flay54zXzFy0wq1IOXnGdUpMKpXHX58fkvStIfhw
+R7wgImjyW1tvHU/2IFYVIZShGKox31x+hPOcyv/mwxV/vnn7p48XN2/P6fPi
+j6fv34cPE31i8cerj+/P+0/9m2dXl5dvP5zLy7hqBpcm31ye/hfuEFXfXF3f
+Xlx9OH3/jawwsmysn2Df0or9gOyIyZlAAbPaLdmAmjdn1//7PwfH5pdf/gVh
+xOHBwesvX/TLjwc/HOML2XGZrSI7LF+xuQ8TbK5NaxoFkg/rvHMtdmBKhqSB
+opTwJbUFO8HPRQcTw3b4K5s/mZzC7jjsG569J3harnk6sjb1b5IfCO0dsLMo
+NGkrPO1AjeGXvxdI/V1j/tnw2ez98ssQvn/58oLmB5rE9P8vyBUbNgDHX75g
+AoJ0mOB3Q0UMNkCeGAwbGE1nLkWrJ5ObR65qZ2v4i5IEbwM7StHNlDYks3lH
+H0mMdhUw5AO7cYnYeGNh4Ww+Ncuu9fYOxuNJ/R+5uG+/NX/UqfqUB65Gly+2
+265l43VTVcJOypZMJrwx5qfr5PYy2T84MW9BUgWrG4hn7ApFCQPUOgCnW2bq
+RR17zggxQiQikZwNyQFns88YFMRCJ80CJjtd2xExhyfmI8yVp8MDAYBcAE8G
+K2EjV0AXLGnkUFpY8HXL0AuySvDWsr9nDpIhWPM7DIispqpMwnJnf07JiUzF
+d6WFa2JjmxG0MXNsG29n01R1BE/WRFP/MK6y46vTEuCGfBInZqYALLA7uZge
+JVDGmqrasrqn24pcL2k9GTUIPuMoYjmRJAyjNSj9juNnmheLpCCHvkqYAp+U
+kuOOOIH3YLwbIhJca5UzhF5UPmvLph8kdOUOmAwAe4152YmlGdHLub+qXy/w
+XOMozQP25HZmriO+r6EPmKWoyFDw+JuHhq0GQgVIQtPjWtgqzHPnUrPqSn4d
+TwUf+zuEzfjUAtsQ2fI/mFPPmaAhb0ia35Z3rq5KVm3WC7g14jphDaI3DDES
+0aMTedxs6Q8WQHEP4sNm0+/vkiaw0QRLuyJjQ1CN95O9B77IZjeebBZHLFyU
+DpsHAdsGRhUpHESOlS4EP/F2EG8iPviH80pwjvcE9+kDxAGaBFDO+8j3Qko2
+hcgiMiQfcQBM4VGVD4d4Pdh5jOXRHV0qqpRQFMOs0YpnyiRQF/Nnh9HgTZcP
+GhcJKj8hNEciRI/XXVkqgU+xEotQ1vdQlpF1rv6SGe145jZsK8TocMYurs5N
+5v0XlKTpvCGHftgUaJ/gJXtsmpi2ydxeXz6zHKzD3qVFl7ayF3Y4ZM3zyXN0
+kwaaHM3YxN0ANMJ2nPZx88xfi2JpghjVPcVLqvPYBAnC6RM2H8vZpXXrFHk+
+vTTXciAcyNmzjuXOr47kTnjIKxIuwNa8GCBlslRWDdxQXdSsPpJ6dl+6nV7G
+Z0+snNgakLxo0S+/PMqYfPmiHuWMJKXXcJplqOMDfT0+MQusTeQrqx92LWnV
+bqOBC0dpxCrPJfLBLFUt/AJbpntwy1CwJFxi4WwZ7qUrCQF7pyK2NCyGlp8w
+rhv5JFUs0XY22BXAf1Wrid2mn+FX6IktPFLmqq4JdlNxAplNQopifJU+kXvW
+y68ZCv1MsqXEuPKuCu4j2xBy3MIYMG0ALxghY1wVzBWi/bVtpjI2GehM0I3X
+jYWMS+aWx4nKRMLULenqqsM+JOrOAbfBdNEnTW48M77sSvno+aTR7Lnwxe/Y
+jjJDmJm4ImRd9MtVownBd7CXOZyi1+fFx4tbID/JzBmBu1PNCyjiFqj8mIcB
+/yFKW1gbi/Qg38dyfRtHxaAE4CBzjPviPYOi/R0CxYaR0xR4Hwr/9i3bWY/3
+ba7aTcNFPl1Bimas6LVr4xOHZq8ZruhR0hFwfzwLsQmLTjl1g+Ea1Wfdj3eu
+3rJYfdwhBhkjw5cnFCG0Neam1RC4gP6mHtr0MvlYIkiCKo9vAG4iqES4yr9J
+XKSsYiOQZ2lpBFElxIAEyVufbvmayIpvwos6B6MxIjMYhqdUUvjMEudlw+z9
+uuQ84jHn1sJ0AVyqeEzNM2vvmOUz8xeOOInBPUMpNUHxgcgJy89UpGFM3CC3
+/IwAjKZkrrNQxDHDjW0QotlSHN671BUgfiQQrxC3SGomVbaLc8SWlEIoeRcN
+Ie7Bl88lBeeSGwjsYKuZ9lBoWbP7I0dQZZnsbq3Jpm4Hx5HboZdoOobGkAjQ
+/peNK6yG7Y4eMt4YpdDFUn2Fa6ZqqDlzoxKgbk8roBx+ghMCO07LbINXLwOf
+Rrz4QcImz3oBsMGG46sm3gAdJAsbsV0BKWcs+dMwq4uZFrcUzfu8PHYtpTT7
+Z1vzrkv1p8rmVNqc16uMyrq0+TSiFDXJAVCyeUfj8CW6r+aT5VUpVRqLNOvJ
+opU3Zi8mdv4EoS8kAji3q7Qr2j618AdEJe4uzR4iW0PXrz6Qh9LHR+z88QQc
+B7DY7ajsQ7x7HHU2m6orcsb/LIXs8HIZTkAAGYqu5JQ+iVCpFrqPcRzDtn6g
+3DXjkeLoJziUYeQzNbA9EjJSgNSbaEwasmKPw3LPqI+l+2tnzTU8Duf1Rqx4
+DS3zgJfDctqijLZ/qq48cWWOYDHvQJZSDUiqo/2z6DfnkMIo3pTkJIlm7BcH
++TGyOVw1AejrKZkPIkoygKLBPq1LyCCYMMUF5Lpil0nTypaLVfyaW2R8x9JM
+I03jJHYjoQ1knrK2ZMX8u5qajv0cTA8QEIV2YuSYLrpHxSwYJHpma62PTcap
+dr/TI1YOHuKcoYjCwf6JubZ1w9E5c9oHwNisAu+S9+E8gsAGmPvU1YXg8yK9
+Z5/Jhk8lvuSSwq+8Twiv6iSnwhM23ZJaCL5rOHpkWQjUHZzAPHrQ7JNyEbHY
+UFZFD9fVMEtMSoU1gXFa8aEixD1Z8UCbbDAPLAigZqFVarlmsno8JeFV2Cj2
+Uv718XJkz+5tUXBjU80xfljXIdblSrd1je3fHHKspmJVOXjrSPqvoLmf7aYq
+cuslSwuJlIFsBULToG8/mp9syYmCsTTc2HWnMGvvp/PrmxfRLMfsdmqGGjTd
+oG6itdl+Xu+EAFHrTJdDRUStKFa6ep5rqhmnqQFRDbvqmgjyzSJT1XXEoJrN
+nXJWi1qsFBH2OzM1FTOaC4XV4IZsSiCD3bogBI3rGfv56pHjlQJCVVu+04+k
+6SeBIQuEhRqX3lhwWgikaCxcr/vrj63U89bpIrYUqkYavbLIMuwMuF28UGR8
+uCCk3rVi0/BrduHpZTxrHgDQz7nGKWKlkIwLKAKPRTFcU3c7CfphneA7pnHm
+kTVT3mQQnqVicgl9lSQSO81Hu+Yz4+nyv7uaq+QhvZinFJVGUgqgeNlDIYnV
+ilWSu3RdVo3z0opLgB4wWfONTQuNw8n0k5ViYlaCQ6cUk3svTlOnrFJ4QlLH
+hDqj6X8gnMpbJGVWajLsWWISQ3tF5cfiEbigmosrO94tqitrzIugRJIu5Ja6
+0nem8DqyTY24LyuoVrrmFjxyLykppTA0otSH4tRjUFRdrll/jWFUpAW0hMTq
+vA/TBMADMNxSZYJ5PxBl4nR4T2K6IN9SqVoxLpKIZ+/XgpznfWsUbXD+2QOM
+keiPaetBV99t0ZKvIr1p+oxd5Jp7vRiuaVCSihXix7DxvdmXJJ534vOV8pLc
+Iju1lVt3KhicRyKLIChUtpgVnBMEqo2QDA2kriCnCVBQcgprtnd1e/pi2k+s
+z3DLQ02OyQdA4ycoAJbUKULIrWtbzcyHJJE2ZLANljoIVa6sREQksClnln0S
+gc30np2tZ4weKSVDCVibi8g3L/pRiKqQhCQoyG1bLKmC96NqB0JDyuSFVI2Y
+BhtuSA4L7+fNdOh5dZ1Qic+EwCiWIy7nbk1lXKaAlXAaMkeZrdXxiBN/6jrM
+iwNDOD/uevHR/dbsfzy92GjcWSMwiKwF8PYVNSQoA8jRuMyshjoXpefCm4eA
+Z3uRAszNaSz+LwyV3+4JwHtMIgIEMzIavZlROvXpmYPmcKWyyqkaAFhVJ152
+2Sta7qjIKDXoAyfehTnZaYnGfKdJE1AeDUPDBh8/M2yBTgeFLQleTgvyM8M7
+ZpFtoISaWbyV7qNL6j4axTSHB8FTsSYNR/G1NJI8udLouHudhEow3bqxL4xY
+TEUImn/kmt+g/enZMGj+1eqpj8vMTVfYsBC2CZryX1VUIiCBHLZQVeFdtevD
+hUaW6vBwaKkeRXGictQA42/RZlETuRh0EkYqFWJR3olzKwuX8dpuF6ngvU0R
+OZaIBcjtLIu0/BzPIxVxqXrEgPYQgPZ0XOEMPp0RJuU3AQCphNoPSALnMbkb
+tBuDhi31BUBpLj6QGWLVDn63cVT10DzwfZWs4ELJ1Q9p2Dt8d/qCJtmCKe65
+hy7pocIhOFls07rdbYAAoBpvXAUTBcRKKLfNZlOWo4qLT5FtiazD4fEjLkSm
+FNRTQwplt9KCIxYYt43ECKR5wWZGAwK0KdYPFdvvlnXXclkjs9/5d6VOmS7B
+EBh1akIouUy13YXewijuVjZydivwkovPVMSWTJeCj4iWV0EK/f55+MUAjxJX
+bZQqotxitfSpq+CCmg66If6D6yWYmQ1CFFyQz2f+keMwwPku59JC51OwDSS7
+17GKm56idGWgqhdBaOupFKgLal5h4DUK7Em2sQVVR1V8SaN41vj1FuQS1NxM
+NbxvDJ0rmAVTGOyS2gdoXOYwDUnNe5uCHde+dj8yewCifJZDrF6mmFE0jaFY
+ataOlFwBOHzYRZyupv62ZK2trEMTGacay7h8MiCvYPJCawE07+r99YuTIcJh
+XRZ4bH1DBZE4eFNMLKL2hkLrv8O69i2NOoV2bvqGDU4AaVUorkzKyi7TsiNd
+h6zWiIAJR5xzd9lO1qDFET34QtBUk4+hPaGpCt3EwRb9eOKbloLfjdKDVuER
+hco8gDVRnwZBq+ko+GP0xbifImWmTWu1YXyx+FJSLK3NNfCW8rLdzjxBoSVH
+CfLZW+eXQuJMIKwZFlue7yR5ro1kMnkqzCXz7hNv2v76TAGFKWtAkW8X7ssL
+3ANFg4SCX1RQDMm9699U3dI9PRV2aW1qtJ9Ac5xPcYNiNWMltdp0LTSSlGx0
+Bf/KsJkM23BlRlGGZI143VZ7ouVhwrJck4iRc+XvcptA1hVp3QuJr0MA0eM7
+nffjcjiToQB2xeoe9kq62GaDZR7tB8ud+j5BH0uG1ijO7An0Y5EDSCw4+RUa
+cEX3fJmMMjtlJro9TlEI6KCdsz+rReabo9b3QW911euxNGDEotCXIpadK7hg
+tiyq7LPPFo7ml3495x3OCo7a0QLg1hBL2GL1THql9I2238bdRxqtXvsERt/N
+J0yOO4t7sBfyHU938+ohA84G+wa8X4mHiQAJ4KQZa/nQ5+G5Lsq+s69msS2Z
+9RDyiNKv0nIigb80T4yL1LnVb2RW4htUdfP5OU/vRMZgU9EHHdw/RPBNDbaP
+R++4VyzQc/hs8I39luKdoU4oal2HF4MybLn08kSWVvvutjZ3HcOOPviMe+ke
+jQvegpsR2jo6GuNszb9Qg7HmfnjePiMUdhkqRbiiYENOHkbBwcfFmxeR+qq8
+ciEtpKgGa6Kmm3lul92aYxPRJZ8NaCrJI/Zr6dSIhDaUItimnqcNd3esJYM8
+Naw5ORVbA/lCNcbhtfqWxj6XoFpx1rfnBPGnVpix8A8lOWrqeXicgoqaTqKY
+5+g4slmQ0p32sVkYo4x9kfZLDAaPij7aEx0b8qi6riZvzgmuqPuUJUo6L3s4
+ugeMVHS5nhbiFoct7efaUlxCfXDcUBpaNknkZr0kWU8/LE/f6+nPdEhcI3FR
+lBxJizU8RLtRxKYPEEaXSEhrkX3ZMtSWZ+bPfRegIPC4CSxYWYnhe4ZTA0fc
+fSUBgfd9MgtkQ5x1rDWIC96QVQ76Ign6qLTCAL/oT7MOFlqOj05QEB/FHUfA
+xQsEDdRT10BWedmE+CPYoJh8kBLlnKQK8tkgEasFVtrq3pbrZEB4P/luS9Gg
+4P56X0lmFtKbjIHCnnpQlgqVqqk/WiPpnEErMB1FDPsyiH+CSGnqIhxcoux4
+iNH4FBzUJwLoUsrmO2eUM/bYe7DapxpSV12xckURcNbZ1eKtYuSDl4dfvkgv
+Nsm0jx3iZQwX/ASG8rrVdzaGFdbeTM/81t3SLd5wBXoifUnrr3OV9rnzeaPK
+bzTXsJ+pn+WXbx9NMASKR6+HnmGQ2O8Fw0WnPISLXGxIKiDUDfl3xDVe74dt
+7EF7+7Dy9v1Cee51ZYjqjntUFycZfIrG/uxPI8pBm5KPm/R+yvtnLJnwkZeT
+WDIo4cs9b254aiUcR2N7TXTuiaAcH79i4P29Oe+v0m8A6NU/fbw481f39/f1
+6tXi7Ormrb9+uH/Ug3eW2ud7R48PYm0V2x1b+P6En9Tz6JjYz5IM03KLyOTW
+NY2CG75QWwqUBAYxxPD5EurSZmsogR4dOpIgVQ6W1vxFIHuW7qT5TMw3qaxg
+5SGJXi9UgFVwn9XC2YgBgFHnEhtKCj6Q7+50aiVaO8OpNB6f22TXbs71uOPU
+5+DETsk787glLQYVHh6IysVBus+nM0m6sqgtO5xn4HLHROq7vRtecTJJ98uf
+IB3WrMEGcXLik2NlpDCKj3GOGu23tHRixcz8hx2dMG7EvTByGabvxkW8fviU
+zl9Dem9ObxcnT3WGcy/nky8/6st7dLJbNQNKNCdNAnbvWurf+c3U6QxBKc3c
+jJXxlAc+7V1HUqQPIM7bnXguTsT1ItOfhIX1uKPDW5Jg3flOLD1jw8Z1ACK/
+17ZyyAxPfxs1vsb95mRURSeD3Gw1gmPL0jPwmUPuvQ0ZJd2GWGCkTtqW4QW8
+z+2E3gU6CR21Q+3o/GXDSVdXxpvBLQdsUW8e+1rfkSaVMk0q/KbUlW9tzqS0
+AyMvCjgUg2j3Jb81Wuax9uKQzpVa+B8YhOtBL66mKqInOFxn1y2J54D8Nnai
+TSbSXdMbiCl5ecp/91kEfxRMYOsTDkjZ1TuhdlNX3Xozls2Ysj2Sj7k4oO1T
+WuObvZ/TDQ2EsyKtn7IudMCYpvnKRsWz+D0YFPww6/WT/XbNiQkHQf2GUe+G
+Av7QPS8hmwYx42jbHxDVkOPOPorDB+MDwt+QdS8o/0yy6/NlhQd7ChMMN6ey
+gVYfQ7mwHkxQRwZ2X/yEbwLpG3L0iMQAp/NxUnBSU6J+KG/qvej+LubpshA5
+3BANC7vuIx6zgMWTU/R+Llv4gzglH5+DGeWiMf2iQ+mrdfwLFD6vO+pHVtq3
+cSNYxWCpYC700czxj1LRkTbgp5PHtkeaU25tNmQaipAh0b41bROZDir8KcfH
+TMD9pmJ7HHXhHQPHnt5VLh8mYVtfU2nk7CdFV3wAjkv6ElyyTq/SraMmQdCT
+2Z4I8Q9DIu/79ltWWW4s21XKHM7K9CYgGrwn9mUPcDkr0WdRVPT5OIWgXEY6
+/icMoiEAEPvDcqk5P68WCeZ2BGElXn9fpXnyBmFlmcmptviYdDTSkedchPab
+jsrZG667+q4DW9dUb9T8gPqgtyEjRf14kEf2baO698s+J3ZvlwLTRC+4NdMH
+Av6wSO1d5FSgbJRCUzi2pPJahJqGnRYPIVRouobxrvb//ediMTVni5t3U7P4
+03tq4fL9JFQFfd5McwKbz2w9Ntjq48kogzsSB4zNMBEXxwaxkXDlrpP9qrqW
+PsL55gWf9v4dhmHA7eOQ+6fxuMqo3jOKctM2tIryYTIE+BUftsOCXsT0IHZu
+ORcqtu19tV7/Q9S9HApuIeOFgxSSoc+4hs6uutFue2mLY/EYur3pqMyiBVVt
+QpSMobR6TqVxJFT84hPFNXU5hLbMkMLU9tq+yWJGHOizRx7rcysGrZ49mSZu
+tUW2dvaOr3M70+AYzDAPeaaH+QuaQWUvwE1thxJU/hTMloOKepCGjnE1eo6L
+k1Tc6jbuqZk+O5VgNn7phk99PnOUTI6E6gFJc9kfJZSzkTk73X8AILx8FYtL
+zS3B9ejIYnQ2OLQ9bdI7V3X1VH9ShzzHlgJGTZ/Fv4TTx2ds4Zoxhnj5Ax8A
+Y0tOVQGIUIZtzJ2KGBCls/dN/IOVoXo2cno+dyv32Mz7rO+MWtz5t6l2CL1b
+bcUj1M8H56WCvXRpWXZkifRXPsJvS2hB36cBP3Cp0o1OtIe6v2/brEOFKP+3
+3nIWqWPt738zAP7J+sNcXljpl47IDk8m/weMDIOmv1MAAA==
 
 -->
 

@@ -4,12 +4,12 @@
 
 IOTOPS                                                          B. Moran
 Internet-Draft                                               Arm Limited
-Intended status: Informational                           21 October 2022
-Expires: 24 April 2023
+Intended status: Informational                             13 March 2023
+Expires: 14 September 2023
 
 
       A summary of security-enabling technologies for IoT devices
-                        draft-moran-iot-nets-02
+                  draft-ietf-iotops-requirement-map-00
 
 Abstract
 
@@ -37,11 +37,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 24 April 2023.
+   This Internet-Draft will expire on 14 September 2023.
 
 Copyright Notice
 
-   Copyright (c) 2022 IETF Trust and the persons identified as the
+   Copyright (c) 2023 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
 
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Moran                     Expires 24 April 2023                 [Page 1]
+Moran                   Expires 14 September 2023               [Page 1]
 
-Internet-Draft     IoT networking security guidelines       October 2022
+Internet-Draft     IoT networking security guidelines         March 2023
 
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Moran                     Expires 24 April 2023                 [Page 2]
+Moran                   Expires 14 September 2023               [Page 2]
 
-Internet-Draft     IoT networking security guidelines       October 2022
+Internet-Draft     IoT networking security guidelines         March 2023
 
 
      4.15. Monitoring and Auditing . . . . . . . . . . . . . . . . .  13
@@ -165,9 +165,9 @@ Internet-Draft     IoT networking security guidelines       October 2022
 
 
 
-Moran                     Expires 24 April 2023                 [Page 3]
+Moran                   Expires 14 September 2023               [Page 3]
 
-Internet-Draft     IoT networking security guidelines       October 2022
+Internet-Draft     IoT networking security guidelines         March 2023
 
 
 4.  Requirement Mapping
@@ -221,9 +221,9 @@ Internet-Draft     IoT networking security guidelines       October 2022
 
 
 
-Moran                     Expires 24 April 2023                 [Page 4]
+Moran                   Expires 14 September 2023               [Page 4]
 
-Internet-Draft     IoT networking security guidelines       October 2022
+Internet-Draft     IoT networking security guidelines         March 2023
 
 
    3.  Use Remote Attestation.  Remote attestation allows a device to
@@ -277,9 +277,9 @@ Internet-Draft     IoT networking security guidelines       October 2022
 
 
 
-Moran                     Expires 24 April 2023                 [Page 5]
+Moran                   Expires 14 September 2023               [Page 5]
 
-Internet-Draft     IoT networking security guidelines       October 2022
+Internet-Draft     IoT networking security guidelines         March 2023
 
 
    While there is no specificaiton for this, it is also required in
@@ -333,9 +333,9 @@ Internet-Draft     IoT networking security guidelines       October 2022
 
 
 
-Moran                     Expires 24 April 2023                 [Page 6]
+Moran                   Expires 14 September 2023               [Page 6]
 
-Internet-Draft     IoT networking security guidelines       October 2022
+Internet-Draft     IoT networking security guidelines         March 2023
 
 
    *  GP-TM-11: Make sure that personal data is used for the specified
@@ -389,9 +389,9 @@ Internet-Draft     IoT networking security guidelines       October 2022
 
 
 
-Moran                     Expires 24 April 2023                 [Page 7]
+Moran                   Expires 14 September 2023               [Page 7]
 
-Internet-Draft     IoT networking security guidelines       October 2022
+Internet-Draft     IoT networking security guidelines         March 2023
 
 
       not contain sensitive data (e.g. hardcoded credentials), that it
@@ -445,9 +445,9 @@ Internet-Draft     IoT networking security guidelines       October 2022
 
 
 
-Moran                     Expires 24 April 2023                 [Page 8]
+Moran                   Expires 14 September 2023               [Page 8]
 
-Internet-Draft     IoT networking security guidelines       October 2022
+Internet-Draft     IoT networking security guidelines         March 2023
 
 
    As an alternative, implementors are encouraged to consider
@@ -501,9 +501,9 @@ Internet-Draft     IoT networking security guidelines       October 2022
 
 
 
-Moran                     Expires 24 April 2023                 [Page 9]
+Moran                   Expires 14 September 2023               [Page 9]
 
-Internet-Draft     IoT networking security guidelines       October 2022
+Internet-Draft     IoT networking security guidelines         March 2023
 
 
    *  GP-TM-31: Measures for tamper protection and detection.  Detection
@@ -557,9 +557,9 @@ Internet-Draft     IoT networking security guidelines       October 2022
 
 
 
-Moran                     Expires 24 April 2023                [Page 10]
+Moran                   Expires 14 September 2023              [Page 10]
 
-Internet-Draft     IoT networking security guidelines       October 2022
+Internet-Draft     IoT networking security guidelines         March 2023
 
 
 4.11.2.  Secure Transport
@@ -613,9 +613,9 @@ Internet-Draft     IoT networking security guidelines       October 2022
 
 
 
-Moran                     Expires 24 April 2023                [Page 11]
+Moran                   Expires 14 September 2023              [Page 11]
 
-Internet-Draft     IoT networking security guidelines       October 2022
+Internet-Draft     IoT networking security guidelines         March 2023
 
 
 4.11.4.  Least Privilege Communication
@@ -669,9 +669,9 @@ Internet-Draft     IoT networking security guidelines       October 2022
 
 
 
-Moran                     Expires 24 April 2023                [Page 12]
+Moran                   Expires 14 September 2023              [Page 12]
 
-Internet-Draft     IoT networking security guidelines       October 2022
+Internet-Draft     IoT networking security guidelines         March 2023
 
 
 4.12.1.  Encrypted User Sessions
@@ -725,9 +725,9 @@ Internet-Draft     IoT networking security guidelines       October 2022
 
 
 
-Moran                     Expires 24 April 2023                [Page 13]
+Moran                   Expires 14 September 2023              [Page 13]
 
-Internet-Draft     IoT networking security guidelines       October 2022
+Internet-Draft     IoT networking security guidelines         March 2023
 
 
    [ENISA-Baseline]
@@ -751,79 +751,79 @@ Internet-Draft     IoT networking security guidelines       October 2022
               Birkholz, H., Fossati, T., Deshpande, Y., Smith, N., and
               W. Pan, "Concise Reference Integrity Manifest", Work in
               Progress, Internet-Draft, draft-birkholz-rats-corim-03, 11
-              July 2022, <https://www.ietf.org/archive/id/draft-
-              birkholz-rats-corim-03.txt>.
+              July 2022, <https://datatracker.ietf.org/doc/html/draft-
+              birkholz-rats-corim-03>.
 
    [I-D.fossati-tls-attestation]
-              Tschofenig, H., Fossati, T., Howard, P., Mihalcea, I., and
+              Tschofenig, H., Sheffer, Y., Howard, P., Mihalcea, I., and
               Y. Deshpande, "Using Attestation in Transport Layer
               Security (TLS) and Datagram Transport Layer Security
               (DTLS)", Work in Progress, Internet-Draft, draft-fossati-
-              tls-attestation-01, 26 August 2022,
-              <https://www.ietf.org/archive/id/draft-fossati-tls-
-              attestation-01.txt>.
+              tls-attestation-03, 13 March 2023,
+              <https://datatracker.ietf.org/doc/html/draft-fossati-tls-
+              attestation-03>.
 
    [I-D.ietf-rats-architecture]
               Birkholz, H., Thaler, D., Richardson, M., Smith, N., and
-              W. Pan, "Remote Attestation Procedures Architecture", Work
-              in Progress, Internet-Draft, draft-ietf-rats-architecture-
-              22, 28 September 2022, <https://www.ietf.org/archive/id/
-              draft-ietf-rats-architecture-22.txt>.
+              W. Pan, "Remote ATtestation procedureS (RATS)
+              Architecture", Work in Progress, Internet-Draft, draft-
+              ietf-rats-architecture-22, 28 September 2022,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-rats-
+              architecture-22>.
 
    [I-D.ietf-rats-eat]
               Lundblade, L., Mandyam, G., O'Donoghue, J., and C.
               Wallace, "The Entity Attestation Token (EAT)", Work in
-              Progress, Internet-Draft, draft-ietf-rats-eat-16, 9
-              October 2022, <https://www.ietf.org/archive/id/draft-ietf-
-              rats-eat-16.txt>.
+              Progress, Internet-Draft, draft-ietf-rats-eat-19, 19
+              December 2022, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-rats-eat-19>.
 
 
 
 
-
-Moran                     Expires 24 April 2023                [Page 14]
+Moran                   Expires 14 September 2023              [Page 14]
 
-Internet-Draft     IoT networking security guidelines       October 2022
+Internet-Draft     IoT networking security guidelines         March 2023
 
 
    [I-D.ietf-sacm-coswid]
               Birkholz, H., Fitzgerald-McKay, J., Schmidt, C., and D.
               Waltermire, "Concise Software Identification Tags", Work
-              in Progress, Internet-Draft, draft-ietf-sacm-coswid-22, 20
-              July 2022, <https://www.ietf.org/archive/id/draft-ietf-
-              sacm-coswid-22.txt>.
+              in Progress, Internet-Draft, draft-ietf-sacm-coswid-24, 24
+              February 2023, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-sacm-coswid-24>.
 
    [I-D.ietf-suit-manifest]
               Moran, B., Tschofenig, H., Birkholz, H., Zandberg, K., and
               O. Rønningstad, "A Concise Binary Object Representation
               (CBOR)-based Serialization Format for the Software Updates
               for Internet of Things (SUIT) Manifest", Work in Progress,
-              Internet-Draft, draft-ietf-suit-manifest-20, 7 October
-              2022, <https://www.ietf.org/archive/id/draft-ietf-suit-
-              manifest-20.txt>.
+              Internet-Draft, draft-ietf-suit-manifest-22, 27 February
+              2023, <https://datatracker.ietf.org/doc/html/draft-ietf-
+              suit-manifest-22>.
 
    [I-D.ietf-suit-report]
               Moran, B. and H. Birkholz, "Secure Reporting of Update
               Status", Work in Progress, Internet-Draft, draft-ietf-
-              suit-report-02, 11 July 2022,
-              <https://www.ietf.org/archive/id/draft-ietf-suit-report-
-              02.txt>.
+              suit-report-04, 24 October 2022,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-suit-
+              report-04>.
 
    [I-D.ietf-teep-architecture]
               Pei, M., Tschofenig, H., Thaler, D., and D. M. Wheeler,
               "Trusted Execution Environment Provisioning (TEEP)
               Architecture", Work in Progress, Internet-Draft, draft-
-              ietf-teep-architecture-18, 11 July 2022,
-              <https://www.ietf.org/archive/id/draft-ietf-teep-
-              architecture-18.txt>.
+              ietf-teep-architecture-19, 24 October 2022,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-teep-
+              architecture-19>.
 
    [I-D.ietf-teep-protocol]
               Tschofenig, H., Pei, M., Wheeler, D. M., Thaler, D., and
               A. Tsukamoto, "Trusted Execution Environment Provisioning
               (TEEP) Protocol", Work in Progress, Internet-Draft, draft-
-              ietf-teep-protocol-10, 28 July 2022,
-              <https://www.ietf.org/archive/id/draft-ietf-teep-protocol-
-              10.txt>.
+              ietf-teep-protocol-12, 13 March 2023,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-teep-
+              protocol-12>.
 
    [IoTopia]  "Global Platform Iotopia", n.d.,
               <https://globalplatform.org/iotopia/mud-file-service/>.
@@ -837,9 +837,9 @@ Internet-Draft     IoT networking security guidelines       October 2022
 
 
 
-Moran                     Expires 24 April 2023                [Page 15]
+Moran                   Expires 14 September 2023              [Page 15]
 
-Internet-Draft     IoT networking security guidelines       October 2022
+Internet-Draft     IoT networking security guidelines         March 2023
 
 
    [NIST-Baseline]
@@ -893,9 +893,9 @@ Internet-Draft     IoT networking security guidelines       October 2022
 
 
 
-Moran                     Expires 24 April 2023                [Page 16]
+Moran                   Expires 14 September 2023              [Page 16]
 
-Internet-Draft     IoT networking security guidelines       October 2022
+Internet-Draft     IoT networking security guidelines         March 2023
 
 
    [RFC9147]  Rescorla, E., Tschofenig, H., and N. Modadugu, "The
@@ -949,4 +949,4 @@ Author's Address
 
 
 
-Moran                     Expires 24 April 2023                [Page 17]
+Moran                   Expires 14 September 2023              [Page 17]
