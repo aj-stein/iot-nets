@@ -32,6 +32,7 @@ author:
 
 
 normative:
+  RFC4122:
   RFC8520:
   RFC8995:
   RFC7030:
@@ -108,7 +109,6 @@ Many baseline security requirements documents have been drafted by standards set
 At time of writing, there are IoT baseline security requirements provided by several organisations:
 
 * ENISA's Baseline Security Recommendations for IoT in the context of Critical Information Infrastructures ({{ENISA-Baseline}})
-* ENISA's Baseline Security Recommendations for IoT ({{}})
 * ETSI's Cyber Security for Consumer Internet of Things: Baseline Requirements {{ETSI-Baseline}}
 * NIST's IoT Device Cybersecurity Capability Core Baseline {{NIST-Baseline}}
 

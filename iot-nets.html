@@ -11,7 +11,7 @@
     " name="description">
 <meta content="xml2rfc 3.15.0" name="generator">
 <meta content="Internet-Draft" name="keyword">
-<meta content="draft-ietf-iotops-requirement-map-00" name="ietf.draft">
+<meta content="draft-moran-iot-nets-03" name="ietf.draft">
 <!-- Generator version information:
   xml2rfc 3.15.0
     Python 3.9.6
@@ -1202,7 +1202,7 @@ li > p:last-of-type {
 <dt class="label-workgroup">Workgroup:</dt>
 <dd class="workgroup">IOTOPS</dd>
 <dt class="label-internet-draft">Internet-Draft:</dt>
-<dd class="internet-draft">draft-ietf-iotops-requirement-map-00</dd>
+<dd class="internet-draft">draft-moran-iot-nets-03</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
 <time datetime="2023-03-13" class="published">13 March 2023</time>
@@ -1289,10 +1289,13 @@ li > p:last-of-type {
                 <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="auto internal xref">4.1</a>.  <a href="#name-hardware-security" class="internal xref">Hardware Security</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1.2.1">
-                    <p id="section-toc.1-1.4.2.1.2.1.1"><a href="#section-4.1.1" class="auto internal xref">4.1.1</a>.  <a href="#name-hardware-immutable-root-of-" class="internal xref">Hardware Immutable Root of Trust</a></p>
+                    <p id="section-toc.1-1.4.2.1.2.1.1"><a href="#section-4.1.1" class="auto internal xref">4.1.1</a>.  <a href="#name-identity" class="internal xref">Identity</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1.2.2">
-                    <p id="section-toc.1-1.4.2.1.2.2.1"><a href="#section-4.1.2" class="auto internal xref">4.1.2</a>.  <a href="#name-hardware-backed-secret-stor" class="internal xref">Hardware-Backed Secret Storage</a></p>
+                    <p id="section-toc.1-1.4.2.1.2.2.1"><a href="#section-4.1.2" class="auto internal xref">4.1.2</a>.  <a href="#name-hardware-immutable-root-of-" class="internal xref">Hardware Immutable Root of Trust</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1.2.3">
+                    <p id="section-toc.1-1.4.2.1.2.3.1"><a href="#section-4.1.3" class="auto internal xref">4.1.3</a>.  <a href="#name-hardware-backed-secret-stor" class="internal xref">Hardware-Backed Secret Storage</a></p>
 </li>
                 </ul>
 </li>
@@ -1309,10 +1312,13 @@ li > p:last-of-type {
                     <p id="section-toc.1-1.4.2.2.2.3.1"><a href="#section-4.2.3" class="auto internal xref">4.2.3</a>.  <a href="#name-secure-firmware-update" class="internal xref">Secure Firmware Update</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2.2.4">
-                    <p id="section-toc.1-1.4.2.2.2.4.1"><a href="#section-4.2.4" class="auto internal xref">4.2.4</a>.  <a href="#name-resilience-to-failure" class="internal xref">Resilience to Failure</a></p>
+                    <p id="section-toc.1-1.4.2.2.2.4.1"><a href="#section-4.2.4" class="auto internal xref">4.2.4</a>.  <a href="#name-configuration" class="internal xref">Configuration</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2.2.5">
-                    <p id="section-toc.1-1.4.2.2.2.5.1"><a href="#section-4.2.5" class="auto internal xref">4.2.5</a>.  <a href="#name-trust-anchor-management" class="internal xref">Trust Anchor Management</a></p>
+                    <p id="section-toc.1-1.4.2.2.2.5.1"><a href="#section-4.2.5" class="auto internal xref">4.2.5</a>.  <a href="#name-resilience-to-failure" class="internal xref">Resilience to Failure</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2.2.6">
+                    <p id="section-toc.1-1.4.2.2.2.6.1"><a href="#section-4.2.6" class="auto internal xref">4.2.6</a>.  <a href="#name-trust-anchor-management" class="internal xref">Trust Anchor Management</a></p>
 </li>
                 </ul>
 </li>
@@ -1458,28 +1464,39 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
       <h2 id="name-requirement-mapping">
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-requirement-mapping" class="section-name selfRef">Requirement Mapping</a>
       </h2>
-<p id="section-4-1">Requirements that pertain to hardware, procedure, and policy compliance are noted, but do not map to ietf and related technologies.<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-4-1">Requirements that pertain to hardware, procedure, and policy compliance are noted, but do not map to ietf and related technologies. NIST's requirements (<span>[<a href="#NIST-Baseline" class="cite xref">NIST-Baseline</a>]</span>) are very broad and already have mappings to ENISA baseline security recommendations.<a href="#section-4-1" class="pilcrow">¶</a></p>
 <div id="hardware-security">
 <section id="section-4.1">
         <h3 id="name-hardware-security">
 <a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-hardware-security" class="section-name selfRef">Hardware Security</a>
         </h3>
-<div id="hardware-immutable-root-of-trust">
+<div id="identity">
 <section id="section-4.1.1">
-          <h4 id="name-hardware-immutable-root-of-">
-<a href="#section-4.1.1" class="section-number selfRef">4.1.1. </a><a href="#name-hardware-immutable-root-of-" class="section-name selfRef">Hardware Immutable Root of Trust</a>
+          <h4 id="name-identity">
+<a href="#section-4.1.1" class="section-number selfRef">4.1.1. </a><a href="#name-identity" class="section-name selfRef">Identity</a>
           </h4>
-<p id="section-4.1.1-1">ENISA GP-TM-01: Employ a hardware-based immutable root of trust.<a href="#section-4.1.1-1" class="pilcrow">¶</a></p>
-<p id="section-4.1.1-2">This is an architectural requirement.<a href="#section-4.1.1-2" class="pilcrow">¶</a></p>
+<p id="section-4.1.1-1">ENISA GP-PS-10: Establish and maintain asset management procedures and configuration controls for key network and information systems.
+NIST Device Identification: The IoT device can be uniquely identified logically and physically.<a href="#section-4.1.1-1" class="pilcrow">¶</a></p>
+<p id="section-4.1.1-2">These requirements are architectural requirements, however <span>[<a href="#RFC4122" class="cite xref">RFC4122</a>]</span> can be used for identifiers.<a href="#section-4.1.1-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="hardware-immutable-root-of-trust">
+<section id="section-4.1.2">
+          <h4 id="name-hardware-immutable-root-of-">
+<a href="#section-4.1.2" class="section-number selfRef">4.1.2. </a><a href="#name-hardware-immutable-root-of-" class="section-name selfRef">Hardware Immutable Root of Trust</a>
+          </h4>
+<p id="section-4.1.2-1">ENISA GP-TM-01: Employ a hardware-based immutable root of trust.<a href="#section-4.1.2-1" class="pilcrow">¶</a></p>
+<p id="section-4.1.2-2">This is an architectural requirement.<a href="#section-4.1.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="hardware-backed-secret-storage">
-<section id="section-4.1.2">
+<section id="section-4.1.3">
           <h4 id="name-hardware-backed-secret-stor">
-<a href="#section-4.1.2" class="section-number selfRef">4.1.2. </a><a href="#name-hardware-backed-secret-stor" class="section-name selfRef">Hardware-Backed Secret Storage</a>
+<a href="#section-4.1.3" class="section-number selfRef">4.1.3. </a><a href="#name-hardware-backed-secret-stor" class="section-name selfRef">Hardware-Backed Secret Storage</a>
           </h4>
-<p id="section-4.1.2-1">ENISA GP-TM-02: Use hardware that incorporates security features to strengthen the protection and integrity of the device - for example, specialised security chips / coprocessors that integrate security at the transistor level, embedded in the processor, providing, among other things, a trusted storage of device identity and authentication means, protection of keys at rest and in use, and preventing unprivileged from accessing to security sensitive code. Protection against local and physical attacks can be covered via functional security.<a href="#section-4.1.2-1" class="pilcrow">¶</a></p>
-<p id="section-4.1.2-2">This is an architectural requirement.<a href="#section-4.1.2-2" class="pilcrow">¶</a></p>
+<p id="section-4.1.3-1">ENISA GP-TM-02: Use hardware that incorporates security features to strengthen the protection and integrity of the device - for example, specialized security chips / coprocessors that integrate security at the transistor level, embedded in the processor, providing, among other things, a trusted storage of device identity and authentication means, protection of keys at rest and in use, and preventing unprivileged from accessing to security sensitive code. Protection against local and physical attacks can be covered via functional security.<a href="#section-4.1.3-1" class="pilcrow">¶</a></p>
+<p id="section-4.1.3-2">NIST Data Protection: The ability to use demonstrably secure cryptographic modules for standardized cryptographic algorithms (e.g., encryption with authentication, cryptographic hashes, digital signature validation) to prevent the confidentiality and integrity of the device's stored and transmitted data from being compromised<a href="#section-4.1.3-2" class="pilcrow">¶</a></p>
+<p id="section-4.1.3-3">This is an architectural requirement.<a href="#section-4.1.3-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1523,25 +1540,61 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 <a href="#section-4.2.3" class="section-number selfRef">4.2.3. </a><a href="#name-secure-firmware-update" class="section-name selfRef">Secure Firmware Update</a>
           </h4>
 <p id="section-4.2.3-1">ENISA GP-TM-05: Control the installation of software in operating systems, to prevent unauthenticated software and files from being loaded onto it.<a href="#section-4.2.3-1" class="pilcrow">¶</a></p>
-<p id="section-4.2.3-2">Many fully-featured operating systems have dedicated means of implementing this requirement. The SUIT manifest (See <span>[<a href="#I-D.ietf-suit-manifest" class="cite xref">I-D.ietf-suit-manifest</a>]</span>) is recommended as a means of providing secure, authenticated software update. Where the software is deployed to a TEE, TEEP (See <span>[<a href="#I-D.ietf-teep-protocol" class="cite xref">I-D.ietf-teep-protocol</a>]</span>) is recommended for software update and management.<a href="#section-4.2.3-2" class="pilcrow">¶</a></p>
+<p id="section-4.2.3-2">NIST Software Update:<a href="#section-4.2.3-2" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-4.2.3-3">
+<li id="section-4.2.3-3.1">The ability to update the device's software through remote (e.g., network download) and/or local means (e.g., removable media)<a href="#section-4.2.3-3.1" class="pilcrow">¶</a>
+</li>
+            <li id="section-4.2.3-3.2">The ability to verify and authenticate any update before installing it<a href="#section-4.2.3-3.2" class="pilcrow">¶</a>
+</li>
+            <li id="section-4.2.3-3.3">The ability for authorized entities to roll back updated software to a previous version<a href="#section-4.2.3-3.3" class="pilcrow">¶</a>
+</li>
+            <li id="section-4.2.3-3.4">The ability to restrict updating actions to authorized entities only<a href="#section-4.2.3-3.4" class="pilcrow">¶</a>
+</li>
+            <li id="section-4.2.3-3.5">The ability to enable or disable updating<a href="#section-4.2.3-3.5" class="pilcrow">¶</a>
+</li>
+            <li id="section-4.2.3-3.6">Configuration settings for use with the Device Configuration capability including, but not limited to:<a href="#section-4.2.3-3.6" class="pilcrow">¶</a>
+</li>
+            <li id="section-4.2.3-3.7">The ability to configure any remote update mechanisms to be either automatically or manually initiated for update downloads and installations<a href="#section-4.2.3-3.7" class="pilcrow">¶</a>
+</li>
+            <li id="section-4.2.3-3.8">The ability to enable or disable notification when an update is available and specify who or what is to be notified<a href="#section-4.2.3-3.8" class="pilcrow">¶</a>
+</li>
+          </ol>
+<p id="section-4.2.3-4">Many fully-featured operating systems have dedicated means of implementing this requirement. The SUIT manifest (See <span>[<a href="#I-D.ietf-suit-manifest" class="cite xref">I-D.ietf-suit-manifest</a>]</span>) is recommended as a means of providing secure, authenticated software update. Where the software is deployed to a TEE, TEEP (See <span>[<a href="#I-D.ietf-teep-protocol" class="cite xref">I-D.ietf-teep-protocol</a>]</span>) is recommended for software update and management.<a href="#section-4.2.3-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="configuration">
+<section id="section-4.2.4">
+          <h4 id="name-configuration">
+<a href="#section-4.2.4" class="section-number selfRef">4.2.4. </a><a href="#name-configuration" class="section-name selfRef">Configuration</a>
+          </h4>
+<p id="section-4.2.4-1">NIST Device Configuration:<a href="#section-4.2.4-1" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-4.2.4-2">
+<li id="section-4.2.4-2.1">The ability to change the device's software configuration settings<a href="#section-4.2.4-2.1" class="pilcrow">¶</a>
+</li>
+            <li id="section-4.2.4-2.2">The ability to restrict configuration changes to authorized entities only<a href="#section-4.2.4-2.2" class="pilcrow">¶</a>
+</li>
+            <li id="section-4.2.4-2.3">The ability for authorized entities to restore the device to a secure configuration defined by an authorized entity<a href="#section-4.2.4-2.3" class="pilcrow">¶</a>
+</li>
+          </ol>
+<p id="section-4.2.4-3">Configuration can be delivered to a device either via a firmware update, such as in <span>[<a href="#I-D.ietf-suit-manifest" class="cite xref">I-D.ietf-suit-manifest</a>]</span>, or via a runtime configuration interface, such as <span>[<a href="#LwM2M" class="cite xref">LwM2M</a>]</span>.<a href="#section-4.2.4-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="resilience-to-failure">
-<section id="section-4.2.4">
+<section id="section-4.2.5">
           <h4 id="name-resilience-to-failure">
-<a href="#section-4.2.4" class="section-number selfRef">4.2.4. </a><a href="#name-resilience-to-failure" class="section-name selfRef">Resilience to Failure</a>
+<a href="#section-4.2.5" class="section-number selfRef">4.2.5. </a><a href="#name-resilience-to-failure" class="section-name selfRef">Resilience to Failure</a>
           </h4>
-<p id="section-4.2.4-1">ENISA GP-TM-06: Enable a system to return to a state that was known to be secure, after a security breach has occured or if an upgrade has not been successful.<a href="#section-4.2.4-1" class="pilcrow">¶</a></p>
-<p id="section-4.2.4-2">While there is no specificaiton for this, it is also required in <span>[<a href="#RFC9019" class="cite xref">RFC9019</a>]</span><a href="#section-4.2.4-2" class="pilcrow">¶</a></p>
+<p id="section-4.2.5-1">ENISA GP-TM-06: Enable a system to return to a state that was known to be secure, after a security breach has occured or if an upgrade has not been successful.<a href="#section-4.2.5-1" class="pilcrow">¶</a></p>
+<p id="section-4.2.5-2">While there is no specificaiton for this, it is also required in <span>[<a href="#RFC9019" class="cite xref">RFC9019</a>]</span><a href="#section-4.2.5-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="trust-anchor-management">
-<section id="section-4.2.5">
+<section id="section-4.2.6">
           <h4 id="name-trust-anchor-management">
-<a href="#section-4.2.5" class="section-number selfRef">4.2.5. </a><a href="#name-trust-anchor-management" class="section-name selfRef">Trust Anchor Management</a>
+<a href="#section-4.2.6" class="section-number selfRef">4.2.6. </a><a href="#name-trust-anchor-management" class="section-name selfRef">Trust Anchor Management</a>
           </h4>
-<p id="section-4.2.5-1">ENISA GP-TM-07: Use protocols and mechanisms able to represent and manage trust and trust relationships.<a href="#section-4.2.5-1" class="pilcrow">¶</a></p>
-<p id="section-4.2.5-2">EST (<span><a href="https://datatracker.ietf.org/doc/html/rfc7030">https://datatracker.ietf.org/doc/html/rfc7030</a></span>) and LwM2M Bootstrap (<span>[<a href="#LwM2M" class="cite xref">LwM2M</a>]</span>) provide a mechanism to replace trust anchors (manage trust/trust relationships).<a href="#section-4.2.5-2" class="pilcrow">¶</a></p>
+<p id="section-4.2.6-1">ENISA GP-TM-07: Use protocols and mechanisms able to represent and manage trust and trust relationships.<a href="#section-4.2.6-1" class="pilcrow">¶</a></p>
+<p id="section-4.2.6-2">EST (<span><a href="https://datatracker.ietf.org/doc/html/rfc7030">https://datatracker.ietf.org/doc/html/rfc7030</a></span>) and LwM2M Bootstrap (<span>[<a href="#LwM2M" class="cite xref">LwM2M</a>]</span>) provide a mechanism to replace trust anchors (manage trust/trust relationships).<a href="#section-4.2.6-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1557,7 +1610,16 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 <a href="#section-4.3.1" class="section-number selfRef">4.3.1. </a><a href="#name-security-on-by-default" class="section-name selfRef">Security ON by Default</a>
           </h4>
 <p id="section-4.3.1-1">ENISA GP-TM-08: Any applicable security features should be enabled by default, and any unused or insecure functionalities should be disabled by default.<a href="#section-4.3.1-1" class="pilcrow">¶</a></p>
-<p id="section-4.3.1-2">This is a procedural requirement, rather than a protocol or document requirement.<a href="#section-4.3.1-2" class="pilcrow">¶</a></p>
+<p id="section-4.3.1-2">NIST Logical Access to Interfaces:<a href="#section-4.3.1-2" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-4.3.1-3">
+<li id="section-4.3.1-3.1">The ability to logically or physically disable any local and network interfaces that are not necessary for the core functionality of the device<a href="#section-4.3.1-3.1" class="pilcrow">¶</a>
+</li>
+            <li id="section-4.3.1-3.2">The ability to logically restrict access to each network interface to only authorized entities (e.g., device authentication, user authentication)<a href="#section-4.3.1-3.2" class="pilcrow">¶</a>
+</li>
+            <li id="section-4.3.1-3.3">Configuration settings for use with the Device Configuration capability including, but not limited to, the ability to enable, disable, and adjust thresholds for any ability the device might have to lock or disable an account or to delay additional authentication attempts after too many failed authentication attempts<a href="#section-4.3.1-3.3" class="pilcrow">¶</a>
+</li>
+          </ol>
+<p id="section-4.3.1-4">These are procedural requirements, rather than a protocol or document requirement.<a href="#section-4.3.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="default-unique-passwords">
@@ -1590,6 +1652,15 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
           <li class="normal" id="section-4.4-3.5">GP-TM-14: Users of IoT products and services must be able to exercise their rights to information, access, erasure, rectification, data portability, restriction of processing, objection to processing, and their right not to be evaluated on the basis of automated processing.<a href="#section-4.4-3.5" class="pilcrow">¶</a>
 </li>
         </ul>
+<p id="section-4.4-4">NIST Data Protection:<a href="#section-4.4-4" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-4.4-5">
+<li id="section-4.4-5.1">The ability to use demonstrably secure cryptographic modules for standardized cryptographic algorithms (e.g., encryption with authentication, cryptographic hashes, digital signature validation) to prevent the confidentiality and integrity of the device's stored and transmitted data from being compromised<a href="#section-4.4-5.1" class="pilcrow">¶</a>
+</li>
+          <li id="section-4.4-5.2">The ability for authorized entities to render all data on the device inaccessible by all entities, whether previously authorized or not (e.g., through a wipe of internal storage, destruction of cryptographic keys for encrypted data)<a href="#section-4.4-5.2" class="pilcrow">¶</a>
+</li>
+          <li id="section-4.4-5.3">Configuration settings for use with the Device Configuration capability including, but not limited to, the ability for authorized entities to configure the cryptography use itself, such as choosing a key length<a href="#section-4.4-5.3" class="pilcrow">¶</a>
+</li>
+        </ol>
 </section>
 </div>
 <div id="system-safety-and-reliability">
@@ -1857,7 +1928,20 @@ product is connected to, at all levels of the protocols.<a href="#section-4.11.4
         </h3>
 <p id="section-4.14-1">Architectural / Procedural requirements:<a href="#section-4.14-1" class="pilcrow">¶</a></p>
 <p id="section-4.14-2">ENISA GP-TM-55: Implement a logging system that records events relating to user authentication, management of accounts and access rights, modifications to security rules, and the functioning of the system. Logs must be preserved on durable storage and retrievable via authenticated connections.<a href="#section-4.14-2" class="pilcrow">¶</a></p>
-<p id="section-4.14-3">Certain logs can be transported via RATS: See <span>[<a href="#I-D.ietf-rats-eat" class="cite xref">I-D.ietf-rats-eat</a>]</span>. Where assosciated with SUIT firmware updates, logs can be transported using SUIT Reports. See <span>[<a href="#I-D.ietf-suit-report" class="cite xref">I-D.ietf-suit-report</a>]</span>.<a href="#section-4.14-3" class="pilcrow">¶</a></p>
+<p id="section-4.14-3">NIST Cybersecurity State Awareness<a href="#section-4.14-3" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-4.14-4">
+<li id="section-4.14-4.1">The ability to report the device's cybersecurity state<a href="#section-4.14-4.1" class="pilcrow">¶</a>
+</li>
+          <li id="section-4.14-4.2">The ability to differentiate between when a device will likely operate as expected from when it may be in a degraded cybersecurity state<a href="#section-4.14-4.2" class="pilcrow">¶</a>
+</li>
+          <li id="section-4.14-4.3">The ability to restrict access to the state indicator so only authorized entities can view it<a href="#section-4.14-4.3" class="pilcrow">¶</a>
+</li>
+          <li id="section-4.14-4.4">The ability to prevent any entities (authorized or unauthorized) from editing the state except for those entities that are responsible for maintaining the device's state information<a href="#section-4.14-4.4" class="pilcrow">¶</a>
+</li>
+          <li id="section-4.14-4.5">The ability to make the state information available to a service on another device, such as an event/state log server<a href="#section-4.14-4.5" class="pilcrow">¶</a>
+</li>
+        </ol>
+<p id="section-4.14-5">Certain logs and indicators of cybersecurity state can be transported via RATS: See <span>[<a href="#I-D.ietf-rats-eat" class="cite xref">I-D.ietf-rats-eat</a>]</span>. Where associated with SUIT firmware updates, logs can be transported using SUIT Reports. See <span>[<a href="#I-D.ietf-suit-report" class="cite xref">I-D.ietf-suit-report</a>]</span>.<a href="#section-4.14-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="monitoring-and-auditing">
@@ -1952,6 +2036,10 @@ product is connected to, at all levels of the protocols.<a href="#section-4.11.4
 <dt id="RFC2119">[RFC2119]</dt>
       <dd>
 <span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2119">https://www.rfc-editor.org/info/rfc2119</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC4122">[RFC4122]</dt>
+      <dd>
+<span class="refAuthor">Leach, P.</span>, <span class="refAuthor">Mealling, M.</span>, and <span class="refAuthor">R. Salz</span>, <span class="refTitle">"A Universally Unique IDentifier (UUID) URN Namespace"</span>, <span class="seriesInfo">RFC 4122</span>, <span class="seriesInfo">DOI 10.17487/RFC4122</span>, <time datetime="2005-07" class="refDate">July 2005</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc4122">https://www.rfc-editor.org/info/rfc4122</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC7030">[RFC7030]</dt>
       <dd>

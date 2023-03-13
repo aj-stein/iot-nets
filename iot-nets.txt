@@ -9,7 +9,7 @@ Expires: 14 September 2023
 
 
       A summary of security-enabling technologies for IoT devices
-                  draft-ietf-iotops-requirement-map-00
+                        draft-moran-iot-nets-03
 
 Abstract
 
@@ -74,38 +74,38 @@ Table of Contents
    3.  Survey of baseline security requirements  . . . . . . . . . .   3
    4.  Requirement Mapping . . . . . . . . . . . . . . . . . . . . .   4
      4.1.  Hardware Security . . . . . . . . . . . . . . . . . . . .   4
-       4.1.1.  Hardware Immutable Root of Trust  . . . . . . . . . .   4
-       4.1.2.  Hardware-Backed Secret Storage  . . . . . . . . . . .   4
-     4.2.  Software Integrity & Authenticity . . . . . . . . . . . .   4
-       4.2.1.  Boot Environment Trustworthiness and Integrity  . . .   4
+       4.1.1.  Identity  . . . . . . . . . . . . . . . . . . . . . .   4
+       4.1.2.  Hardware Immutable Root of Trust  . . . . . . . . . .   4
+       4.1.3.  Hardware-Backed Secret Storage  . . . . . . . . . . .   4
+     4.2.  Software Integrity & Authenticity . . . . . . . . . . . .   5
+       4.2.1.  Boot Environment Trustworthiness and Integrity  . . .   5
        4.2.2.  Code Integrity and Authenticity . . . . . . . . . . .   5
-       4.2.3.  Secure Firmware Update  . . . . . . . . . . . . . . .   5
-       4.2.4.  Resilience to Failure . . . . . . . . . . . . . . . .   5
-       4.2.5.  Trust Anchor Management . . . . . . . . . . . . . . .   6
-     4.3.  Default Security & Privacy  . . . . . . . . . . . . . . .   6
-       4.3.1.  Security ON by Default  . . . . . . . . . . . . . . .   6
-       4.3.2.  Default Unique Passwords  . . . . . . . . . . . . . .   6
-     4.4.  Data Protection . . . . . . . . . . . . . . . . . . . . .   6
-     4.5.  System Safety and Reliability . . . . . . . . . . . . . .   7
-     4.6.  Secure Software / Firmware updates  . . . . . . . . . . .   7
-     4.7.  Authentication  . . . . . . . . . . . . . . . . . . . . .   8
-       4.7.1.  Align Authentication Schemes with Threat Models . . .   8
-       4.7.2.  Password Rules  . . . . . . . . . . . . . . . . . . .   8
-     4.8.  Authorisation . . . . . . . . . . . . . . . . . . . . . .   9
-       4.8.1.  Principle of Least Privilege  . . . . . . . . . . . .   9
-       4.8.2.  Software Isolation  . . . . . . . . . . . . . . . . .   9
-       4.8.3.  Access Control  . . . . . . . . . . . . . . . . . . .   9
-     4.9.  Environmental and Physical Security . . . . . . . . . . .   9
-     4.10. Cryptography  . . . . . . . . . . . . . . . . . . . . . .  10
-     4.11. Secure and Trusted Communications . . . . . . . . . . . .  10
-       4.11.1.  Data Security  . . . . . . . . . . . . . . . . . . .  10
-       4.11.2.  Secure Transport . . . . . . . . . . . . . . . . . .  11
-       4.11.3.  Data Authenticity  . . . . . . . . . . . . . . . . .  11
-       4.11.4.  Least Privilege Communication  . . . . . . . . . . .  12
-     4.12. Secure Interfaces and network services  . . . . . . . . .  12
-       4.12.1.  Encrypted User Sessions  . . . . . . . . . . . . . .  13
-     4.13. Secure input and output handling  . . . . . . . . . . . .  13
-     4.14. Logging . . . . . . . . . . . . . . . . . . . . . . . . .  13
+       4.2.3.  Secure Firmware Update  . . . . . . . . . . . . . . .   6
+       4.2.4.  Configuration . . . . . . . . . . . . . . . . . . . .   6
+       4.2.5.  Resilience to Failure . . . . . . . . . . . . . . . .   7
+       4.2.6.  Trust Anchor Management . . . . . . . . . . . . . . .   7
+     4.3.  Default Security & Privacy  . . . . . . . . . . . . . . .   7
+       4.3.1.  Security ON by Default  . . . . . . . . . . . . . . .   7
+       4.3.2.  Default Unique Passwords  . . . . . . . . . . . . . .   8
+     4.4.  Data Protection . . . . . . . . . . . . . . . . . . . . .   8
+     4.5.  System Safety and Reliability . . . . . . . . . . . . . .   9
+     4.6.  Secure Software / Firmware updates  . . . . . . . . . . .   9
+     4.7.  Authentication  . . . . . . . . . . . . . . . . . . . . .  10
+       4.7.1.  Align Authentication Schemes with Threat Models . . .  10
+       4.7.2.  Password Rules  . . . . . . . . . . . . . . . . . . .  10
+     4.8.  Authorisation . . . . . . . . . . . . . . . . . . . . . .  11
+       4.8.1.  Principle of Least Privilege  . . . . . . . . . . . .  11
+       4.8.2.  Software Isolation  . . . . . . . . . . . . . . . . .  11
+       4.8.3.  Access Control  . . . . . . . . . . . . . . . . . . .  11
+     4.9.  Environmental and Physical Security . . . . . . . . . . .  12
+     4.10. Cryptography  . . . . . . . . . . . . . . . . . . . . . .  12
+     4.11. Secure and Trusted Communications . . . . . . . . . . . .  12
+       4.11.1.  Data Security  . . . . . . . . . . . . . . . . . . .  12
+       4.11.2.  Secure Transport . . . . . . . . . . . . . . . . . .  13
+       4.11.3.  Data Authenticity  . . . . . . . . . . . . . . . . .  13
+       4.11.4.  Least Privilege Communication  . . . . . . . . . . .  14
+     4.12. Secure Interfaces and network services  . . . . . . . . .  14
+       4.12.1.  Encrypted User Sessions  . . . . . . . . . . . . . .  15
 
 
 
@@ -114,10 +114,12 @@ Moran                   Expires 14 September 2023               [Page 2]
 Internet-Draft     IoT networking security guidelines         March 2023
 
 
-     4.15. Monitoring and Auditing . . . . . . . . . . . . . . . . .  13
-   5.  Security Considerations . . . . . . . . . . . . . . . . . . .  13
-   6.  Normative References  . . . . . . . . . . . . . . . . . . . .  13
-   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .  17
+     4.13. Secure input and output handling  . . . . . . . . . . . .  15
+     4.14. Logging . . . . . . . . . . . . . . . . . . . . . . . . .  15
+     4.15. Monitoring and Auditing . . . . . . . . . . . . . . . . .  16
+   5.  Security Considerations . . . . . . . . . . . . . . . . . . .  16
+   6.  Normative References  . . . . . . . . . . . . . . . . . . . .  16
+   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .  19
 
 1.  Introduction
 
@@ -163,8 +165,6 @@ Internet-Draft     IoT networking security guidelines         March 2023
 
 
 
-
-
 Moran                   Expires 14 September 2023               [Page 3]
 
 Internet-Draft     IoT networking security guidelines         March 2023
@@ -174,21 +174,32 @@ Internet-Draft     IoT networking security guidelines         March 2023
 
    Requirements that pertain to hardware, procedure, and policy
    compliance are noted, but do not map to ietf and related
-   technologies.
+   technologies.  NIST's requirements ([NIST-Baseline]) are very broad
+   and already have mappings to ENISA baseline security recommendations.
 
 4.1.  Hardware Security
 
-4.1.1.  Hardware Immutable Root of Trust
+4.1.1.  Identity
+
+   ENISA GP-PS-10: Establish and maintain asset management procedures
+   and configuration controls for key network and information systems.
+   NIST Device Identification: The IoT device can be uniquely identified
+   logically and physically.
+
+   These requirements are architectural requirements, however [RFC4122]
+   can be used for identifiers.
+
+4.1.2.  Hardware Immutable Root of Trust
 
    ENISA GP-TM-01: Employ a hardware-based immutable root of trust.
 
    This is an architectural requirement.
 
-4.1.2.  Hardware-Backed Secret Storage
+4.1.3.  Hardware-Backed Secret Storage
 
    ENISA GP-TM-02: Use hardware that incorporates security features to
    strengthen the protection and integrity of the device - for example,
-   specialised security chips / coprocessors that integrate security at
+   specialized security chips / coprocessors that integrate security at
    the transistor level, embedded in the processor, providing, among
    other things, a trusted storage of device identity and authentication
    means, protection of keys at rest and in use, and preventing
@@ -196,7 +207,24 @@ Internet-Draft     IoT networking security guidelines         March 2023
    against local and physical attacks can be covered via functional
    security.
 
+   NIST Data Protection: The ability to use demonstrably secure
+   cryptographic modules for standardized cryptographic algorithms
+   (e.g., encryption with authentication, cryptographic hashes, digital
+   signature validation) to prevent the confidentiality and integrity of
+   the device's stored and transmitted data from being compromised
+
    This is an architectural requirement.
+
+
+
+
+
+
+
+Moran                   Expires 14 September 2023               [Page 4]
+
+Internet-Draft     IoT networking security guidelines         March 2023
+
 
 4.2.  Software Integrity & Authenticity
 
@@ -217,14 +245,6 @@ Internet-Draft     IoT networking security guidelines         March 2023
    2.  Record critical measurements of each step of boot in a TPM.
        Trust is established by evaluating the measurements recorded by
        the TPM.
-
-
-
-
-Moran                   Expires 14 September 2023               [Page 4]
-
-Internet-Draft     IoT networking security guidelines         March 2023
-
 
    3.  Use Remote Attestation.  Remote attestation allows a device to
        report to third parties the critical measurements it has recorded
@@ -254,26 +274,6 @@ Internet-Draft     IoT networking security guidelines         March 2023
    protect sensitive processes.  The TEEP protocol (see
    [I-D.ietf-teep-architecture]) is recommended for managing TEEs.
 
-4.2.3.  Secure Firmware Update
-
-   ENISA GP-TM-05: Control the installation of software in operating
-   systems, to prevent unauthenticated software and files from being
-   loaded onto it.
-
-   Many fully-featured operating systems have dedicated means of
-   implementing this requirement.  The SUIT manifest (See
-   [I-D.ietf-suit-manifest]) is recommended as a means of providing
-   secure, authenticated software update.  Where the software is
-   deployed to a TEE, TEEP (See [I-D.ietf-teep-protocol]) is recommended
-   for software update and management.
-
-4.2.4.  Resilience to Failure
-
-   ENISA GP-TM-06: Enable a system to return to a state that was known
-   to be secure, after a security breach has occured or if an upgrade
-   has not been successful.
-
-
 
 
 
@@ -282,10 +282,79 @@ Moran                   Expires 14 September 2023               [Page 5]
 Internet-Draft     IoT networking security guidelines         March 2023
 
 
+4.2.3.  Secure Firmware Update
+
+   ENISA GP-TM-05: Control the installation of software in operating
+   systems, to prevent unauthenticated software and files from being
+   loaded onto it.
+
+   NIST Software Update:
+
+   1.  The ability to update the device's software through remote (e.g.,
+       network download) and/or local means (e.g., removable media)
+
+   2.  The ability to verify and authenticate any update before
+       installing it
+
+   3.  The ability for authorized entities to roll back updated software
+       to a previous version
+
+   4.  The ability to restrict updating actions to authorized entities
+       only
+
+   5.  The ability to enable or disable updating
+
+   6.  Configuration settings for use with the Device Configuration
+       capability including, but not limited to:
+
+   7.  The ability to configure any remote update mechanisms to be
+       either automatically or manually initiated for update downloads
+       and installations
+
+   8.  The ability to enable or disable notification when an update is
+       available and specify who or what is to be notified
+
+   Many fully-featured operating systems have dedicated means of
+   implementing this requirement.  The SUIT manifest (See
+   [I-D.ietf-suit-manifest]) is recommended as a means of providing
+   secure, authenticated software update.  Where the software is
+   deployed to a TEE, TEEP (See [I-D.ietf-teep-protocol]) is recommended
+   for software update and management.
+
+4.2.4.  Configuration
+
+   NIST Device Configuration:
+
+   1.  The ability to change the device's software configuration
+       settings
+
+   2.  The ability to restrict configuration changes to authorized
+       entities only
+
+
+
+Moran                   Expires 14 September 2023               [Page 6]
+
+Internet-Draft     IoT networking security guidelines         March 2023
+
+
+   3.  The ability for authorized entities to restore the device to a
+       secure configuration defined by an authorized entity
+
+   Configuration can be delivered to a device either via a firmware
+   update, such as in [I-D.ietf-suit-manifest], or via a runtime
+   configuration interface, such as [LwM2M].
+
+4.2.5.  Resilience to Failure
+
+   ENISA GP-TM-06: Enable a system to return to a state that was known
+   to be secure, after a security breach has occured or if an upgrade
+   has not been successful.
+
    While there is no specificaiton for this, it is also required in
    [RFC9019]
 
-4.2.5.  Trust Anchor Management
+4.2.6.  Trust Anchor Management
 
    ENISA GP-TM-07: Use protocols and mechanisms able to represent and
    manage trust and trust relationships.
@@ -302,7 +371,37 @@ Internet-Draft     IoT networking security guidelines         March 2023
    default, and any unused or insecure functionalities should be
    disabled by default.
 
-   This is a procedural requirement, rather than a protocol or document
+   NIST Logical Access to Interfaces:
+
+   1.  The ability to logically or physically disable any local and
+       network interfaces that are not necessary for the core
+       functionality of the device
+
+   2.  The ability to logically restrict access to each network
+       interface to only authorized entities (e.g., device
+       authentication, user authentication)
+
+
+
+
+
+
+
+
+
+Moran                   Expires 14 September 2023               [Page 7]
+
+Internet-Draft     IoT networking security guidelines         March 2023
+
+
+   3.  Configuration settings for use with the Device Configuration
+       capability including, but not limited to, the ability to enable,
+       disable, and adjust thresholds for any ability the device might
+       have to lock or disable an account or to delay additional
+       authentication attempts after too many failed authentication
+       attempts
+
+   These are procedural requirements, rather than a protocol or document
    requirement.
 
 4.3.2.  Default Unique Passwords
@@ -327,17 +426,6 @@ Internet-Draft     IoT networking security guidelines         March 2023
       lawfully, it should never be collected and processed without the
       data subject's consent.
 
-
-
-
-
-
-
-Moran                   Expires 14 September 2023               [Page 6]
-
-Internet-Draft     IoT networking security guidelines         March 2023
-
-
    *  GP-TM-11: Make sure that personal data is used for the specified
       purposes for which they were collected, and that any further
       processing of personal data is compatible and that the data
@@ -353,6 +441,32 @@ Internet-Draft     IoT networking security guidelines         March 2023
       rectification, data portability, restriction of processing,
       objection to processing, and their right not to be evaluated on
       the basis of automated processing.
+
+
+
+
+Moran                   Expires 14 September 2023               [Page 8]
+
+Internet-Draft     IoT networking security guidelines         March 2023
+
+
+   NIST Data Protection:
+
+   1.  The ability to use demonstrably secure cryptographic modules for
+       standardized cryptographic algorithms (e.g., encryption with
+       authentication, cryptographic hashes, digital signature
+       validation) to prevent the confidentiality and integrity of the
+       device's stored and transmitted data from being compromised
+
+   2.  The ability for authorized entities to render all data on the
+       device inaccessible by all entities, whether previously
+       authorized or not (e.g., through a wipe of internal storage,
+       destruction of cryptographic keys for encrypted data)
+
+   3.  Configuration settings for use with the Device Configuration
+       capability including, but not limited to, the ability for
+       authorized entities to configure the cryptography use itself,
+       such as choosing a key length
 
 4.5.  System Safety and Reliability
 
@@ -382,18 +496,20 @@ Internet-Draft     IoT networking security guidelines         March 2023
 
    ENISA Software Update Requirements:
 
-   *  GP-TM-18: Ensure that the device software/firmware, its
-      configuration and its applications have the ability to update
-      Over-The-Air (OTA), that the update server is secure, that the
-      update file is transmitted via a secure connection, that it does
 
 
 
-Moran                   Expires 14 September 2023               [Page 7]
+
+
+Moran                   Expires 14 September 2023               [Page 9]
 
 Internet-Draft     IoT networking security guidelines         March 2023
 
 
+   *  GP-TM-18: Ensure that the device software/firmware, its
+      configuration and its applications have the ability to update
+      Over-The-Air (OTA), that the update server is secure, that the
+      update file is transmitted via a secure connection, that it does
       not contain sensitive data (e.g. hardcoded credentials), that it
       is signed by an authorised trust entity and encrypted using
       accepted encryption methods, and that the update package has its
@@ -437,18 +553,19 @@ Internet-Draft     IoT networking security guidelines         March 2023
       attempts.  This protection should also consider keys stored in
       devices.
 
+
+
+
+
+Moran                   Expires 14 September 2023              [Page 10]
+
+Internet-Draft     IoT networking security guidelines         March 2023
+
+
    *  GP-TM-26: Ensure password recovery or reset mechanism is robust
       and does not supply an attacker with information indicating a
       valid account.  The same applies to key update and recovery
       mechanisms.
-
-
-
-
-Moran                   Expires 14 September 2023               [Page 8]
-
-Internet-Draft     IoT networking security guidelines         March 2023
-
 
    As an alternative, implementors are encouraged to consider
    passwordless schemes, such as FIDO.
@@ -491,20 +608,21 @@ Internet-Draft     IoT networking security guidelines         March 2023
    requirements, but is not sufficient in itself to meet these
    requiremnents.
 
+
+
+
+
+
+Moran                   Expires 14 September 2023              [Page 11]
+
+Internet-Draft     IoT networking security guidelines         March 2023
+
+
 4.9.  Environmental and Physical Security
 
    ENISA defines the following physical security requirements.  These
    are hardware-architectural requirements and not covered by protocol
    and format specifications.
-
-
-
-
-
-Moran                   Expires 14 September 2023               [Page 9]
-
-Internet-Draft     IoT networking security guidelines         March 2023
-
 
    *  GP-TM-31: Measures for tamper protection and detection.  Detection
       and reaction to hardware tampering should not rely on network
@@ -548,19 +666,18 @@ Internet-Draft     IoT networking security guidelines         March 2023
    information in transit on the networks or stored in the IoT
    application or in the Cloud.
 
+
+
+
+Moran                   Expires 14 September 2023              [Page 12]
+
+Internet-Draft     IoT networking security guidelines         March 2023
+
+
    This Data Security requirement can be fulfilled using COSE [RFC8152]
    for ensuring the authenticity, integrity, and confidentiality of data
    either in transit or at rest.  Secure Transport (see Section 4.11.2)
    technologies can be used to protect data in transit.
-
-
-
-
-
-Moran                   Expires 14 September 2023              [Page 10]
-
-Internet-Draft     IoT networking security guidelines         March 2023
-
 
 4.11.2.  Secure Transport
 
@@ -604,19 +721,17 @@ Internet-Draft     IoT networking security guidelines         March 2023
    *  ATLS: Application-layer TLS for authenticating a connection that
       may traverse multiple secure transport connections.
 
-   *  Attested TLS: The use of attestation in session establishment in
-      TLS (See [I-D.fossati-tls-attestation]).
 
 
 
 
-
-
-
-Moran                   Expires 14 September 2023              [Page 11]
+Moran                   Expires 14 September 2023              [Page 13]
 
 Internet-Draft     IoT networking security guidelines         March 2023
 
+
+   *  Attested TLS: The use of attestation in session establishment in
+      TLS (See [I-D.fossati-tls-attestation]).
 
 4.11.4.  Least Privilege Communication
 
@@ -663,16 +778,15 @@ Internet-Draft     IoT networking security guidelines         March 2023
    *  GP-TM-51: Implement a DDoS-resistant and Load-Balancing
       infrastructure.
 
-   *  GP-TM-53: Avoid security issues when designing error messages.
 
 
 
-
-
-Moran                   Expires 14 September 2023              [Page 12]
+Moran                   Expires 14 September 2023              [Page 14]
 
 Internet-Draft     IoT networking security guidelines         March 2023
 
+
+   *  GP-TM-53: Avoid security issues when designing error messages.
 
 4.12.1.  Encrypted User Sessions
 
@@ -700,9 +814,38 @@ Internet-Draft     IoT networking security guidelines         March 2023
    system.  Logs must be preserved on durable storage and retrievable
    via authenticated connections.
 
-   Certain logs can be transported via RATS: See [I-D.ietf-rats-eat].
-   Where assosciated with SUIT firmware updates, logs can be transported
-   using SUIT Reports.  See [I-D.ietf-suit-report].
+   NIST Cybersecurity State Awareness
+
+   1.  The ability to report the device's cybersecurity state
+
+   2.  The ability to differentiate between when a device will likely
+       operate as expected from when it may be in a degraded
+       cybersecurity state
+
+   3.  The ability to restrict access to the state indicator so only
+       authorized entities can view it
+
+   4.  The ability to prevent any entities (authorized or unauthorized)
+       from editing the state except for those entities that are
+       responsible for maintaining the device's state information
+
+   5.  The ability to make the state information available to a service
+       on another device, such as an event/state log server
+
+
+
+
+
+
+Moran                   Expires 14 September 2023              [Page 15]
+
+Internet-Draft     IoT networking security guidelines         March 2023
+
+
+   Certain logs and indicators of cybersecurity state can be transported
+   via RATS: See [I-D.ietf-rats-eat].  Where associated with SUIT
+   firmware updates, logs can be transported using SUIT Reports.  See
+   [I-D.ietf-suit-report].
 
 4.15.  Monitoring and Auditing
 
@@ -721,14 +864,6 @@ Internet-Draft     IoT networking security guidelines         March 2023
    in the preceeding sections.
 
 6.  Normative References
-
-
-
-
-Moran                   Expires 14 September 2023              [Page 13]
-
-Internet-Draft     IoT networking security guidelines         March 2023
-
 
    [ENISA-Baseline]
               ENISA, ., "Baseline Security Recommendations for IoT in
@@ -754,6 +889,15 @@ Internet-Draft     IoT networking security guidelines         March 2023
               July 2022, <https://datatracker.ietf.org/doc/html/draft-
               birkholz-rats-corim-03>.
 
+
+
+
+
+Moran                   Expires 14 September 2023              [Page 16]
+
+Internet-Draft     IoT networking security guidelines         March 2023
+
+
    [I-D.fossati-tls-attestation]
               Tschofenig, H., Sheffer, Y., Howard, P., Mihalcea, I., and
               Y. Deshpande, "Using Attestation in Transport Layer
@@ -778,14 +922,6 @@ Internet-Draft     IoT networking security guidelines         March 2023
               December 2022, <https://datatracker.ietf.org/doc/html/
               draft-ietf-rats-eat-19>.
 
-
-
-
-Moran                   Expires 14 September 2023              [Page 14]
-
-Internet-Draft     IoT networking security guidelines         March 2023
-
-
    [I-D.ietf-sacm-coswid]
               Birkholz, H., Fitzgerald-McKay, J., Schmidt, C., and D.
               Waltermire, "Concise Software Identification Tags", Work
@@ -808,6 +944,15 @@ Internet-Draft     IoT networking security guidelines         March 2023
               suit-report-04, 24 October 2022,
               <https://datatracker.ietf.org/doc/html/draft-ietf-suit-
               report-04>.
+
+
+
+
+
+Moran                   Expires 14 September 2023              [Page 17]
+
+Internet-Draft     IoT networking security guidelines         March 2023
+
 
    [I-D.ietf-teep-architecture]
               Pei, M., Tschofenig, H., Thaler, D., and D. M. Wheeler,
@@ -832,16 +977,6 @@ Internet-Draft     IoT networking security guidelines         March 2023
               <https://csrc.nist.gov/Projects/Software-Identification-
               SWID/guidelines>.
 
-
-
-
-
-
-Moran                   Expires 14 September 2023              [Page 15]
-
-Internet-Draft     IoT networking security guidelines         March 2023
-
-
    [NIST-Baseline]
               NIST, ., "IoT Device Cybersecurity Capability Core
               Baseline", n.d., <https://www.nist.gov/publications/iot-
@@ -852,6 +987,11 @@ Internet-Draft     IoT networking security guidelines         March 2023
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/info/rfc2119>.
 
+   [RFC4122]  Leach, P., Mealling, M., and R. Salz, "A Universally
+              Unique IDentifier (UUID) URN Namespace", RFC 4122,
+              DOI 10.17487/RFC4122, July 2005,
+              <https://www.rfc-editor.org/info/rfc4122>.
+
    [RFC7030]  Pritikin, M., Ed., Yee, P., Ed., and D. Harkins, Ed.,
               "Enrollment over Secure Transport", RFC 7030,
               DOI 10.17487/RFC7030, October 2013,
@@ -860,6 +1000,15 @@ Internet-Draft     IoT networking security guidelines         March 2023
    [RFC8152]  Schaad, J., "CBOR Object Signing and Encryption (COSE)",
               RFC 8152, DOI 10.17487/RFC8152, July 2017,
               <https://www.rfc-editor.org/info/rfc8152>.
+
+
+
+
+
+Moran                   Expires 14 September 2023              [Page 18]
+
+Internet-Draft     IoT networking security guidelines         March 2023
+
 
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
@@ -889,15 +1038,6 @@ Internet-Draft     IoT networking security guidelines         March 2023
               RFC 9019, DOI 10.17487/RFC9019, April 2021,
               <https://www.rfc-editor.org/info/rfc9019>.
 
-
-
-
-
-Moran                   Expires 14 September 2023              [Page 16]
-
-Internet-Draft     IoT networking security guidelines         March 2023
-
-
    [RFC9147]  Rescorla, E., Tschofenig, H., and N. Modadugu, "The
               Datagram Transport Layer Security (DTLS) Protocol Version
               1.3", RFC 9147, DOI 10.17487/RFC9147, April 2022,
@@ -921,32 +1061,4 @@ Author's Address
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Moran                   Expires 14 September 2023              [Page 17]
+Moran                   Expires 14 September 2023              [Page 19]
