@@ -1,7 +1,7 @@
 ---
 title: A summary of security-enabling technologies for IoT devices
 abbrev: IoT networking security guidelines
-docname: draft-ietf-iotops-requirement-map-00
+docname: draft-moran-iot-nets-03
 category: info
 
 ipr: trust200902
@@ -108,14 +108,22 @@ Many baseline security requirements documents have been drafted by standards set
 At time of writing, there are IoT baseline security requirements provided by several organisations:
 
 * ENISA's Baseline Security Recommendations for IoT in the context of Critical Information Infrastructures ({{ENISA-Baseline}})
+* ENISA's Baseline Security Recommendations for IoT ({{}})
 * ETSI's Cyber Security for Consumer Internet of Things: Baseline Requirements {{ETSI-Baseline}}
 * NIST's IoT Device Cybersecurity Capability Core Baseline {{NIST-Baseline}}
 
 # Requirement Mapping
 
-Requirements that pertain to hardware, procedure, and policy compliance are noted, but do not map to ietf and related technologies.
+Requirements that pertain to hardware, procedure, and policy compliance are noted, but do not map to ietf and related technologies. NIST's requirements ({{NIST-Baseline}}) are very broad and already have mappings to ENISA baseline security recommendations.
 
 ## Hardware Security
+
+### Identity
+
+ENISA GP-PS-10: Establish and maintain asset management procedures and configuration controls for key network and information systems.
+NIST Device Identification: The IoT device can be uniquely identified logically and physically.
+
+These requirements are architectural requirements, however {{RFC4122}} can be used for identifiers.
 
 ### Hardware Immutable Root of Trust
 
@@ -125,7 +133,9 @@ This is an architectural requirement.
 
 ### Hardware-Backed Secret Storage
 
-ENISA GP-TM-02: Use hardware that incorporates security features to strengthen the protection and integrity of the device - for example, specialised security chips / coprocessors that integrate security at the transistor level, embedded in the processor, providing, among other things, a trusted storage of device identity and authentication means, protection of keys at rest and in use, and preventing unprivileged from accessing to security sensitive code. Protection against local and physical attacks can be covered via functional security.
+ENISA GP-TM-02: Use hardware that incorporates security features to strengthen the protection and integrity of the device - for example, specialized security chips / coprocessors that integrate security at the transistor level, embedded in the processor, providing, among other things, a trusted storage of device identity and authentication means, protection of keys at rest and in use, and preventing unprivileged from accessing to security sensitive code. Protection against local and physical attacks can be covered via functional security.
+
+NIST Data Protection: The ability to use demonstrably secure cryptographic modules for standardized cryptographic algorithms (e.g., encryption with authentication, cryptographic hashes, digital signature validation) to prevent the confidentiality and integrity of the device’s stored and transmitted data from being compromised
 
 This is an architectural requirement.
 
@@ -155,7 +165,29 @@ To satisfy the associated requirement of run-time protection and secure executio
 
 ENISA GP-TM-05: Control the installation of software in operating systems, to prevent unauthenticated software and files from being loaded onto it.
 
+NIST Software Update:
+
+1. The ability to update the device’s software through remote (e.g., network download) and/or local means (e.g., removable media)
+2. The ability to verify and authenticate any update before installing it
+3. The ability for authorized entities to roll back updated software to a previous version
+4. The ability to restrict updating actions to authorized entities only
+5. The ability to enable or disable updating
+6. Configuration settings for use with the Device Configuration capability including, but not limited to:
+
+  1. The ability to configure any remote update mechanisms to be either automatically or manually initiated for update downloads and installations
+  2. The ability to enable or disable notification when an update is available and specify who or what is to be notified
+
 Many fully-featured operating systems have dedicated means of implementing this requirement. The SUIT manifest (See {{I-D.ietf-suit-manifest}}) is recommended as a means of providing secure, authenticated software update. Where the software is deployed to a TEE, TEEP (See {{I-D.ietf-teep-protocol}}) is recommended for software update and management.
+
+### Configuration
+
+NIST Device Configuration:
+
+1. The ability to change the device’s software configuration settings
+2. The ability to restrict configuration changes to authorized entities only
+3. The ability for authorized entities to restore the device to a secure configuration defined by an authorized entity
+
+Configuration can be delivered to a device either via a firmware update, such as in {{I-D.ietf-suit-manifest}}, or via a runtime configuration interface, such as {{LwM2M}}.
 
 ### Resilience to Failure
 
@@ -175,7 +207,13 @@ EST ({{https://datatracker.ietf.org/doc/html/rfc7030}}) and LwM2M Bootstrap ({{L
 
 ENISA GP-TM-08: Any applicable security features should be enabled by default, and any unused or insecure functionalities should be disabled by default.
 
-This is a procedural requirement, rather than a protocol or document requirement.
+NIST Logical Access to Interfaces:
+
+1. The ability to logically or physically disable any local and network interfaces that are not necessary for the core functionality of the device
+2. The ability to logically restrict access to each network interface to only authorized entities (e.g., device authentication, user authentication)
+3. Configuration settings for use with the Device Configuration capability including, but not limited to, the ability to enable, disable, and adjust thresholds for any ability the device might have to lock or disable an account or to delay additional authentication attempts after too many failed authentication attempts
+
+These are procedural requirements, rather than a protocol or document requirement.
 
 ### Default Unique Passwords
 
@@ -194,6 +232,12 @@ ENISA Data Protection requirements:
 * GP-TM-12: Minimise the data collected and retained.
 * GP-TM-13: IoT stakeholders must be compliant with the EU General Data Protection Regulation (GDPR).
 * GP-TM-14: Users of IoT products and services must be able to exercise their rights to information, access, erasure, rectification, data portability, restriction of processing, objection to processing, and their right not to be evaluated on the basis of automated processing.
+
+NIST Data Protection:
+
+1. The ability to use demonstrably secure cryptographic modules for standardized cryptographic algorithms (e.g., encryption with authentication, cryptographic hashes, digital signature validation) to prevent the confidentiality and integrity of the device’s stored and transmitted data from being compromised
+2. The ability for authorized entities to render all data on the device inaccessible by all entities, whether previously authorized or not (e.g., through a wipe of internal storage, destruction of cryptographic keys for encrypted data)
+3. Configuration settings for use with the Device Configuration capability including, but not limited to, the ability for authorized entities to configure the cryptography use itself, such as choosing a key length
 
 ## System Safety and Reliability
 
@@ -355,7 +399,15 @@ Architectural / Procedural requirements:
 
 ENISA GP-TM-55: Implement a logging system that records events relating to user authentication, management of accounts and access rights, modifications to security rules, and the functioning of the system. Logs must be preserved on durable storage and retrievable via authenticated connections.
 
-Certain logs can be transported via RATS: See {{I-D.ietf-rats-eat}}. Where assosciated with SUIT firmware updates, logs can be transported using SUIT Reports. See {{I-D.ietf-suit-report}}.
+NIST Cybersecurity State Awareness
+
+1. The ability to report the device’s cybersecurity state
+2. The ability to differentiate between when a device will likely operate as expected from when it may be in a degraded cybersecurity state
+3. The ability to restrict access to the state indicator so only authorized entities can view it
+4. The ability to prevent any entities (authorized or unauthorized) from editing the state except for those entities that are responsible for maintaining the device’s state information
+5. The ability to make the state information available to a service on another device, such as an event/state log server
+
+Certain logs and indicators of cybersecurity state can be transported via RATS: See {{I-D.ietf-rats-eat}}. Where associated with SUIT firmware updates, logs can be transported using SUIT Reports. See {{I-D.ietf-suit-report}}. 
 
 ## Monitoring and Auditing
 
