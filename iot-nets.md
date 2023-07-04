@@ -1,7 +1,7 @@
 ---
 title: A summary of security-enabling technologies for IoT devices
-abbrev: IoT networking security guidelines
-docname: draft-moran-iot-nets-03
+abbrev: IoT networking security summary
+docname: draft-ietf-iotops-security-summary-00
 category: info
 
 ipr: trust200902

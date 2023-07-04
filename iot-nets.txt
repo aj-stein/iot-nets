@@ -4,12 +4,12 @@
 
 IOTOPS                                                          B. Moran
 Internet-Draft                                               Arm Limited
-Intended status: Informational                             13 March 2023
-Expires: 14 September 2023
+Intended status: Informational                               4 July 2023
+Expires: 5 January 2024
 
 
       A summary of security-enabling technologies for IoT devices
-                        draft-moran-iot-nets-03
+                 draft-ietf-iotops-security-summary-00
 
 Abstract
 
@@ -37,7 +37,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 14 September 2023.
+   This Internet-Draft will expire on 5 January 2024.
 
 Copyright Notice
 
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Moran                   Expires 14 September 2023               [Page 1]
+Moran                    Expires 5 January 2024                 [Page 1]
 
-Internet-Draft     IoT networking security guidelines         March 2023
+Internet-Draft       IoT networking security summary           July 2023
 
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Moran                   Expires 14 September 2023               [Page 2]
+Moran                    Expires 5 January 2024                 [Page 2]
 
-Internet-Draft     IoT networking security guidelines         March 2023
+Internet-Draft       IoT networking security summary           July 2023
 
 
      4.13. Secure input and output handling  . . . . . . . . . . . .  15
@@ -165,9 +165,9 @@ Internet-Draft     IoT networking security guidelines         March 2023
 
 
 
-Moran                   Expires 14 September 2023               [Page 3]
+Moran                    Expires 5 January 2024                 [Page 3]
 
-Internet-Draft     IoT networking security guidelines         March 2023
+Internet-Draft       IoT networking security summary           July 2023
 
 
 4.  Requirement Mapping
@@ -211,7 +211,7 @@ Internet-Draft     IoT networking security guidelines         March 2023
    cryptographic modules for standardized cryptographic algorithms
    (e.g., encryption with authentication, cryptographic hashes, digital
    signature validation) to prevent the confidentiality and integrity of
-   the device's stored and transmitted data from being compromised
+   the device’s stored and transmitted data from being compromised
 
    This is an architectural requirement.
 
@@ -221,9 +221,9 @@ Internet-Draft     IoT networking security guidelines         March 2023
 
 
 
-Moran                   Expires 14 September 2023               [Page 4]
+Moran                    Expires 5 January 2024                 [Page 4]
 
-Internet-Draft     IoT networking security guidelines         March 2023
+Internet-Draft       IoT networking security summary           July 2023
 
 
 4.2.  Software Integrity & Authenticity
@@ -277,9 +277,9 @@ Internet-Draft     IoT networking security guidelines         March 2023
 
 
 
-Moran                   Expires 14 September 2023               [Page 5]
+Moran                    Expires 5 January 2024                 [Page 5]
 
-Internet-Draft     IoT networking security guidelines         March 2023
+Internet-Draft       IoT networking security summary           July 2023
 
 
 4.2.3.  Secure Firmware Update
@@ -333,9 +333,9 @@ Internet-Draft     IoT networking security guidelines         March 2023
 
 
 
-Moran                   Expires 14 September 2023               [Page 6]
+Moran                    Expires 5 January 2024                 [Page 6]
 
-Internet-Draft     IoT networking security guidelines         March 2023
+Internet-Draft       IoT networking security summary           July 2023
 
 
    3.  The ability for authorized entities to restore the device to a
@@ -389,9 +389,9 @@ Internet-Draft     IoT networking security guidelines         March 2023
 
 
 
-Moran                   Expires 14 September 2023               [Page 7]
+Moran                    Expires 5 January 2024                 [Page 7]
 
-Internet-Draft     IoT networking security guidelines         March 2023
+Internet-Draft       IoT networking security summary           July 2023
 
 
    3.  Configuration settings for use with the Device Configuration
@@ -445,9 +445,9 @@ Internet-Draft     IoT networking security guidelines         March 2023
 
 
 
-Moran                   Expires 14 September 2023               [Page 8]
+Moran                    Expires 5 January 2024                 [Page 8]
 
-Internet-Draft     IoT networking security guidelines         March 2023
+Internet-Draft       IoT networking security summary           July 2023
 
 
    NIST Data Protection:
@@ -501,9 +501,9 @@ Internet-Draft     IoT networking security guidelines         March 2023
 
 
 
-Moran                   Expires 14 September 2023               [Page 9]
+Moran                    Expires 5 January 2024                 [Page 9]
 
-Internet-Draft     IoT networking security guidelines         March 2023
+Internet-Draft       IoT networking security summary           July 2023
 
 
    *  GP-TM-18: Ensure that the device software/firmware, its
@@ -557,9 +557,9 @@ Internet-Draft     IoT networking security guidelines         March 2023
 
 
 
-Moran                   Expires 14 September 2023              [Page 10]
+Moran                    Expires 5 January 2024                [Page 10]
 
-Internet-Draft     IoT networking security guidelines         March 2023
+Internet-Draft       IoT networking security summary           July 2023
 
 
    *  GP-TM-26: Ensure password recovery or reset mechanism is robust
@@ -613,9 +613,9 @@ Internet-Draft     IoT networking security guidelines         March 2023
 
 
 
-Moran                   Expires 14 September 2023              [Page 11]
+Moran                    Expires 5 January 2024                [Page 11]
 
-Internet-Draft     IoT networking security guidelines         March 2023
+Internet-Draft       IoT networking security summary           July 2023
 
 
 4.9.  Environmental and Physical Security
@@ -669,9 +669,9 @@ Internet-Draft     IoT networking security guidelines         March 2023
 
 
 
-Moran                   Expires 14 September 2023              [Page 12]
+Moran                    Expires 5 January 2024                [Page 12]
 
-Internet-Draft     IoT networking security guidelines         March 2023
+Internet-Draft       IoT networking security summary           July 2023
 
 
    This Data Security requirement can be fulfilled using COSE [RFC8152]
@@ -725,9 +725,9 @@ Internet-Draft     IoT networking security guidelines         March 2023
 
 
 
-Moran                   Expires 14 September 2023              [Page 13]
+Moran                    Expires 5 January 2024                [Page 13]
 
-Internet-Draft     IoT networking security guidelines         March 2023
+Internet-Draft       IoT networking security summary           July 2023
 
 
    *  Attested TLS: The use of attestation in session establishment in
@@ -781,9 +781,9 @@ Internet-Draft     IoT networking security guidelines         March 2023
 
 
 
-Moran                   Expires 14 September 2023              [Page 14]
+Moran                    Expires 5 January 2024                [Page 14]
 
-Internet-Draft     IoT networking security guidelines         March 2023
+Internet-Draft       IoT networking security summary           July 2023
 
 
    *  GP-TM-53: Avoid security issues when designing error messages.
@@ -837,9 +837,9 @@ Internet-Draft     IoT networking security guidelines         March 2023
 
 
 
-Moran                   Expires 14 September 2023              [Page 15]
+Moran                    Expires 5 January 2024                [Page 15]
 
-Internet-Draft     IoT networking security guidelines         March 2023
+Internet-Draft       IoT networking security summary           July 2023
 
 
    Certain logs and indicators of cybersecurity state can be transported
@@ -866,19 +866,19 @@ Internet-Draft     IoT networking security guidelines         March 2023
 6.  Normative References
 
    [ENISA-Baseline]
-              ENISA, ., "Baseline Security Recommendations for IoT in
-              the context of Critical Information Infrastructures",
-              n.d., <https://www.enisa.europa.eu/publications/baseline-
+              ENISA, "Baseline Security Recommendations for IoT in the
+              context of Critical Information Infrastructures", n.d.,
+              <https://www.enisa.europa.eu/publications/baseline-
               security-recommendations-for-iot/>.
 
    [ETSI-Baseline]
-              ETSI, ., "Cyber Security for Consumer Internet of Things:
+              ETSI, "Cyber Security for Consumer Internet of Things:
               Baseline Requirements", n.d.,
               <https://www.etsi.org/deliver/
               etsi_en/303600_303699/303645/02.01.01_60/
               en_303645v020101p.pdf>.
 
-   [FDO]      FIDO Alliance, ., "FIDO Device Onboarding", n.d.,
+   [FDO]      FIDO Alliance, "FIDO Device Onboarding", n.d.,
               <https://fidoalliance.org/specs/FDO/FIDO-Device-Onboard-
               RD-v1.0-20201202.html>.
 
@@ -893,9 +893,9 @@ Internet-Draft     IoT networking security guidelines         March 2023
 
 
 
-Moran                   Expires 14 September 2023              [Page 16]
+Moran                    Expires 5 January 2024                [Page 16]
 
-Internet-Draft     IoT networking security guidelines         March 2023
+Internet-Draft       IoT networking security summary           July 2023
 
 
    [I-D.fossati-tls-attestation]
@@ -918,9 +918,9 @@ Internet-Draft     IoT networking security guidelines         March 2023
    [I-D.ietf-rats-eat]
               Lundblade, L., Mandyam, G., O'Donoghue, J., and C.
               Wallace, "The Entity Attestation Token (EAT)", Work in
-              Progress, Internet-Draft, draft-ietf-rats-eat-19, 19
-              December 2022, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-rats-eat-19>.
+              Progress, Internet-Draft, draft-ietf-rats-eat-21, 30 June
+              2023, <https://datatracker.ietf.org/doc/html/draft-ietf-
+              rats-eat-21>.
 
    [I-D.ietf-sacm-coswid]
               Birkholz, H., Fitzgerald-McKay, J., Schmidt, C., and D.
@@ -941,17 +941,17 @@ Internet-Draft     IoT networking security guidelines         March 2023
    [I-D.ietf-suit-report]
               Moran, B. and H. Birkholz, "Secure Reporting of Update
               Status", Work in Progress, Internet-Draft, draft-ietf-
-              suit-report-04, 24 October 2022,
+              suit-report-05, 13 March 2023,
               <https://datatracker.ietf.org/doc/html/draft-ietf-suit-
-              report-04>.
+              report-05>.
 
 
 
 
 
-Moran                   Expires 14 September 2023              [Page 17]
+Moran                    Expires 5 January 2024                [Page 17]
 
-Internet-Draft     IoT networking security guidelines         March 2023
+Internet-Draft       IoT networking security summary           July 2023
 
 
    [I-D.ietf-teep-architecture]
@@ -966,89 +966,89 @@ Internet-Draft     IoT networking security guidelines         March 2023
               Tschofenig, H., Pei, M., Wheeler, D. M., Thaler, D., and
               A. Tsukamoto, "Trusted Execution Environment Provisioning
               (TEEP) Protocol", Work in Progress, Internet-Draft, draft-
-              ietf-teep-protocol-12, 13 March 2023,
+              ietf-teep-protocol-15, 3 July 2023,
               <https://datatracker.ietf.org/doc/html/draft-ietf-teep-
-              protocol-12>.
+              protocol-15>.
 
    [IoTopia]  "Global Platform Iotopia", n.d.,
               <https://globalplatform.org/iotopia/mud-file-service/>.
 
-   [LwM2M]    NIST, ., "LwM2M Core Specification", n.d.,
+   [LwM2M]    NIST, "LwM2M Core Specification", n.d.,
               <https://csrc.nist.gov/Projects/Software-Identification-
               SWID/guidelines>.
 
    [NIST-Baseline]
-              NIST, ., "IoT Device Cybersecurity Capability Core
-              Baseline", n.d., <https://www.nist.gov/publications/iot-
-              device-cybersecurity-capability-core-baseline>.
+              NIST, "IoT Device Cybersecurity Capability Core Baseline",
+              n.d., <https://www.nist.gov/publications/iot-device-
+              cybersecurity-capability-core-baseline>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
-              <https://www.rfc-editor.org/info/rfc2119>.
+              <https://www.rfc-editor.org/rfc/rfc2119>.
 
    [RFC4122]  Leach, P., Mealling, M., and R. Salz, "A Universally
               Unique IDentifier (UUID) URN Namespace", RFC 4122,
               DOI 10.17487/RFC4122, July 2005,
-              <https://www.rfc-editor.org/info/rfc4122>.
+              <https://www.rfc-editor.org/rfc/rfc4122>.
 
    [RFC7030]  Pritikin, M., Ed., Yee, P., Ed., and D. Harkins, Ed.,
               "Enrollment over Secure Transport", RFC 7030,
               DOI 10.17487/RFC7030, October 2013,
-              <https://www.rfc-editor.org/info/rfc7030>.
+              <https://www.rfc-editor.org/rfc/rfc7030>.
 
    [RFC8152]  Schaad, J., "CBOR Object Signing and Encryption (COSE)",
               RFC 8152, DOI 10.17487/RFC8152, July 2017,
-              <https://www.rfc-editor.org/info/rfc8152>.
+              <https://www.rfc-editor.org/rfc/rfc8152>.
 
 
 
 
 
-Moran                   Expires 14 September 2023              [Page 18]
+Moran                    Expires 5 January 2024                [Page 18]
 
-Internet-Draft     IoT networking security guidelines         March 2023
+Internet-Draft       IoT networking security summary           July 2023
 
 
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
-              May 2017, <https://www.rfc-editor.org/info/rfc8174>.
+              May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
 
    [RFC8446]  Rescorla, E., "The Transport Layer Security (TLS) Protocol
               Version 1.3", RFC 8446, DOI 10.17487/RFC8446, August 2018,
-              <https://www.rfc-editor.org/info/rfc8446>.
+              <https://www.rfc-editor.org/rfc/rfc8446>.
 
    [RFC8520]  Lear, E., Droms, R., and D. Romascanu, "Manufacturer Usage
               Description Specification", RFC 8520,
               DOI 10.17487/RFC8520, March 2019,
-              <https://www.rfc-editor.org/info/rfc8520>.
+              <https://www.rfc-editor.org/rfc/rfc8520>.
 
    [RFC8995]  Pritikin, M., Richardson, M., Eckert, T., Behringer, M.,
               and K. Watsen, "Bootstrapping Remote Secure Key
               Infrastructure (BRSKI)", RFC 8995, DOI 10.17487/RFC8995,
-              May 2021, <https://www.rfc-editor.org/info/rfc8995>.
+              May 2021, <https://www.rfc-editor.org/rfc/rfc8995>.
 
    [RFC9000]  Iyengar, J., Ed. and M. Thomson, Ed., "QUIC: A UDP-Based
               Multiplexed and Secure Transport", RFC 9000,
               DOI 10.17487/RFC9000, May 2021,
-              <https://www.rfc-editor.org/info/rfc9000>.
+              <https://www.rfc-editor.org/rfc/rfc9000>.
 
    [RFC9019]  Moran, B., Tschofenig, H., Brown, D., and M. Meriac, "A
               Firmware Update Architecture for Internet of Things",
               RFC 9019, DOI 10.17487/RFC9019, April 2021,
-              <https://www.rfc-editor.org/info/rfc9019>.
+              <https://www.rfc-editor.org/rfc/rfc9019>.
 
    [RFC9147]  Rescorla, E., Tschofenig, H., and N. Modadugu, "The
               Datagram Transport Layer Security (DTLS) Protocol Version
               1.3", RFC 9147, DOI 10.17487/RFC9147, April 2022,
-              <https://www.rfc-editor.org/info/rfc9147>.
+              <https://www.rfc-editor.org/rfc/rfc9147>.
 
    [RFC9203]  Palombini, F., Seitz, L., Selander, G., and M. Gunnarsson,
               "The Object Security for Constrained RESTful Environments
               (OSCORE) Profile of the Authentication and Authorization
               for Constrained Environments (ACE) Framework", RFC 9203,
               DOI 10.17487/RFC9203, August 2022,
-              <https://www.rfc-editor.org/info/rfc9203>.
+              <https://www.rfc-editor.org/rfc/rfc9203>.
 
 Author's Address
 
@@ -1061,4 +1061,4 @@ Author's Address
 
 
 
-Moran                   Expires 14 September 2023              [Page 19]
+Moran                    Expires 5 January 2024                [Page 19]
