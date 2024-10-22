@@ -4,12 +4,12 @@
 
 IOTOPS                                                          B. Moran
 Internet-Draft                                               Arm Limited
-Intended status: Informational                           23 October 2023
-Expires: 25 April 2024
+Intended status: Informational                           21 October 2024
+Expires: 24 April 2025
 
 
       A summary of security-enabling technologies for IoT devices
-                 draft-ietf-iotops-security-summary-01
+                 draft-ietf-iotops-security-summary-03
 
 Abstract
 
@@ -37,11 +37,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 25 April 2024.
+   This Internet-Draft will expire on 24 April 2025.
 
 Copyright Notice
 
-   Copyright (c) 2023 IETF Trust and the persons identified as the
+   Copyright (c) 2024 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
 
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Moran                     Expires 25 April 2024                 [Page 1]
+Moran                     Expires 24 April 2025                 [Page 1]
 
-Internet-Draft       IoT networking security summary        October 2023
+Internet-Draft       IoT networking security summary        October 2024
 
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Moran                     Expires 25 April 2024                 [Page 2]
+Moran                     Expires 24 April 2025                 [Page 2]
 
-Internet-Draft       IoT networking security summary        October 2023
+Internet-Draft       IoT networking security summary        October 2024
 
 
      4.13. Logging . . . . . . . . . . . . . . . . . . . . . . . . .  21
@@ -165,9 +165,9 @@ Internet-Draft       IoT networking security summary        October 2023
 
 
 
-Moran                     Expires 25 April 2024                 [Page 3]
+Moran                     Expires 24 April 2025                 [Page 3]
 
-Internet-Draft       IoT networking security summary        October 2023
+Internet-Draft       IoT networking security summary        October 2024
 
 
 4.  Requirement Mapping
@@ -221,9 +221,9 @@ Internet-Draft       IoT networking security summary        October 2023
 
 
 
-Moran                     Expires 25 April 2024                 [Page 4]
+Moran                     Expires 24 April 2025                 [Page 4]
 
-Internet-Draft       IoT networking security summary        October 2023
+Internet-Draft       IoT networking security summary        October 2024
 
 
    ETSI Provision 5.4-1: Sensitive security parameters in persistent
@@ -277,9 +277,9 @@ Internet-Draft       IoT networking security summary        October 2023
 
 
 
-Moran                     Expires 25 April 2024                 [Page 5]
+Moran                     Expires 24 April 2025                 [Page 5]
 
-Internet-Draft       IoT networking security summary        October 2023
+Internet-Draft       IoT networking security summary        October 2024
 
 
    Secure Invocation can be achieved using the SUIT Manifest format,
@@ -333,9 +333,9 @@ Internet-Draft       IoT networking security summary        October 2023
 
 
 
-Moran                     Expires 25 April 2024                 [Page 6]
+Moran                     Expires 24 April 2025                 [Page 6]
 
-Internet-Draft       IoT networking security summary        October 2023
+Internet-Draft       IoT networking security summary        October 2024
 
 
    3.  The ability for authorized entities to roll back updated software
@@ -389,9 +389,9 @@ Internet-Draft       IoT networking security summary        October 2023
 
 
 
-Moran                     Expires 25 April 2024                 [Page 7]
+Moran                     Expires 24 April 2025                 [Page 7]
 
-Internet-Draft       IoT networking security summary        October 2023
+Internet-Draft       IoT networking security summary        October 2024
 
 
    *  Provision 5.3-10 Where updates are delivered over a network
@@ -445,9 +445,9 @@ Internet-Draft       IoT networking security summary        October 2023
 
 
 
-Moran                     Expires 25 April 2024                 [Page 8]
+Moran                     Expires 24 April 2025                 [Page 8]
 
-Internet-Draft       IoT networking security summary        October 2023
+Internet-Draft       IoT networking security summary        October 2024
 
 
    2.  The ability to restrict configuration changes to authorized
@@ -501,9 +501,9 @@ Internet-Draft       IoT networking security summary        October 2023
 
 
 
-Moran                     Expires 25 April 2024                 [Page 9]
+Moran                     Expires 24 April 2025                 [Page 9]
 
-Internet-Draft       IoT networking security summary        October 2023
+Internet-Draft       IoT networking security summary        October 2024
 
 
 4.2.6.  Trust Anchor Management
@@ -557,9 +557,9 @@ Internet-Draft       IoT networking security summary        October 2023
 
 
 
-Moran                     Expires 25 April 2024                [Page 10]
+Moran                     Expires 24 April 2025                [Page 10]
 
-Internet-Draft       IoT networking security summary        October 2023
+Internet-Draft       IoT networking security summary        October 2024
 
 
    *  Provision 5.6-6: Code should be minimized to the functionality
@@ -613,9 +613,9 @@ Internet-Draft       IoT networking security summary        October 2023
 
 
 
-Moran                     Expires 25 April 2024                [Page 11]
+Moran                     Expires 24 April 2025                [Page 11]
 
-Internet-Draft       IoT networking security summary        October 2023
+Internet-Draft       IoT networking security summary        October 2024
 
 
    *  GP-TM-14: Users of IoT products and services must be able to
@@ -669,9 +669,9 @@ Internet-Draft       IoT networking security summary        October 2023
 
 
 
-Moran                     Expires 25 April 2024                [Page 12]
+Moran                     Expires 24 April 2025                [Page 12]
 
-Internet-Draft       IoT networking security summary        October 2023
+Internet-Draft       IoT networking security summary        October 2024
 
 
    *  Provision 6-1: The manufacturer shall provide consumers with clear
@@ -725,9 +725,9 @@ Internet-Draft       IoT networking security summary        October 2023
 
 
 
-Moran                     Expires 25 April 2024                [Page 13]
+Moran                     Expires 24 April 2025                [Page 13]
 
-Internet-Draft       IoT networking security summary        October 2023
+Internet-Draft       IoT networking security summary        October 2024
 
 
    *  Provision 5.1-5 When the device is not a constrained device, it
@@ -781,9 +781,9 @@ Internet-Draft       IoT networking security summary        October 2023
 
 
 
-Moran                     Expires 25 April 2024                [Page 14]
+Moran                     Expires 24 April 2025                [Page 14]
 
-Internet-Draft       IoT networking security summary        October 2023
+Internet-Draft       IoT networking security summary        October 2024
 
 
    *  Provision 5.1-2 Where pre-installed unique per device passwords
@@ -837,9 +837,9 @@ Internet-Draft       IoT networking security summary        October 2023
 
 
 
-Moran                     Expires 25 April 2024                [Page 15]
+Moran                     Expires 24 April 2025                [Page 15]
 
-Internet-Draft       IoT networking security summary        October 2023
+Internet-Draft       IoT networking security summary        October 2024
 
 
    *  GP-TM-30: Ensure a context-based security and privacy that
@@ -893,9 +893,9 @@ Internet-Draft       IoT networking security summary        October 2023
 
 
 
-Moran                     Expires 25 April 2024                [Page 16]
+Moran                     Expires 24 April 2025                [Page 16]
 
-Internet-Draft       IoT networking security summary        October 2023
+Internet-Draft       IoT networking security summary        October 2024
 
 
    ETSI defines the following physical security requirements:
@@ -949,9 +949,9 @@ Internet-Draft       IoT networking security summary        October 2023
 
 
 
-Moran                     Expires 25 April 2024                [Page 17]
+Moran                     Expires 24 April 2025                [Page 17]
 
-Internet-Draft       IoT networking security summary        October 2023
+Internet-Draft       IoT networking security summary        October 2024
 
 
 4.10.  Secure and Trusted Communications
@@ -1005,9 +1005,9 @@ Internet-Draft       IoT networking security summary        October 2023
 
 
 
-Moran                     Expires 25 April 2024                [Page 18]
+Moran                     Expires 24 April 2025                [Page 18]
 
-Internet-Draft       IoT networking security summary        October 2023
+Internet-Draft       IoT networking security summary        October 2024
 
 
    ETSI Requirements:
@@ -1061,9 +1061,9 @@ Internet-Draft       IoT networking security summary        October 2023
 
 
 
-Moran                     Expires 25 April 2024                [Page 19]
+Moran                     Expires 24 April 2025                [Page 19]
 
-Internet-Draft       IoT networking security summary        October 2023
+Internet-Draft       IoT networking security summary        October 2024
 
 
    *  Attested TLS: The use of attestation in session establishment in
@@ -1117,9 +1117,9 @@ Internet-Draft       IoT networking security summary        October 2023
 
 
 
-Moran                     Expires 25 April 2024                [Page 20]
+Moran                     Expires 24 April 2025                [Page 20]
 
-Internet-Draft       IoT networking security summary        October 2023
+Internet-Draft       IoT networking security summary        October 2024
 
 
    *  GP-TM-53: Avoid security issues when designing error messages.
@@ -1173,9 +1173,9 @@ Internet-Draft       IoT networking security summary        October 2023
 
 
 
-Moran                     Expires 25 April 2024                [Page 21]
+Moran                     Expires 24 April 2025                [Page 21]
 
-Internet-Draft       IoT networking security summary        October 2023
+Internet-Draft       IoT networking security summary        October 2024
 
 
    3.  The ability to restrict access to the state indicator so only
@@ -1229,9 +1229,9 @@ Internet-Draft       IoT networking security summary        October 2023
 
 
 
-Moran                     Expires 25 April 2024                [Page 22]
+Moran                     Expires 24 April 2025                [Page 22]
 
-Internet-Draft       IoT networking security summary        October 2023
+Internet-Draft       IoT networking security summary        October 2024
 
 
    *  Provision 5.10-1 If telemetry data is collected from consumer IoT
@@ -1275,19 +1275,19 @@ Internet-Draft       IoT networking security summary        October 2023
               birkholz-rats-corim-03>.
 
    [I-D.fossati-tls-attestation]
-              Tschofenig, H., Sheffer, Y., Howard, P., Mihalcea, I., and
-              Y. Deshpande, "Using Attestation in Transport Layer
-              Security (TLS) and Datagram Transport Layer Security
-              (DTLS)", Work in Progress, Internet-Draft, draft-fossati-
-              tls-attestation-04, 23 October 2023,
-              <https://datatracker.ietf.org/doc/html/draft-fossati-tls-
-              attestation-04>.
+              Tschofenig, H., Sheffer, Y., Howard, P., Mihalcea, I.,
+              Deshpande, Y., Niemi, A., and T. Fossati, "Using
+              Attestation in Transport Layer Security (TLS) and Datagram
+              Transport Layer Security (DTLS)", Work in Progress,
+              Internet-Draft, draft-fossati-tls-attestation-08, 21
+              October 2024, <https://datatracker.ietf.org/doc/html/
+              draft-fossati-tls-attestation-08>.
 
 
 
-Moran                     Expires 25 April 2024                [Page 23]
+Moran                     Expires 24 April 2025                [Page 23]
 
-Internet-Draft       IoT networking security summary        October 2023
+Internet-Draft       IoT networking security summary        October 2024
 
 
    [I-D.ietf-rats-architecture]
@@ -1301,9 +1301,9 @@ Internet-Draft       IoT networking security summary        October 2023
    [I-D.ietf-rats-eat]
               Lundblade, L., Mandyam, G., O'Donoghue, J., and C.
               Wallace, "The Entity Attestation Token (EAT)", Work in
-              Progress, Internet-Draft, draft-ietf-rats-eat-22, 14
-              October 2023, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-rats-eat-22>.
+              Progress, Internet-Draft, draft-ietf-rats-eat-31, 6
+              September 2024, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-rats-eat-31>.
 
    [I-D.ietf-sacm-coswid]
               Birkholz, H., Fitzgerald-McKay, J., Schmidt, C., and D.
@@ -1316,34 +1316,34 @@ Internet-Draft       IoT networking security summary        October 2023
               Birkholz, H., Delignat-Lavaud, A., Fournet, C., Deshpande,
               Y., and S. Lasker, "An Architecture for Trustworthy and
               Transparent Digital Supply Chains", Work in Progress,
-              Internet-Draft, draft-ietf-scitt-architecture-03, 16
-              October 2023, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-scitt-architecture-03>.
+              Internet-Draft, draft-ietf-scitt-architecture-09, 15
+              October 2024, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-scitt-architecture-09>.
 
    [I-D.ietf-suit-manifest]
               Moran, B., Tschofenig, H., Birkholz, H., Zandberg, K., and
               O. Rønningstad, "A Concise Binary Object Representation
               (CBOR)-based Serialization Format for the Software Updates
               for Internet of Things (SUIT) Manifest", Work in Progress,
-              Internet-Draft, draft-ietf-suit-manifest-24, 23 October
-              2023, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              suit-manifest-24>.
+              Internet-Draft, draft-ietf-suit-manifest-28, 21 October
+              2024, <https://datatracker.ietf.org/doc/html/draft-ietf-
+              suit-manifest-28>.
 
    [I-D.ietf-suit-report]
               Moran, B. and H. Birkholz, "Secure Reporting of Update
               Status", Work in Progress, Internet-Draft, draft-ietf-
-              suit-report-07, 11 September 2023,
+              suit-report-10, 21 October 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-suit-
-              report-07>.
+              report-10>.
 
 
 
 
 
 
-Moran                     Expires 25 April 2024                [Page 24]
+Moran                     Expires 24 April 2025                [Page 24]
 
-Internet-Draft       IoT networking security summary        October 2023
+Internet-Draft       IoT networking security summary        October 2024
 
 
    [I-D.ietf-teep-architecture]
@@ -1358,16 +1358,17 @@ Internet-Draft       IoT networking security summary        October 2023
               Tschofenig, H., Pei, M., Wheeler, D. M., Thaler, D., and
               A. Tsukamoto, "Trusted Execution Environment Provisioning
               (TEEP) Protocol", Work in Progress, Internet-Draft, draft-
-              ietf-teep-protocol-17, 23 October 2023,
+              ietf-teep-protocol-19, 19 May 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-teep-
-              protocol-17>.
+              protocol-19>.
 
    [IoTopia]  "Global Platform Iotopia", n.d.,
               <https://globalplatform.org/iotopia/mud-file-service/>.
 
-   [LwM2M]    NIST, "LwM2M Core Specification", n.d.,
-              <https://csrc.nist.gov/Projects/Software-Identification-
-              SWID/guidelines>.
+   [LwM2M]    OMA, "LwM2M Core Specification", n.d.,
+              <http://openmobilealliance.org/release/LightweightM2M/
+              V1_2-20201110-A/OMA-TS-LightweightM2M_Core-
+              V1_2-20201110-A.pdf>.
 
    [NIST-Baseline]
               NIST, "IoT Device Cybersecurity Capability Core Baseline",
@@ -1396,10 +1397,9 @@ Internet-Draft       IoT networking security summary        October 2023
 
 
 
-
-Moran                     Expires 25 April 2024                [Page 25]
+Moran                     Expires 24 April 2025                [Page 25]
 
-Internet-Draft       IoT networking security summary        October 2023
+Internet-Draft       IoT networking security summary        October 2024
 
 
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
@@ -1453,9 +1453,9 @@ Internet-Draft       IoT networking security summary        October 2023
 
 
 
-Moran                     Expires 25 April 2024                [Page 26]
+Moran                     Expires 24 April 2025                [Page 26]
 
-Internet-Draft       IoT networking security summary        October 2023
+Internet-Draft       IoT networking security summary        October 2024
 
 
    [RFC9397]  Pei, M., Tschofenig, H., Thaler, D., and D. Wheeler,
@@ -1509,4 +1509,4 @@ Author's Address
 
 
 
-Moran                     Expires 25 April 2024                [Page 27]
+Moran                     Expires 24 April 2025                [Page 27]
